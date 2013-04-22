@@ -1,0 +1,21 @@
+
+PODS: 
+- AFNetworking (1.2.1)
+- AFOAuth1Client (0.1.1): 
+  - AFNetworking (>= 0.9)
+- AFOAuth2Client (0.1.1): 
+  - AFNetworking (~> 1.0)
+- MasterShareSDK (1.1): 
+  - AFOAuth1Client
+  - AFOAuth2Client
+
+COCOAPODS: 0.16.3
+
+SPEC CHECKSUMS: 
+  AFOAuth2Client: 039596f19e8a4bdd852cb3fc44ddbe45e12c290a
+  AFOAuth1Client: 037044e341e897e0742920404f0c54ffd51dc776
+  MasterShareSDK: 03d28ef462dc4102dfadab4a6fb3f938269c90ac
+  AFNetworking: 616da0028916ce296f5c3cef74e5552eb4e10e13
+
+DEPENDENCIES: 
+- MasterShareSDK

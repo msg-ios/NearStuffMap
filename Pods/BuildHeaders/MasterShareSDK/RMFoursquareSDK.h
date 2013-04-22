@@ -1,0 +1,1 @@
+../../MasterShareSDK/MasterShareSDK/RMFoursquareSDK.h
