@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RMMapViewController.h"
 
 @interface RMViewController : UIViewController
 

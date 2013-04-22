@@ -10,14 +10,18 @@
 
 #import "RMViewController.h"
 
+#import "RMMapViewController.h"
 @implementation RMAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.viewController = [[RMViewController alloc] initWithNibName:@"RMViewController" bundle:nil];
-    self.window.rootViewController = self.viewController;
+    
+     RMMapViewController *viewController = [[RMMapViewController alloc] init];
+    
+  //  self.viewController = [[RMViewController alloc] initWithNibName:@"RMViewController" bundle:nil];
+    self.window.rootViewController = viewController;
     [self.window makeKeyAndVisible];
     return YES;
 }
