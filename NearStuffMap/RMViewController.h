@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
-@interface RMViewController : UIViewController
+@interface RMViewController : UIViewController <MKMapViewDelegate>
+
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+
+- (void)zoomToUserLocation:(MKUserLocation *)userLocation;
 
 @end
