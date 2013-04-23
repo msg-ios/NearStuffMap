@@ -33,6 +33,8 @@
 
 @protocol FoursquareDelegate <NSObject>
 
+-(void)loadNearbyExploreWithData:(NSDictionary *)array;
+
 @end
 
 @interface RMFoursquareSDK : AFOAuth2Client

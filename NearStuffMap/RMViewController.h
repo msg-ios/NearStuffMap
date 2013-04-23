@@ -8,8 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "RMMasterSDK.h"
 
-@interface RMViewController : UIViewController <MKMapViewDelegate>
+@interface RMViewController : UIViewController <MKMapViewDelegate, FoursquareDelegate> {
+    
+    float latitude;
+    float longitude;
+    
+}
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
