@@ -48,7 +48,24 @@
 	// Do any additional setup after loading the view, typically from a nib.
     [self.mapView setShowsUserLocation:YES];
     self.mapView.delegate = self;
+    [self performLogin];
 }
+
+-(void)performLogin{
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]) {
+        
+    } else
+    {
+        [[RMMasterSDK FoursquareSDK] authenticate];
+        [[RMMasterSDK FoursquareSDK] setLoginDelegate:self];
+    }
+}
+
+-(void)performLoginFromHandle{
+    [self performLogin];
+}
+
 
 - (void)didReceiveMemoryWarning
 {

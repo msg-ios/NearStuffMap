@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "RMMasterSDK.h"
+#import "RMFoursquareSDK.h"
 
 @interface RMViewController : UIViewController <MKMapViewDelegate, FoursquareDelegate> {
     

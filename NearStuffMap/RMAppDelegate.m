@@ -10,6 +10,8 @@
 
 #import "RMViewController.h"
 
+#import "RMMasterSDK.h"
+
 @implementation RMAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -21,6 +23,16 @@
     [self.window makeKeyAndVisible];
     return YES;
 }
+
+
+-(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [[RMMasterSDK FoursquareSDK] handleOpenURL:url];
+}
+
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [[RMMasterSDK FoursquareSDK] handleOpenURL:url];
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

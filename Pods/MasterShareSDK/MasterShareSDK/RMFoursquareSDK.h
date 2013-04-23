@@ -32,6 +32,7 @@
 #import "AFOAuth2Client.h"
 
 @protocol FoursquareDelegate <NSObject>
+-(void)performLoginFromHandle;
 
 -(void)loadNearbyExploreWithData:(NSDictionary *)array;
 
@@ -41,6 +42,7 @@
 
 @property (nonatomic, retain) NSDictionary *params;
 @property (nonatomic, retain) AFOAuthCredential *credential;
+@property (nonatomic, strong) NSObject <FoursquareDelegate> *loginDelegate;
 
 + (RMFoursquareSDK *)sharedClient;
 -(void)authenticate;

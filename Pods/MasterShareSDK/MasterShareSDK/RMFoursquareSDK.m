@@ -35,8 +35,8 @@
 
 static NSString * const kOAuth2BaseURLString = @"https://foursquare.com/";
 static NSString * const kServerAPIURL = @"https://api.foursquare.com/v2/";
-static NSString * const kClientIDString = @"";//COMPLETE WITH YOUR OWN CLIENT_ID
-static NSString * const kClientSecretString = @"";//COMPLETE WITH YOUR OWN CLIENT_SECRET
+static NSString * const kClientIDString = @"AD1QBEWHCZWATQNPFJOET2RD3LOZOXVHAX534NX30UOBNX12";//COMPLETE WITH YOUR OWN CLIENT_ID
+static NSString * const kClientSecretString = @"IRH3TEV00N1ID1ZHWH0EWNRVVGNOZF2M5V55MYYNW1ZGAS44";//COMPLETE WITH YOUR OWN CLIENT_SECRET
 
 @implementation RMFoursquareSDK
 
@@ -58,9 +58,13 @@ static NSString * const kClientSecretString = @"";//COMPLETE WITH YOUR OWN CLIEN
     return _sharedClient;
 }
 
+//REDIRECT URI SHOULD BE: fsq[YOUR OWN CLIENT ID STRING IN LOWERCASE]://authorize
 -(void)authenticate {
     
-    [self authenticateUsingOAuthWithPath:@"oauth2/authenticate" scope:nil redirectURI:@"fsqad1qbewhczwatqnpfjoet2rd3lozoxvhax534nx30uobnx12://authorize" success:^(AFOAuthCredential *credential) {
+    NSString *lowercaseClientID = [kClientIDString lowercaseString];
+    NSString *redirectURI = [NSString stringWithFormat:@"fsq%@://authorize", lowercaseClientID];
+    
+    [self authenticateUsingOAuthWithPath:@"oauth2/authenticate" scope:nil redirectURI:redirectURI success:^(AFOAuthCredential *credential) {
         
         
     } failure:^(NSError *error) {
@@ -107,7 +111,6 @@ static NSString * const kClientSecretString = @"";//COMPLETE WITH YOUR OWN CLIEN
     didOpenOtherApp = [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[mutableRequest.URL absoluteString]]];
     
 }
-
 
 - (BOOL)handleOpenURL:(NSURL *)url{
     
@@ -156,11 +159,13 @@ static NSString * const kClientSecretString = @"";//COMPLETE WITH YOUR OWN CLIEN
     [[NSUserDefaults standardUserDefaults] setObject:self.credential.accessToken forKey:@"accessToken"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
     
+    [_loginDelegate performLoginFromHandle];
     
     //     [self igDidLogin:accessToken/* expirationDate:expirationDate*/];
     return YES;
     
 }
+
 
 - (NSDictionary*)parseURLParams:(NSString *)query {
 	NSArray *pairs = [query componentsSeparatedByString:@"&"];
