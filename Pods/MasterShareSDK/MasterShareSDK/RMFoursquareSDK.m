@@ -860,6 +860,9 @@ static NSString * const kClientSecretString = @"";//COMPLETE WITH YOUR OWN CLIEN
         NSLog(@"Response object: %@", responseObject);
         //Complete with delegate call
         
+        [delegate loadNearbyExploreWithData:responseObject];
+        
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
