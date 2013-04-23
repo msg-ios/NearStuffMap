@@ -48,22 +48,6 @@
 	// Do any additional setup after loading the view, typically from a nib.
     [self.mapView setShowsUserLocation:YES];
     self.mapView.delegate = self;
-    [self performLogin];
-}
-
--(void)performLogin{
-    
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]) {
-        
-    } else
-    {
-        [[RMMasterSDK FoursquareSDK] authenticate];
-        [[RMMasterSDK FoursquareSDK] setLoginDelegate:self];
-    }
-}
-
--(void)performLoginFromHandle{
-    [self performLogin];
 }
 
 
@@ -125,9 +109,9 @@
 -(void)loadAnnotations{
     
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%f", latitude],@"latitude", [NSString stringWithFormat:@"%f", longitude], @"longitude", nil];
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"600", @"radious", @"10", @"limit", nil];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"700", @"radius", @"15", @"limit", nil];
 
-    [[RMMasterSDK FoursquareSDK] getExploreVenuesWithLatitudeLongitude:dict OrNear:nil AndParameters:params AndWithDelegate:self];
+    [[RMMasterSDK FoursquareSDK] getUserlessExploreVenuesWithLatitudeLongitude:dict OrNear:nil AndParameters:params AndWithDelegate:self];
 }
 
 -(void)loadNearbyExploreWithData:(NSDictionary *)array{
@@ -136,23 +120,23 @@
     
     for (int i = 0; i < [[[[[array  objectForKey:@"response"] objectForKey:@"groups"] objectAtIndex:0] objectForKey:@"items"] count] ; i++)
     {
-    RMMapViewAnnotation *annotation = [[RMMapViewAnnotation alloc] init];
-    
-    CLLocationCoordinate2D location;
-   
-    location.latitude = [[[[[[[[[array  objectForKey:@"response"] objectForKey:@"groups"] objectAtIndex:0] objectForKey:@"items"] objectAtIndex:i] objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"lat"] floatValue];
-   location.longitude = [[[[[[[[[array  objectForKey:@"response"] objectForKey:@"groups"] objectAtIndex:0] objectForKey:@"items"] objectAtIndex:i] objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"lng"] floatValue];
-    
-    
-    
-    NSLog(@"LAT : %f LON: %f", location.latitude, location.longitude);
+        RMMapViewAnnotation *annotation = [[RMMapViewAnnotation alloc] init];
         
-    annotation.coordinate = location;
-    annotation.title = [[[[[[[array  objectForKey:@"response"] objectForKey:@"groups"] objectAtIndex:0] objectForKey:@"items"] objectAtIndex:i] objectForKey:@"venue"] objectForKey:@"name"];
+        CLLocationCoordinate2D location;
+       
+        location.latitude = [[[[[[[[[array  objectForKey:@"response"] objectForKey:@"groups"] objectAtIndex:0] objectForKey:@"items"] objectAtIndex:i] objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"lat"] floatValue];
+       location.longitude = [[[[[[[[[array  objectForKey:@"response"] objectForKey:@"groups"] objectAtIndex:0] objectForKey:@"items"] objectAtIndex:i] objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"lng"] floatValue];
         
-    annotation.socialNetwork = @"Foursquare";
-    
-    [self.mapView addAnnotation:annotation];
+        
+        
+        NSLog(@"LAT : %f LON: %f", location.latitude, location.longitude);
+            
+        annotation.coordinate = location;
+        annotation.title = [[[[[[[array  objectForKey:@"response"] objectForKey:@"groups"] objectAtIndex:0] objectForKey:@"items"] objectAtIndex:i] objectForKey:@"venue"] objectForKey:@"name"];
+            
+        annotation.socialNetwork = @"Foursquare";
+        
+        [self.mapView addAnnotation:annotation];
         
     }
     
