@@ -14,10 +14,27 @@
 {
 }
 - (id)initWithAnnotation:(id <MKAnnotation>) annotation andPinColor:(MKPinAnnotationColor *)pinColor;
+- (id)initWithAnnotation:(id <MKAnnotation>) annotation andImage:(UIImage *)photo;
 
 @end
 
 @implementation CustomPin
+
+- (id)initWithAnnotation:(id <MKAnnotation>)annotation andImage:(UIImage *)photo
+{
+    
+    self = [super initWithAnnotation:annotation reuseIdentifier:@"CustomId"];
+    
+    if (self)
+    {
+        
+        self.image = photo;
+        
+        self.frame = CGRectMake(0, 0, 50, 50);
+    }
+    return self;
+    
+}
 
 - (id)initWithAnnotation:(id <MKAnnotation>)annotation andPinColor:(MKPinAnnotationColor *)pinColor
 {
@@ -33,6 +50,7 @@
     return self;
     
 }
+
 @end
 
 @interface RMViewController ()
@@ -92,6 +110,10 @@
             {                
                 view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorGreen];
             }
+            else if ([annotation.socialNetwork isEqualToString:@"Instagram"])
+            {
+                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:annotation.photo];
+            }
             
            
             
@@ -112,6 +134,11 @@
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"700", @"radius", @"15", @"limit", nil];
 
     [[RMMasterSDK FoursquareSDK] getUserlessExploreVenuesWithLatitudeLongitude:dict OrNear:nil AndParameters:params AndWithDelegate:self];
+    
+    NSDictionary *dict2 = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%f", latitude],@"lat", [NSString stringWithFormat:@"%f", longitude], @"lng", @"1000", @"distance", nil];
+    
+    [[RMMasterSDK InstagramSDK] getWAMediaSearchWithParams:dict2 AndWithDelegate:self];
+    
 }
 
 -(void)loadNearbyExploreWithData:(NSDictionary *)array{
@@ -140,6 +167,54 @@
         
     }
     
+}
+
+-(void)loadNerbyImagesWithData:(NSDictionary *)data{
+    
+    NSLog(@"ARRAY: %@", [[[[data objectForKey:@"data"] objectAtIndex:0] objectForKey:@"location"] objectForKey:@"latitude"]);
+    NSLog(@"ARRAY: %@", [[[[data objectForKey:@"data"] objectAtIndex:0] objectForKey:@"location"] objectForKey:@"longitude"]);
+    NSLog(@"ARRAY: %@", [[[[[data objectForKey:@"data"] objectAtIndex:0] objectForKey:@"images"] objectForKey:@"thumbnail"] objectForKey:@"url"]);
+    
+    
+    for (int i = 0; i < [[data objectForKey:@"data"] count]; i++){
+        
+        RMMapViewAnnotation *annotation = [[RMMapViewAnnotation alloc] init];
+        
+        CLLocationCoordinate2D location;
+        
+        location.latitude = [[[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"location"] objectForKey:@"latitude"] floatValue];
+        location.longitude = [[[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"location"] objectForKey:@"longitude"] floatValue];
+        
+        
+        
+        NSLog(@"LAT : %f LON: %f", location.latitude, location.longitude);
+        
+        annotation.coordinate = location;
+        
+       // UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"images"] objectForKey:@"thumbnail"] objectForKey:@"url"]]]];
+        
+          NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[[[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"images"] objectForKey:@"thumbnail"] objectForKey:@"url"]]];
+        
+        AFImageRequestOperation *operation;
+        operation = [AFImageRequestOperation imageRequestOperationWithRequest:request
+                                                         imageProcessingBlock:nil
+                                                                      success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                                                          
+                                                                        annotation.photo = image;
+
+                                                                      }
+                                                                      failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                                                          NSLog(@"%@", [error localizedDescription]);
+                                                                      }];
+        [operation start];
+
+       
+        
+        annotation.socialNetwork = @"Instagram";
+        
+        [self.mapView addAnnotation:annotation];
+        
+    }
 }
 
 
