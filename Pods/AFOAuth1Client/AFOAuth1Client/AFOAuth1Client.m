@@ -415,8 +415,8 @@ static inline NSString * AFHMACSHA1Signature(NSURLRequest *request, NSString *co
        expiration:(NSDate *)expiration
         renewable:(BOOL)canBeRenewed
 {
-    NSParameterAssert(key);
-    NSParameterAssert(secret);
+  //  NSParameterAssert(key);
+   // NSParameterAssert(secret);
 
     self = [super init];
     if (!self) {
