@@ -19,5 +19,6 @@
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
 @property (nonatomic, copy) NSString *socialNetwork;
 @property (nonatomic, retain) MKPinAnnotationView *pin;
+@property (nonatomic, retain) UIImage *photo;
 
 @end

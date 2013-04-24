@@ -33,8 +33,8 @@
 
 static NSString * const kOAuth2BaseURLString = @"https://instagram.com/";
 static NSString * const kServerAPIURL = @"https://api.instagram.com/v1/";
-static NSString * const kClientIDString = @"";//COMPLETE WITH YOUR OWN CLIENT ID
-static NSString * const kClientSecretString = @"";//COMPLETE WITH YOUR OWN CLIENT SECRET
+static NSString * const kClientIDString = @"b5be30367f2445f5b1824e914d1cb3f5";//COMPLETE WITH YOUR OWN CLIENT ID
+static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39";//COMPLETE WITH YOUR OWN CLIENT SECRET
 
 
 @implementation RMInstagramSDK
@@ -517,6 +517,8 @@ static NSString * const kClientSecretString = @"";//COMPLETE WITH YOUR OWN CLIEN
         NSLog(@"MEDIA SEARCH GET REQUEST");
         NSLog(@"Response object: %@", responseObject);
         //Complete with delegate call
+        
+        [delegate loadNerbyImagesWithData:responseObject];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
