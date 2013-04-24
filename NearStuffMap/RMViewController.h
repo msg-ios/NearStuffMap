@@ -10,7 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "RMMasterSDK.h"
 
-@interface RMViewController : UIViewController <MKMapViewDelegate, FoursquareDelegate, InstagramDelegate> {
+@interface RMViewController : UIViewController <MKMapViewDelegate, FoursquareDelegate, InstagramDelegate, YelpDelegate> {
     
     float latitude;
     float longitude;
