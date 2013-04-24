@@ -114,6 +114,10 @@
             {
                 view = [[CustomPin alloc] initWithAnnotation:annotation andImage:annotation.photo];
             }
+            else if ([annotation.socialNetwork isEqualToString:@"Yelp"])
+            {
+                view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorRed];
+            }
             
            
             
@@ -139,6 +143,8 @@
     
     [[RMMasterSDK InstagramSDK] getWAMediaSearchWithParams:dict2 AndWithDelegate:self];
     
+    
+    [[RMMasterSDK YelpSDK] getSearchWithTerm:nil AndCoordinates:dict AndParams:[NSDictionary dictionaryWithObjectsAndKeys:@"1000",@"radius_filter", nil] AndWithDelegate:self];
 }
 
 -(void)loadNearbyExploreWithData:(NSDictionary *)array{
@@ -160,7 +166,7 @@
             
         annotation.coordinate = location;
         annotation.title = [[[[[[[array  objectForKey:@"response"] objectForKey:@"groups"] objectAtIndex:0] objectForKey:@"items"] objectAtIndex:i] objectForKey:@"venue"] objectForKey:@"name"];
-            
+        annotation.subtitle = @"Foursquare";
         annotation.socialNetwork = @"Foursquare";
         
         [self.mapView addAnnotation:annotation];
@@ -215,6 +221,35 @@
         [self.mapView addAnnotation:annotation];
         
     }
+}
+
+
+-(void)loadNearbyPlacesYelpWithData:(NSDictionary *)data{
+    
+
+    for (int i = 0; i < [[data objectForKey:@"businesses"] count] ; i++)
+    {
+        RMMapViewAnnotation *annotation = [[RMMapViewAnnotation alloc] init];
+        
+        CLLocationCoordinate2D location;
+        
+        location.latitude = [[[[[[data objectForKey:@"businesses"] objectAtIndex:i] objectForKey:@"location"] objectForKey:@"coordinate"] objectForKey:@"latitude"] floatValue];
+        location.longitude = [[[[[[data objectForKey:@"businesses"] objectAtIndex:i] objectForKey:@"location"] objectForKey:@"coordinate"] objectForKey:@"longitude"] floatValue];
+        
+        
+        
+        NSLog(@"LAT : %f LON: %f", location.latitude, location.longitude);
+        
+        annotation.coordinate = location;
+        annotation.title = [[[data objectForKey:@"businesses"] objectAtIndex:i] objectForKey:@"name"];
+        annotation.subtitle = @"Yelp";
+        annotation.socialNetwork = @"Yelp";
+        
+        [self.mapView addAnnotation:annotation];
+        
+    }
+
+
 }
 
 

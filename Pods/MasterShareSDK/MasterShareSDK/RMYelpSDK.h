@@ -33,6 +33,8 @@
 #import "AFOAuth1Client.h"
 @protocol YelpDelegate <NSObject>
 
+-(void)loadNearbyPlacesYelpWithData:(NSDictionary *)data;
+
 @end
 
 @interface RMYelpSDK : AFOAuth1Client
