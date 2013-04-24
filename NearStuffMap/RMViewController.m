@@ -118,6 +118,10 @@
             {
                 view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorRed];
             }
+            else if ([annotation.socialNetwork isEqualToString:@"Twitter"])
+            {
+                view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorPurple];
+            }
             
            
             
@@ -145,11 +149,11 @@
     
     
     [[RMMasterSDK YelpSDK] getSearchWithTerm:nil AndCoordinates:dict AndParams:[NSDictionary dictionaryWithObjectsAndKeys:@"1000",@"radius_filter", nil] AndWithDelegate:self];
+    
+    [[RMTwitterSDK sharedClient] getPlacesOnTwitterWithLatitude:[NSString stringWithFormat:@"%f", latitude] AndLongitude:[NSString stringWithFormat:@"%f", longitude] AndWithDelegate:self];
 }
 
 -(void)loadNearbyExploreWithData:(NSDictionary *)array{
-
-    NSLog(@"ArrayCount: %i",[[[/*[[*/[[array  objectForKey:@"response"] objectForKey:@"groups"] objectAtIndex:0] objectForKey:@"items"] count] /*objectForKey:@"venue"] objectForKey:@"location"] */);
     
     for (int i = 0; i < [[[[[array  objectForKey:@"response"] objectForKey:@"groups"] objectAtIndex:0] objectForKey:@"items"] count] ; i++)
     {
@@ -176,10 +180,6 @@
 }
 
 -(void)loadNerbyImagesWithData:(NSDictionary *)data{
-    
-    NSLog(@"ARRAY: %@", [[[[data objectForKey:@"data"] objectAtIndex:0] objectForKey:@"location"] objectForKey:@"latitude"]);
-    NSLog(@"ARRAY: %@", [[[[data objectForKey:@"data"] objectAtIndex:0] objectForKey:@"location"] objectForKey:@"longitude"]);
-    NSLog(@"ARRAY: %@", [[[[[data objectForKey:@"data"] objectAtIndex:0] objectForKey:@"images"] objectForKey:@"thumbnail"] objectForKey:@"url"]);
     
     
     for (int i = 0; i < [[data objectForKey:@"data"] count]; i++){
@@ -250,6 +250,43 @@
     }
 
 
+}
+
+-(void)loadNearbyTwitterPlacesWithData:(NSDictionary *)data{
+    
+    for (int i = 0 ; i < [[[data objectForKey:@"result"] objectForKey:@"places"] count]; i++)
+    {
+ 
+        for (int k = 0; k < [[[[[[data objectForKey:@"result"] objectForKey:@"places"] objectAtIndex:i] objectForKey:@"bounding_box"] objectForKey:@"coordinates"] count] ; k++)
+        {
+            
+           
+            
+            for (int q = 0; q < [[[[[[[data objectForKey:@"result"] objectForKey:@"places"] objectAtIndex:i] objectForKey:@"bounding_box"] objectForKey:@"coordinates"] objectAtIndex:k] count]; q++)
+            {
+                
+                RMMapViewAnnotation *annotation = [[RMMapViewAnnotation alloc] init];
+                
+                CLLocationCoordinate2D location;
+                
+                location.latitude = [[[[[[[[[data objectForKey:@"result"] objectForKey:@"places"] objectAtIndex:i] objectForKey:@"bounding_box"] objectForKey:@"coordinates"] objectAtIndex:k] objectAtIndex:q] objectAtIndex:1] floatValue];
+                location.longitude = [[[[[[[[[data objectForKey:@"result"] objectForKey:@"places"] objectAtIndex:i] objectForKey:@"bounding_box"] objectForKey:@"coordinates"] objectAtIndex:k] objectAtIndex:q] objectAtIndex:0] floatValue];
+                
+                
+                NSLog(@"LAT : %f LON: %f", location.latitude, location.longitude);
+                
+                annotation.coordinate = location;
+                annotation.title = [[[[data objectForKey:@"result"] objectForKey:@"places"] objectAtIndex:i] objectForKey:@"full_name"];
+                annotation.subtitle = @"Twitter";
+                annotation.socialNetwork = @"Twitter";
+                
+                [self.mapView addAnnotation:annotation];
+
+            }
+            
+        }
+        
+    }
 }
 
 
