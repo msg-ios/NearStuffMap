@@ -31,10 +31,10 @@
 #import "RMYelpSDK.h"
 
 static NSString * const kOAuth1BaseURLString = @"http://api.yelp.com/v2/";
-static NSString * const kConsumerKeyString = @"";//COMPLETE WITH YOUR OWN CONSUMER KEY
-static NSString * const kConsumerSecretString = @"";//COMPLETE WITH YOUR OWN CONSUMER SECRET
-static NSString * const kTokenString = @"";//COMPLETE WITH YOUR OWN TOKEN
-static NSString * const kTokenSecretString = @"";//COMPLETE WITH YOUR OWN TOKEN SECRET
+static NSString * const kConsumerKeyString = @"CCWA9Km2t8lC7BFRVi2IkA";//COMPLETE WITH YOUR OWN CONSUMER KEY
+static NSString * const kConsumerSecretString = @"IRdQKHOEvJJGcuHz_j0zYsZaLg8";//COMPLETE WITH YOUR OWN CONSUMER SECRET
+static NSString * const kTokenString = @"e7nKgPCRAIAAEts_q0YcbK_gKYDnJF5C";//COMPLETE WITH YOUR OWN TOKEN
+static NSString * const kTokenSecretString = @"CN8R7f1YA3l30GdQl1cQB7a-mvw";//COMPLETE WITH YOUR OWN TOKEN SECRET
 
 //IMPORTANT NOTE: IT MIGHT BE NECESSARY TO COMMENT THE LINES 418 & 419 IN THE FILE AFOAuth1Client.m
 
@@ -69,8 +69,9 @@ static NSString * const kTokenSecretString = @"";//COMPLETE WITH YOUR OWN TOKEN 
         if (params)
             mutableParameters = [NSMutableDictionary dictionaryWithDictionary:params];
         
+        if (term)
+            [mutableParameters setValue:term forKey:@"term"];
         
-        [mutableParameters setValue:term forKey:@"term"];
         [mutableParameters setValue:location forKey:@"location"];
         
         NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
@@ -112,8 +113,8 @@ static NSString * const kTokenSecretString = @"";//COMPLETE WITH YOUR OWN TOKEN 
         if (params)
             mutableParameters = [NSMutableDictionary dictionaryWithDictionary:params];
         
-        
-        [mutableParameters setValue:term forKey:@"term"];
+        if (term)
+            [mutableParameters setValue:term forKey:@"term"];
         
         NSString *boundsString = [NSString stringWithFormat:@"%@,%@|%@,%@", [boundsParams objectForKey:@"sw_latitude"],[boundsParams objectForKey:@"sw_longitude"],[boundsParams objectForKey:@"ne_latitude"],[boundsParams objectForKey:@"ne_longitude"]];
         
@@ -158,8 +159,8 @@ static NSString * const kTokenSecretString = @"";//COMPLETE WITH YOUR OWN TOKEN 
         if (params)
             mutableParameters = [NSMutableDictionary dictionaryWithDictionary:params];
         
-        
-        [mutableParameters setValue:term forKey:@"term"];
+        if (term)
+            [mutableParameters setValue:term forKey:@"term"];
         
         NSMutableArray *locationArray = [NSMutableArray array];
         
@@ -188,6 +189,7 @@ static NSString * const kTokenSecretString = @"";//COMPLETE WITH YOUR OWN TOKEN 
             
             NSLog(@"Response array: %@", json);
             
+            [delegate loadNearbyPlacesYelpWithData:json];
             //Complete with delegate call
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -214,8 +216,8 @@ static NSString * const kTokenSecretString = @"";//COMPLETE WITH YOUR OWN TOKEN 
         if (params)
             mutableParameters = [NSMutableDictionary dictionaryWithDictionary:params];
         
-        
-        [mutableParameters setValue:term forKey:@"term"];
+        if (term)
+            [mutableParameters setValue:term forKey:@"term"];
         [mutableParameters setValue:location forKey:@"location"];
         
         NSString *coordinateString = [NSString stringWithFormat:@"%@,%@", latitude, longitude];
