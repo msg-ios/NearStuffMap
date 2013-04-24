@@ -19,6 +19,7 @@
 		280E87E81725D38900A152DD /* RMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E87E71725D38900A152DD /* RMViewController.m */; };
 		280E87EB1725D38900A152DD /* RMViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E87E91725D38900A152DD /* RMViewController.xib */; };
 		280E87F91725DBF600A152DD /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280E87F81725DBF600A152DD /* MapKit.framework */; };
+		AAACB54717287DC30088B73D /* RMTwitterSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = AAACB54617287DC30088B73D /* RMTwitterSDK.m */; };
 		AAF2A9B01725F85B00B48D7F /* RMMapViewAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF2A9AF1725F85B00B48D7F /* RMMapViewAnnotation.m */; };
 		EE38B2F0324B4196867411CB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BE394D772714CD69142F29A /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -43,6 +44,8 @@
 		280E87F81725DBF600A152DD /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7BE394D772714CD69142F29A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A649A159EDC24B0BA1886337 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		AAACB54517287DC30088B73D /* RMTwitterSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMTwitterSDK.h; sourceTree = "<group>"; };
+		AAACB54617287DC30088B73D /* RMTwitterSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMTwitterSDK.m; sourceTree = "<group>"; };
 		AAF2A9AE1725F85B00B48D7F /* RMMapViewAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMMapViewAnnotation.h; sourceTree = "<group>"; };
 		AAF2A9AF1725F85B00B48D7F /* RMMapViewAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMMapViewAnnotation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,6 +101,8 @@
 			children = (
 				280E87DD1725D38900A152DD /* RMAppDelegate.h */,
 				280E87DE1725D38900A152DD /* RMAppDelegate.m */,
+				AAACB54517287DC30088B73D /* RMTwitterSDK.h */,
+				AAACB54617287DC30088B73D /* RMTwitterSDK.m */,
 				280E87E61725D38900A152DD /* RMViewController.h */,
 				280E87E71725D38900A152DD /* RMViewController.m */,
 				AAF2A9AE1725F85B00B48D7F /* RMMapViewAnnotation.h */,
@@ -211,6 +216,7 @@
 				280E87DF1725D38900A152DD /* RMAppDelegate.m in Sources */,
 				280E87E81725D38900A152DD /* RMViewController.m in Sources */,
 				AAF2A9B01725F85B00B48D7F /* RMMapViewAnnotation.m in Sources */,
+				AAACB54717287DC30088B73D /* RMTwitterSDK.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
