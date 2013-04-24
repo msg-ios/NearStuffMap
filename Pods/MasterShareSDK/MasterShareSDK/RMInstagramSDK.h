@@ -35,6 +35,7 @@
 @protocol InstagramDelegate <NSObject>
 //-(void)performLoginFromHandle;
 
+-(void)loadNerbyImagesWithData:(NSDictionary *)data;
 
 @end
 
