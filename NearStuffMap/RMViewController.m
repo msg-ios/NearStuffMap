@@ -151,6 +151,31 @@
            
             
         }
+        else {
+            view.annotation = annotation;
+            
+            if ( app.foursquareSwitch && [annotation.socialNetwork isEqualToString:@"Foursquare"])
+            {
+                view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorGreen];
+            }
+            else if (app.instagramSwitch && [annotation.socialNetwork isEqualToString:@"Instagram"])
+            {
+                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:annotation.photo];
+            }
+            else if (app.yelpSwitch && [annotation.socialNetwork isEqualToString:@"Yelp"])
+            {
+                view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorRed];
+            }
+            else if (app.twitterSwitch && [annotation.socialNetwork isEqualToString:@"Twitter"])
+            {
+                view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorPurple];
+            }
+            else if ([annotation.socialNetwork isEqualToString:@"Facebook"])
+            {
+                view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorPurple];
+            }
+
+        }
         
         [view setCanShowCallout:YES];
 
