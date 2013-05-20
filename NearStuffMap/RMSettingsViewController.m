@@ -13,7 +13,7 @@
 @end
 
 @implementation RMSettingsViewController
-@synthesize instagramSwitch, foursquareSwitch, yelpSwitch, twitterSwitch;
+@synthesize instagramSwitch, foursquareSwitch, yelpSwitch, twitterSwitch, facebookSwitch;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,7 +34,7 @@
     twitterSwitch.on = app.twitterSwitch;
     instagramSwitch.on = app.instagramSwitch;
     yelpSwitch.on = app.yelpSwitch;
-    
+    facebookSwitch.on = app.facebookSwitch;
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -70,6 +70,12 @@
     
     RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
     app.twitterSwitch = twitterSwitch.isOn;
+}
+
+-(IBAction)toggleSwitchFacebook{
+    
+    RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
+    app.facebookSwitch = facebookSwitch.isOn;
 }
 
 @end
