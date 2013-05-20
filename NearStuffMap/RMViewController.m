@@ -139,15 +139,11 @@
             {
                 view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorRed];
             }
-<<<<<<< HEAD
             else if (app.twitterSwitch && [annotation.socialNetwork isEqualToString:@"Twitter"])
-=======
-//            else if ([annotation.socialNetwork isEqualToString:@"Twitter"])
-//            {
-//                view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorPurple];
-//            }
+            {
+                view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorPurple];
+            }
             else if ([annotation.socialNetwork isEqualToString:@"Facebook"])
->>>>>>> upstream/master
             {
                 view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorPurple];
             }
@@ -192,12 +188,10 @@
         
     }
     
-<<<<<<< HEAD
     if (app.twitterSwitch){
         [[RMTwitterSDK sharedClient] getPlacesOnTwitterWithLatitude:[NSString stringWithFormat:@"%f", latitude] AndLongitude:[NSString stringWithFormat:@"%f", longitude] AndWithDelegate:self];
         
     }
-=======
     //∫[[RMTwitterSDK sharedClient] getPlacesOnTwitterWithLatitude:[NSString stringWithFormat:@"%f", latitude] AndLongitude:[NSString stringWithFormat:@"%f", longitude] AndWithDelegate:self];
     
     
@@ -206,7 +200,6 @@
     NSDictionary *dict3 = [NSDictionary dictionaryWithObjectsAndKeys:@"1000", @"distance", nil];
     [[RMFacebookSDK sharedClient] getPublicPlaceWithQuery:@"coffee" WithLatitude:lat WithLongitude:lon WithParams:dict3 AndWithDelegate:self];
     
->>>>>>> upstream/master
 }
 
 -(void)loadNearbyExploreWithData:(NSDictionary *)array{
@@ -352,7 +345,6 @@
     [self refreshData];
 }
 
-<<<<<<< HEAD
 -(IBAction)refreshData{
 
     if (self.mapView)
@@ -375,7 +367,6 @@
         [self loadAnnotations];
     }
 }
-=======
 -(void)loadNearbyFacebookPlacesWithData:(NSDictionary *)data {
     
     for (int i = 0; i < [[data objectForKey:@"data"] count]; i++){
@@ -399,6 +390,4 @@
     }
 
 }
-
->>>>>>> upstream/master
 @end
