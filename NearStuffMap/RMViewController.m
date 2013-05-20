@@ -139,11 +139,19 @@
             {
                 view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorRed];
             }
+<<<<<<< HEAD
             else if (app.twitterSwitch && [annotation.socialNetwork isEqualToString:@"Twitter"])
+=======
+//            else if ([annotation.socialNetwork isEqualToString:@"Twitter"])
+//            {
+//                view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorPurple];
+//            }
+            else if ([annotation.socialNetwork isEqualToString:@"Facebook"])
+>>>>>>> upstream/master
             {
                 view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorPurple];
             }
-            
+
            
             
         }
@@ -184,10 +192,21 @@
         
     }
     
+<<<<<<< HEAD
     if (app.twitterSwitch){
         [[RMTwitterSDK sharedClient] getPlacesOnTwitterWithLatitude:[NSString stringWithFormat:@"%f", latitude] AndLongitude:[NSString stringWithFormat:@"%f", longitude] AndWithDelegate:self];
         
     }
+=======
+    //∫[[RMTwitterSDK sharedClient] getPlacesOnTwitterWithLatitude:[NSString stringWithFormat:@"%f", latitude] AndLongitude:[NSString stringWithFormat:@"%f", longitude] AndWithDelegate:self];
+    
+    
+    NSString *lat = [NSString stringWithFormat:@"%f", latitude];
+    NSString *lon = [NSString stringWithFormat:@"%f", longitude];
+    NSDictionary *dict3 = [NSDictionary dictionaryWithObjectsAndKeys:@"1000", @"distance", nil];
+    [[RMFacebookSDK sharedClient] getPublicPlaceWithQuery:@"coffee" WithLatitude:lat WithLongitude:lon WithParams:dict3 AndWithDelegate:self];
+    
+>>>>>>> upstream/master
 }
 
 -(void)loadNearbyExploreWithData:(NSDictionary *)array{
@@ -333,6 +352,7 @@
     [self refreshData];
 }
 
+<<<<<<< HEAD
 -(IBAction)refreshData{
 
     if (self.mapView)
@@ -355,4 +375,30 @@
         [self loadAnnotations];
     }
 }
+=======
+-(void)loadNearbyFacebookPlacesWithData:(NSDictionary *)data {
+    
+    for (int i = 0; i < [[data objectForKey:@"data"] count]; i++){
+        
+        RMMapViewAnnotation *annotation = [[RMMapViewAnnotation alloc] init];
+        
+        CLLocationCoordinate2D location;
+        
+        location.latitude = [[[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"location"] objectForKey:@"latitude"] floatValue];
+        location.longitude = [[[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"location"] objectForKey:@"longitude"] floatValue];
+        
+        NSLog(@"LAT : %f LON: %f", location.latitude, location.longitude);
+        
+        annotation.coordinate = location;
+        annotation.title = [[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"name"];
+        annotation.subtitle = @"Facebook";
+        annotation.socialNetwork = @"Facebook";
+        
+        [self.mapView addAnnotation:annotation];
+        
+    }
+
+}
+
+>>>>>>> upstream/master
 @end
