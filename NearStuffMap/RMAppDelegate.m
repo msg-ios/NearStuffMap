@@ -11,12 +11,19 @@
 #import "RMViewController.h"
 
 @implementation RMAppDelegate
+@synthesize foursquareSwitch, twitterSwitch,instagramSwitch,yelpSwitch;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.viewController = [[RMViewController alloc] initWithNibName:@"RMViewController" bundle:nil];
+    
+    foursquareSwitch = YES;
+    twitterSwitch = YES;
+    instagramSwitch = YES;
+    yelpSwitch = YES;
+    
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;

@@ -19,6 +19,8 @@
 		280E87E81725D38900A152DD /* RMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E87E71725D38900A152DD /* RMViewController.m */; };
 		280E87EB1725D38900A152DD /* RMViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E87E91725D38900A152DD /* RMViewController.xib */; };
 		280E87F91725DBF600A152DD /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280E87F81725DBF600A152DD /* MapKit.framework */; };
+		AA2DA26E174AC4CD00B9438B /* RMSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2DA26C174AC4CD00B9438B /* RMSettingsViewController.m */; };
+		AA2DA26F174AC4CD00B9438B /* RMSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA2DA26D174AC4CD00B9438B /* RMSettingsViewController.xib */; };
 		2815CD561730486200AC25C1 /* RMFacebookSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 2815CD551730486200AC25C1 /* RMFacebookSDK.m */; };
 		AAACB54717287DC30088B73D /* RMTwitterSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = AAACB54617287DC30088B73D /* RMTwitterSDK.m */; };
 		AAF2A9B01725F85B00B48D7F /* RMMapViewAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF2A9AF1725F85B00B48D7F /* RMMapViewAnnotation.m */; };
@@ -47,6 +49,9 @@
 		2815CD551730486200AC25C1 /* RMFacebookSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMFacebookSDK.m; sourceTree = "<group>"; };
 		7BE394D772714CD69142F29A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A649A159EDC24B0BA1886337 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		AA2DA26B174AC4CD00B9438B /* RMSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSettingsViewController.h; sourceTree = "<group>"; };
+		AA2DA26C174AC4CD00B9438B /* RMSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSettingsViewController.m; sourceTree = "<group>"; };
+		AA2DA26D174AC4CD00B9438B /* RMSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSettingsViewController.xib; sourceTree = "<group>"; };
 		AAACB54517287DC30088B73D /* RMTwitterSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMTwitterSDK.h; sourceTree = "<group>"; };
 		AAACB54617287DC30088B73D /* RMTwitterSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMTwitterSDK.m; sourceTree = "<group>"; };
 		AAF2A9AE1725F85B00B48D7F /* RMMapViewAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMMapViewAnnotation.h; sourceTree = "<group>"; };
@@ -110,9 +115,12 @@
 				AAACB54617287DC30088B73D /* RMTwitterSDK.m */,
 				280E87E61725D38900A152DD /* RMViewController.h */,
 				280E87E71725D38900A152DD /* RMViewController.m */,
+				AA2DA26B174AC4CD00B9438B /* RMSettingsViewController.h */,
+				AA2DA26C174AC4CD00B9438B /* RMSettingsViewController.m */,
 				AAF2A9AE1725F85B00B48D7F /* RMMapViewAnnotation.h */,
 				AAF2A9AF1725F85B00B48D7F /* RMMapViewAnnotation.m */,
 				280E87E91725D38900A152DD /* RMViewController.xib */,
+				AA2DA26D174AC4CD00B9438B /* RMSettingsViewController.xib */,
 				280E87D51725D38900A152DD /* Supporting Files */,
 			);
 			path = NearStuffMap;
@@ -190,6 +198,7 @@
 				280E87E31725D38900A152DD /* Default@2x.png in Resources */,
 				280E87E51725D38900A152DD /* Default-568h@2x.png in Resources */,
 				280E87EB1725D38900A152DD /* RMViewController.xib in Resources */,
+				AA2DA26F174AC4CD00B9438B /* RMSettingsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,6 +231,7 @@
 				280E87E81725D38900A152DD /* RMViewController.m in Sources */,
 				AAF2A9B01725F85B00B48D7F /* RMMapViewAnnotation.m in Sources */,
 				AAACB54717287DC30088B73D /* RMTwitterSDK.m in Sources */,
+				AA2DA26E174AC4CD00B9438B /* RMSettingsViewController.m in Sources */,
 				2815CD561730486200AC25C1 /* RMFacebookSDK.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
