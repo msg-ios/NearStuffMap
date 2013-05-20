@@ -13,12 +13,15 @@
     IBOutlet UISwitch *twitterSwitch;
     IBOutlet UISwitch *yelpSwitch;
     IBOutlet UISwitch *foursquareSwitch;
+    IBOutlet UISwitch *facebookSwitch;
+
 }
 
 @property (nonatomic, retain) UISwitch *instagramSwitch;
 @property (nonatomic, retain) UISwitch *twitterSwitch;
 @property (nonatomic, retain) UISwitch *yelpSwitch;
 @property (nonatomic, retain) UISwitch *foursquareSwitch;
+@property (nonatomic, retain) UISwitch *facebookSwitch;
 
 
 -(IBAction)dismissSettingsView;
@@ -29,5 +32,7 @@
 -(IBAction)toggleSwitchInstagram;
 
 -(IBAction)toggleSwitchTwitter;
+
+-(IBAction)toggleSwitchFacebook;
 
 @end

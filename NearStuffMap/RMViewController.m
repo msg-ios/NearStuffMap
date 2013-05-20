@@ -143,7 +143,7 @@
             {
                 view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorPurple];
             }
-            else if ([annotation.socialNetwork isEqualToString:@"Facebook"])
+            else if (app.facebookSwitch && [annotation.socialNetwork isEqualToString:@"Facebook"])
             {
                 view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorPurple];
             }
@@ -170,7 +170,7 @@
             {
                 view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorPurple];
             }
-            else if ([annotation.socialNetwork isEqualToString:@"Facebook"])
+            else if (app.facebookSwitch && [annotation.socialNetwork isEqualToString:@"Facebook"])
             {
                 view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorPurple];
             }
@@ -220,11 +220,13 @@
     //∫[[RMTwitterSDK sharedClient] getPlacesOnTwitterWithLatitude:[NSString stringWithFormat:@"%f", latitude] AndLongitude:[NSString stringWithFormat:@"%f", longitude] AndWithDelegate:self];
     
     
+    if (app.facebookSwitch)
+    {
     NSString *lat = [NSString stringWithFormat:@"%f", latitude];
     NSString *lon = [NSString stringWithFormat:@"%f", longitude];
     NSDictionary *dict3 = [NSDictionary dictionaryWithObjectsAndKeys:@"1000", @"distance", nil];
     [[RMFacebookSDK sharedClient] getPublicPlaceWithQuery:@"coffee" WithLatitude:lat WithLongitude:lon WithParams:dict3 AndWithDelegate:self];
-    
+    }
 }
 
 -(void)loadNearbyExploreWithData:(NSDictionary *)array{
