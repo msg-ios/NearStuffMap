@@ -16,4 +16,9 @@
 
 @property (strong, nonatomic) RMViewController *viewController;
 
+@property BOOL foursquareSwitch;
+@property BOOL twitterSwitch;
+@property BOOL yelpSwitch;
+@property BOOL instagramSwitch;
+
 @end

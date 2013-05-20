@@ -15,10 +15,14 @@
     float latitude;
     float longitude;
     
+    IBOutlet UIBarButtonItem *socialNetworks;
 }
 
-@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (nonatomic, retain) IBOutlet MKMapView *mapView;
 
 - (void)zoomToUserLocation:(MKUserLocation *)userLocation;
+
+-(IBAction)createAndShowSocialNetworksView;
+-(IBAction)refreshData;
 
 @end

@@ -9,6 +9,8 @@
 #import "RMViewController.h"
 #import "RMMapViewAnnotation.h"
 #import "RMMasterSDK.h"
+#import "RMSettingsViewController.h"
+#import "RMAppDelegate.h"
 
 @interface CustomPin : MKPinAnnotationView
 {
@@ -64,6 +66,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+
     [self.mapView setShowsUserLocation:YES];
     self.mapView.delegate = self;
 }
@@ -80,13 +83,29 @@
     [super viewDidUnload];
 }
 
-
+-(IBAction)createAndShowSocialNetworksView{
+    
+    RMSettingsViewController *settingsVC = [[RMSettingsViewController alloc] initWithNibName:@"RMSettingsViewController" bundle:nil];
+    
+    [self presentViewController:settingsVC animated:YES completion:nil];
+    
+}
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
     self.mapView.centerCoordinate = userLocation.coordinate;
     
     latitude = userLocation.coordinate.latitude;
     longitude = userLocation.coordinate.longitude;
+    
+    //Get the current user location annotation.
+    id userAnnotation=self.mapView.userLocation;
+    
+    //Remove all added annotations
+      [self.mapView removeAnnotations:[[self mapView] annotations]];
+    
+    // Add the current user location annotation again.
+    if(userAnnotation!=nil)
+        [self.mapView addAnnotation:userAnnotation];
     
     [self loadAnnotations];
     
@@ -101,24 +120,26 @@
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(RMMapViewAnnotation *)annotation{
     
+    RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
+
     if([annotation isKindOfClass:[RMMapViewAnnotation class]]) {
         MKAnnotationView *view = [self.mapView dequeueReusableAnnotationViewWithIdentifier:@"CustomId"];
         if(nil == view) {
             
             
-            if ([annotation.socialNetwork isEqualToString:@"Foursquare"])
+            if ( app.foursquareSwitch && [annotation.socialNetwork isEqualToString:@"Foursquare"])
             {                
                 view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorGreen];
             }
-            else if ([annotation.socialNetwork isEqualToString:@"Instagram"])
+            else if (app.instagramSwitch && [annotation.socialNetwork isEqualToString:@"Instagram"])
             {
                 view = [[CustomPin alloc] initWithAnnotation:annotation andImage:annotation.photo];
             }
-            else if ([annotation.socialNetwork isEqualToString:@"Yelp"])
+            else if (app.yelpSwitch && [annotation.socialNetwork isEqualToString:@"Yelp"])
             {
                 view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorRed];
             }
-            else if ([annotation.socialNetwork isEqualToString:@"Twitter"])
+            else if (app.twitterSwitch && [annotation.socialNetwork isEqualToString:@"Twitter"])
             {
                 view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorPurple];
             }
@@ -138,19 +159,35 @@
 
 -(void)loadAnnotations{
     
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%f", latitude],@"latitude", [NSString stringWithFormat:@"%f", longitude], @"longitude", nil];
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"700", @"radius", @"15", @"limit", nil];
+    RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
 
-    [[RMMasterSDK FoursquareSDK] getUserlessExploreVenuesWithLatitudeLongitude:dict OrNear:nil AndParameters:params AndWithDelegate:self];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%f", latitude],@"latitude", [NSString stringWithFormat:@"%f", longitude], @"longitude", nil];
+
+
+    if (app.foursquareSwitch)
+    {
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"700", @"radius", @"15", @"limit", nil];
+        [[RMMasterSDK FoursquareSDK] getUserlessExploreVenuesWithLatitudeLongitude:dict OrNear:nil AndParameters:params AndWithDelegate:self];
     
-    NSDictionary *dict2 = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%f", latitude],@"lat", [NSString stringWithFormat:@"%f", longitude], @"lng", @"1000", @"distance", nil];
+    }
     
-    [[RMMasterSDK InstagramSDK] getWAMediaSearchWithParams:dict2 AndWithDelegate:self];
+    if (app.instagramSwitch){
+        
+        NSDictionary *dict2 = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%f", latitude],@"lat", [NSString stringWithFormat:@"%f", longitude], @"lng", @"1000", @"distance", nil];
+
+        [[RMMasterSDK InstagramSDK] getWAMediaSearchWithParams:dict2 AndWithDelegate:self];
+        
+    }
     
+    if (app.yelpSwitch){
+        [[RMMasterSDK YelpSDK] getSearchWithTerm:nil AndCoordinates:dict AndParams:[NSDictionary dictionaryWithObjectsAndKeys:@"1000",@"radius_filter", nil] AndWithDelegate:self];
+        
+    }
     
-    [[RMMasterSDK YelpSDK] getSearchWithTerm:nil AndCoordinates:dict AndParams:[NSDictionary dictionaryWithObjectsAndKeys:@"1000",@"radius_filter", nil] AndWithDelegate:self];
-    
-    [[RMTwitterSDK sharedClient] getPlacesOnTwitterWithLatitude:[NSString stringWithFormat:@"%f", latitude] AndLongitude:[NSString stringWithFormat:@"%f", longitude] AndWithDelegate:self];
+    if (app.twitterSwitch){
+        [[RMTwitterSDK sharedClient] getPlacesOnTwitterWithLatitude:[NSString stringWithFormat:@"%f", latitude] AndLongitude:[NSString stringWithFormat:@"%f", longitude] AndWithDelegate:self];
+        
+    }
 }
 
 -(void)loadNearbyExploreWithData:(NSDictionary *)array{
@@ -289,5 +326,33 @@
     }
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    
+   
+    [self refreshData];
+}
 
+-(IBAction)refreshData{
+
+    if (self.mapView)
+    {
+       //Get the current user location annotation.
+        id userAnnotation=self.mapView.userLocation;
+        
+        //Remove all added annotations
+        
+        for (RMMapViewAnnotation *annotation in self.mapView.annotations)
+        {
+            [self.mapView removeAnnotation:annotation];
+        }
+      //  [self.mapView removeAnnotations:[[self mapView] annotations]];
+        
+        // Add the current user location annotation again.
+        if(userAnnotation!=nil)
+           [self.mapView addAnnotation:userAnnotation];
+
+        [self loadAnnotations];
+    }
+}
 @end
