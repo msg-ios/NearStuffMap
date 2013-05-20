@@ -11,7 +11,7 @@
 #import "RMViewController.h"
 
 @implementation RMAppDelegate
-@synthesize foursquareSwitch, twitterSwitch,instagramSwitch,yelpSwitch;
+@synthesize foursquareSwitch, twitterSwitch,instagramSwitch,yelpSwitch, facebookSwitch;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -23,7 +23,7 @@
     twitterSwitch = YES;
     instagramSwitch = YES;
     yelpSwitch = YES;
-    
+    facebookSwitch = YES;
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;

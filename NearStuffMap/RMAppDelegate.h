@@ -20,5 +20,6 @@
 @property BOOL twitterSwitch;
 @property BOOL yelpSwitch;
 @property BOOL instagramSwitch;
+@property BOOL facebookSwitch;
 
 @end
