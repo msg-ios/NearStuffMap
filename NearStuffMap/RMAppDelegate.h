@@ -16,6 +16,8 @@
 
 @property (strong, nonatomic) RMViewController *viewController;
 
+@property (strong, nonatomic) NSMutableArray *socialArrays;
+
 @property BOOL foursquareSwitch;
 @property BOOL twitterSwitch;
 @property BOOL yelpSwitch;
