@@ -11,6 +11,8 @@
 #import "RMMasterSDK.h"
 #import "RMTwitterSDK.h"
 #import "RMFacebookSDK.h"
+#import <CoreLocation/CoreLocation.h>
+
 @interface RMViewController : UIViewController <MKMapViewDelegate, FoursquareDelegate, InstagramDelegate, YelpDelegate, TwitterSDKDelegate, FacebookDelegate> {
     
     float latitude;
@@ -19,6 +21,8 @@
     BOOL canRefreshData;
     
     IBOutlet UIBarButtonItem *socialNetworks;
+    
+    MKUserLocation *lastUserLocation;
 }
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;

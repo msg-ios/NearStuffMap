@@ -12,7 +12,7 @@
 #import "AFNetworkActivityIndicatorManager.h"
 
 @implementation RMAppDelegate
-@synthesize foursquareSwitch, twitterSwitch,instagramSwitch,yelpSwitch, facebookSwitch;
+@synthesize foursquareSwitch, twitterSwitch,instagramSwitch,yelpSwitch, facebookSwitch, socialArrays;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -30,6 +30,9 @@
     instagramSwitch = YES;
     yelpSwitch = YES;
     facebookSwitch = YES;
+    
+    socialArrays = [[NSMutableArray alloc ] init];
+    
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;

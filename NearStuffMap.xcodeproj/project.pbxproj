@@ -29,6 +29,7 @@
 		AAACB54717287DC30088B73D /* RMTwitterSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = AAACB54617287DC30088B73D /* RMTwitterSDK.m */; };
 		AAF2A9B01725F85B00B48D7F /* RMMapViewAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF2A9AF1725F85B00B48D7F /* RMMapViewAnnotation.m */; };
 		AAFE6922174D729D009FE228 /* yelpPin.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFE6921174D729D009FE228 /* yelpPin.png */; };
+		AAFE6924174D8890009FE228 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAFE6923174D8890009FE228 /* CoreLocation.framework */; };
 		EE38B2F0324B4196867411CB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BE394D772714CD69142F29A /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +67,7 @@
 		AAF2A9AE1725F85B00B48D7F /* RMMapViewAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMMapViewAnnotation.h; sourceTree = "<group>"; };
 		AAF2A9AF1725F85B00B48D7F /* RMMapViewAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMMapViewAnnotation.m; sourceTree = "<group>"; };
 		AAFE6921174D729D009FE228 /* yelpPin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yelpPin.png; sourceTree = "<group>"; };
+		AAFE6923174D8890009FE228 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAFE6924174D8890009FE228 /* CoreLocation.framework in Frameworks */,
 				280E87F91725DBF600A152DD /* MapKit.framework in Frameworks */,
 				280E87CF1725D38900A152DD /* UIKit.framework in Frameworks */,
 				280E87D11725D38900A152DD /* Foundation.framework in Frameworks */,
@@ -87,6 +90,7 @@
 		280E87BF1725D38900A152DD = {
 			isa = PBXGroup;
 			children = (
+				AAFE6923174D8890009FE228 /* CoreLocation.framework */,
 				280E87D41725D38900A152DD /* NearStuffMap */,
 				280E87CD1725D38900A152DD /* Frameworks */,
 				280E87CB1725D38900A152DD /* Products */,

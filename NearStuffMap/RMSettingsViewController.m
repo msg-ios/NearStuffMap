@@ -38,6 +38,11 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
+
+    NSLog(@"ARRAY: %@", app.socialArrays);
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -52,30 +57,60 @@
     
     RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
     app.foursquareSwitch = foursquareSwitch.isOn;
-}
+    if (![foursquareSwitch isOn])
+        [app.socialArrays addObject:@"Foursquare"];
+    else{
+        if ([app.socialArrays containsObject:@"Foursquare"])
+            [app.socialArrays removeObject:@"Foursquare"];
+    }}
 
 -(IBAction)toggleSwitchYelp{
     
     RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
     app.yelpSwitch = yelpSwitch.isOn;
+    if (![yelpSwitch isOn])
+        [app.socialArrays addObject:@"Yelp"];
+    else{
+        if ([app.socialArrays containsObject:@"Yelp"])
+            [app.socialArrays removeObject:@"Yelp"];
+    }
+
 }
 
 -(IBAction)toggleSwitchInstagram{
     
     RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
     app.instagramSwitch = instagramSwitch.isOn;
+    if (![instagramSwitch isOn])
+        [app.socialArrays addObject:@"Instagram"];
+    else{
+        if ([app.socialArrays containsObject:@"Instagram"])
+            [app.socialArrays removeObject:@"Instagram"];
+    }
 }
 
 -(IBAction)toggleSwitchTwitter{
     
     RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
     app.twitterSwitch = twitterSwitch.isOn;
+    if (![twitterSwitch isOn])
+        [app.socialArrays addObject:@"Twitter"];
+    else{
+        if ([app.socialArrays containsObject:@"Twitter"])
+            [app.socialArrays removeObject:@"Twitter"];
+    }
 }
 
 -(IBAction)toggleSwitchFacebook{
     
     RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
     app.facebookSwitch = facebookSwitch.isOn;
+    if (![facebookSwitch isOn])
+        [app.socialArrays addObject:@"Facebook"];
+    else{
+        if ([app.socialArrays containsObject:@"Facebook"])
+            [app.socialArrays removeObject:@"Facebook"];
+    }
 }
 
 @end
