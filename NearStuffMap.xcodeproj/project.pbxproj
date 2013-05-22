@@ -19,11 +19,17 @@
 		280E87E81725D38900A152DD /* RMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E87E71725D38900A152DD /* RMViewController.m */; };
 		280E87EB1725D38900A152DD /* RMViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E87E91725D38900A152DD /* RMViewController.xib */; };
 		280E87F91725DBF600A152DD /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280E87F81725DBF600A152DD /* MapKit.framework */; };
+		2815CD561730486200AC25C1 /* RMFacebookSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 2815CD551730486200AC25C1 /* RMFacebookSDK.m */; };
+		AA0D8C07174C33CA00B44399 /* twitterPin.png in Resources */ = {isa = PBXBuildFile; fileRef = AA0D8C06174C33CA00B44399 /* twitterPin.png */; };
 		AA2DA26E174AC4CD00B9438B /* RMSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2DA26C174AC4CD00B9438B /* RMSettingsViewController.m */; };
 		AA2DA26F174AC4CD00B9438B /* RMSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA2DA26D174AC4CD00B9438B /* RMSettingsViewController.xib */; };
-		2815CD561730486200AC25C1 /* RMFacebookSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 2815CD551730486200AC25C1 /* RMFacebookSDK.m */; };
+		AA92E121174C1BFA0058C231 /* facePin.png in Resources */ = {isa = PBXBuildFile; fileRef = AA92E120174C1BFA0058C231 /* facePin.png */; };
+		AA92E123174C27050058C231 /* facePinWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = AA92E122174C27050058C231 /* facePinWhite.png */; };
+		AA92E125174C29770058C231 /* fourPin.png in Resources */ = {isa = PBXBuildFile; fileRef = AA92E124174C29770058C231 /* fourPin.png */; };
 		AAACB54717287DC30088B73D /* RMTwitterSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = AAACB54617287DC30088B73D /* RMTwitterSDK.m */; };
 		AAF2A9B01725F85B00B48D7F /* RMMapViewAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF2A9AF1725F85B00B48D7F /* RMMapViewAnnotation.m */; };
+		AAFE6922174D729D009FE228 /* yelpPin.png in Resources */ = {isa = PBXBuildFile; fileRef = AAFE6921174D729D009FE228 /* yelpPin.png */; };
+		AAFE6924174D8890009FE228 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAFE6923174D8890009FE228 /* CoreLocation.framework */; };
 		EE38B2F0324B4196867411CB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BE394D772714CD69142F29A /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -49,13 +55,19 @@
 		2815CD551730486200AC25C1 /* RMFacebookSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMFacebookSDK.m; sourceTree = "<group>"; };
 		7BE394D772714CD69142F29A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A649A159EDC24B0BA1886337 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		AA0D8C06174C33CA00B44399 /* twitterPin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitterPin.png; sourceTree = "<group>"; };
 		AA2DA26B174AC4CD00B9438B /* RMSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSettingsViewController.h; sourceTree = "<group>"; };
 		AA2DA26C174AC4CD00B9438B /* RMSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSettingsViewController.m; sourceTree = "<group>"; };
 		AA2DA26D174AC4CD00B9438B /* RMSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSettingsViewController.xib; sourceTree = "<group>"; };
+		AA92E120174C1BFA0058C231 /* facePin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facePin.png; sourceTree = "<group>"; };
+		AA92E122174C27050058C231 /* facePinWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facePinWhite.png; sourceTree = "<group>"; };
+		AA92E124174C29770058C231 /* fourPin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fourPin.png; sourceTree = "<group>"; };
 		AAACB54517287DC30088B73D /* RMTwitterSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMTwitterSDK.h; sourceTree = "<group>"; };
 		AAACB54617287DC30088B73D /* RMTwitterSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMTwitterSDK.m; sourceTree = "<group>"; };
 		AAF2A9AE1725F85B00B48D7F /* RMMapViewAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMMapViewAnnotation.h; sourceTree = "<group>"; };
 		AAF2A9AF1725F85B00B48D7F /* RMMapViewAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMMapViewAnnotation.m; sourceTree = "<group>"; };
+		AAFE6921174D729D009FE228 /* yelpPin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yelpPin.png; sourceTree = "<group>"; };
+		AAFE6923174D8890009FE228 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAFE6924174D8890009FE228 /* CoreLocation.framework in Frameworks */,
 				280E87F91725DBF600A152DD /* MapKit.framework in Frameworks */,
 				280E87CF1725D38900A152DD /* UIKit.framework in Frameworks */,
 				280E87D11725D38900A152DD /* Foundation.framework in Frameworks */,
@@ -77,6 +90,7 @@
 		280E87BF1725D38900A152DD = {
 			isa = PBXGroup;
 			children = (
+				AAFE6923174D8890009FE228 /* CoreLocation.framework */,
 				280E87D41725D38900A152DD /* NearStuffMap */,
 				280E87CD1725D38900A152DD /* Frameworks */,
 				280E87CB1725D38900A152DD /* Products */,
@@ -107,6 +121,11 @@
 		280E87D41725D38900A152DD /* NearStuffMap */ = {
 			isa = PBXGroup;
 			children = (
+				AA92E122174C27050058C231 /* facePinWhite.png */,
+				AA0D8C06174C33CA00B44399 /* twitterPin.png */,
+				AA92E124174C29770058C231 /* fourPin.png */,
+				AAFE6921174D729D009FE228 /* yelpPin.png */,
+				AA92E120174C1BFA0058C231 /* facePin.png */,
 				2815CD541730486200AC25C1 /* RMFacebookSDK.h */,
 				2815CD551730486200AC25C1 /* RMFacebookSDK.m */,
 				280E87DD1725D38900A152DD /* RMAppDelegate.h */,
@@ -199,6 +218,11 @@
 				280E87E51725D38900A152DD /* Default-568h@2x.png in Resources */,
 				280E87EB1725D38900A152DD /* RMViewController.xib in Resources */,
 				AA2DA26F174AC4CD00B9438B /* RMSettingsViewController.xib in Resources */,
+				AA92E121174C1BFA0058C231 /* facePin.png in Resources */,
+				AA92E123174C27050058C231 /* facePinWhite.png in Resources */,
+				AA92E125174C29770058C231 /* fourPin.png in Resources */,
+				AA0D8C07174C33CA00B44399 /* twitterPin.png in Resources */,
+				AAFE6922174D729D009FE228 /* yelpPin.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -72,11 +72,36 @@
     self.mapView.delegate = self;
     canRefreshData = YES;
     self.annotationsArray = [[NSMutableArray alloc] init];
+
+    lastUserLocation = [[MKUserLocation alloc] init];
+    [lastUserLocation setCoordinate:CLLocationCoordinate2DMake(0.0000, 0.0000)];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     
+
+    if (self.mapView)
+    {
+        RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
+
+        for (int k = 0; k < app.socialArrays.count ; k++)
+        {
+        for (int i = 0; i < self.annotationsArray.count; i++)
+        {
+            RMMapViewAnnotation *annotation = (RMMapViewAnnotation *)[self.annotationsArray objectAtIndex:i];
+
+            if ([annotation.socialNetwork isEqualToString:[app.socialArrays objectAtIndex:k]])
+            {
+                [self.annotationsArray removeObject:annotation];
+            }
+            
+        }
+        }
+        
+        [self refreshData];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -99,8 +124,13 @@
     latitude = userLocation.coordinate.latitude;
     longitude = userLocation.coordinate.longitude;
     
-    [self loadAnnotations];
+    if (fabsf(userLocation.coordinate.latitude - lastUserLocation.coordinate.latitude) > 0.0010 || fabsf(userLocation.coordinate.longitude - lastUserLocation.coordinate.longitude) > 0.0010)
+    {
+        [lastUserLocation setCoordinate:userLocation.coordinate];
+        
+        [self loadAnnotations];
     
+    }
     [self zoomToUserLocation:self.mapView.userLocation];
 }
 
@@ -121,7 +151,7 @@
             
             if ( app.foursquareSwitch && [annotation.socialNetwork isEqualToString:@"Foursquare"])
             {                
-                view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorGreen];
+                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"fourPin"]];
             }
             else if (app.instagramSwitch && [annotation.socialNetwork isEqualToString:@"Instagram"])
             {
@@ -129,15 +159,15 @@
             }
             else if (app.yelpSwitch && [annotation.socialNetwork isEqualToString:@"Yelp"])
             {
-                view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorRed];
+                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"yelpPin"]];
             }
             else if (app.twitterSwitch && [annotation.socialNetwork isEqualToString:@"Twitter"])
             {
-                view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorPurple];
+                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"twitterPin"]];
             }
             else if (app.facebookSwitch && [annotation.socialNetwork isEqualToString:@"Facebook"])
             {
-                view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorPurple];
+                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"facePin"]];
             }
 
            
@@ -148,7 +178,7 @@
             
             if ( app.foursquareSwitch && [annotation.socialNetwork isEqualToString:@"Foursquare"])
             {
-                view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorGreen];
+                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"fourPin"]];
             }
             else if (app.instagramSwitch && [annotation.socialNetwork isEqualToString:@"Instagram"])
             {
@@ -156,17 +186,16 @@
             }
             else if (app.yelpSwitch && [annotation.socialNetwork isEqualToString:@"Yelp"])
             {
-                view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorRed];
+                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"yelpPin"]];
             }
             else if (app.twitterSwitch && [annotation.socialNetwork isEqualToString:@"Twitter"])
             {
-                view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorPurple];
+                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"twitterPin"]];
             }
             else if (app.facebookSwitch && [annotation.socialNetwork isEqualToString:@"Facebook"])
             {
-                view = [[CustomPin alloc] initWithAnnotation:annotation andPinColor:MKPinAnnotationColorPurple];
+                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"facePin"]];
             }
-
         }
         
         [view setCanShowCallout:YES];
@@ -397,21 +426,24 @@
 
     if (self.mapView)
     {
-        if (canRefreshData) {
+       // if (canRefreshData) {
             
-            canRefreshData = NO;
+      //      canRefreshData = NO;
             
             //Remove all added annotations
             for (RMMapViewAnnotation *annotation in self.mapView.annotations)
             {
                 [self.mapView removeAnnotation:annotation];
             }
-            [self loadAnnotations];
+        
+            [self.mapView addAnnotations:self.annotationsArray];
+        
+           // [self loadAnnotations];
             //The user will be able to refresh the data in 15 min.
-            [self performSelector:@selector(scheduledTask) withObject:nil afterDelay:900.0];
-        }
-        else {
-            UIAlertView *alert = [[UIAlertView alloc]
+            //[self performSelector:@selector(scheduledTask) withObject:nil afterDelay:900.0];
+       // }
+      //  else {
+      /*      UIAlertView *alert = [[UIAlertView alloc]
                                   initWithTitle:@"Can't update data."
                                   message:@"Wait for timer to expire."
                                   delegate:nil
@@ -419,7 +451,7 @@
                                   otherButtonTitles:nil, nil];
             [alert show];
         
-        }
+        }*/
         
     
     }
