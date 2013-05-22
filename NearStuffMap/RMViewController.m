@@ -72,6 +72,8 @@
     self.mapView.delegate = self;
     canRefreshData = YES;
     self.annotationsArray = [[NSMutableArray alloc] init];
+    annotationsArrayBackup = [[NSMutableArray alloc] init];
+    
 
     lastUserLocation = [[MKUserLocation alloc] init];
     [lastUserLocation setCoordinate:CLLocationCoordinate2DMake(0.0000, 0.0000)];
@@ -84,6 +86,8 @@
 
     if (self.mapView)
     {
+        self.annotationsArray = annotationsArrayBackup;
+        
         RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
 
         for (int k = 0; k < app.socialArrays.count ; k++)
@@ -92,6 +96,7 @@
         {
             RMMapViewAnnotation *annotation = (RMMapViewAnnotation *)[self.annotationsArray objectAtIndex:i];
 
+            
             if ([annotation.socialNetwork isEqualToString:[app.socialArrays objectAtIndex:k]])
             {
                 [self.annotationsArray removeObject:annotation];
@@ -126,6 +131,7 @@
     
     if (fabsf(userLocation.coordinate.latitude - lastUserLocation.coordinate.latitude) > 0.0010 || fabsf(userLocation.coordinate.longitude - lastUserLocation.coordinate.longitude) > 0.0010)
     {
+                
         [lastUserLocation setCoordinate:userLocation.coordinate];
         
         [self loadAnnotations];
@@ -270,6 +276,7 @@
         
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];
+        [annotationsArrayBackup addObject:annotation];
     }
     
 }
@@ -315,7 +322,8 @@
         
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];
-        
+        [annotationsArrayBackup addObject:annotation];
+
     }
 }
 
@@ -343,7 +351,8 @@
         
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];
-        
+        [annotationsArrayBackup addObject:annotation];
+
     }
 
 
@@ -379,6 +388,7 @@
                 
                 [self.mapView addAnnotation:annotation];
                 [self.annotationsArray addObject:annotation];
+                [annotationsArrayBackup addObject:annotation];
 
             }
             
@@ -408,7 +418,8 @@
         
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];
-        
+        [annotationsArrayBackup addObject:annotation];
+
     }
     
 }
@@ -426,6 +437,10 @@
 
     if (self.mapView)
     {
+        
+        NSLog(@"Annotation count: %i", annotationsArrayBackup.count);
+        NSLog(@"Annotation2 count: %i", self.annotationsArray.count);
+
        // if (canRefreshData) {
             
       //      canRefreshData = NO;
