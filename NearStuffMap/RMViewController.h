@@ -16,12 +16,17 @@
     float latitude;
     float longitude;
     
+    BOOL canRefreshData;
+    
     IBOutlet UIBarButtonItem *socialNetworks;
 }
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
+@property (nonatomic, retain) NSMutableArray *annotationsArray;
 
 - (void)zoomToUserLocation:(MKUserLocation *)userLocation;
+
+-(void)scheduledTask;
 
 -(IBAction)createAndShowSocialNetworksView;
 -(IBAction)refreshData;

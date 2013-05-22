@@ -61,6 +61,7 @@
 
 @implementation RMViewController
 @synthesize mapView = _mapView;
+@synthesize annotationsArray = _annotationsArray;
 
 - (void)viewDidLoad
 {
@@ -69,8 +70,14 @@
 
     [self.mapView setShowsUserLocation:YES];
     self.mapView.delegate = self;
+    canRefreshData = YES;
+    self.annotationsArray = [[NSMutableArray alloc] init];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -83,29 +90,14 @@
     [super viewDidUnload];
 }
 
--(IBAction)createAndShowSocialNetworksView{
-    
-    RMSettingsViewController *settingsVC = [[RMSettingsViewController alloc] initWithNibName:@"RMSettingsViewController" bundle:nil];
-    
-    [self presentViewController:settingsVC animated:YES completion:nil];
-    
-}
+
+
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
     self.mapView.centerCoordinate = userLocation.coordinate;
     
     latitude = userLocation.coordinate.latitude;
     longitude = userLocation.coordinate.longitude;
-    
-    //Get the current user location annotation.
-    id userAnnotation=self.mapView.userLocation;
-    
-    //Remove all added annotations
-      [self.mapView removeAnnotations:[[self mapView] annotations]];
-    
-    // Add the current user location annotation again.
-    if(userAnnotation!=nil)
-        [self.mapView addAnnotation:userAnnotation];
     
     [self loadAnnotations];
     
@@ -217,15 +209,13 @@
         [[RMTwitterSDK sharedClient] getPlacesOnTwitterWithLatitude:[NSString stringWithFormat:@"%f", latitude] AndLongitude:[NSString stringWithFormat:@"%f", longitude] AndWithDelegate:self];
         
     }
-    //∫[[RMTwitterSDK sharedClient] getPlacesOnTwitterWithLatitude:[NSString stringWithFormat:@"%f", latitude] AndLongitude:[NSString stringWithFormat:@"%f", longitude] AndWithDelegate:self];
-    
     
     if (app.facebookSwitch)
     {
-    NSString *lat = [NSString stringWithFormat:@"%f", latitude];
-    NSString *lon = [NSString stringWithFormat:@"%f", longitude];
-    NSDictionary *dict3 = [NSDictionary dictionaryWithObjectsAndKeys:@"1000", @"distance", nil];
-    [[RMFacebookSDK sharedClient] getPublicPlaceWithQuery:@"coffee" WithLatitude:lat WithLongitude:lon WithParams:dict3 AndWithDelegate:self];
+        NSString *lat = [NSString stringWithFormat:@"%f", latitude];
+        NSString *lon = [NSString stringWithFormat:@"%f", longitude];
+        NSDictionary *dict3 = [NSDictionary dictionaryWithObjectsAndKeys:@"1000", @"distance", nil];
+        [[RMFacebookSDK sharedClient] getPublicPlaceWithQuery:@"coffee" WithLatitude:lat WithLongitude:lon WithParams:dict3 AndWithDelegate:self];
     }
 }
 
@@ -250,7 +240,7 @@
         annotation.socialNetwork = @"Foursquare";
         
         [self.mapView addAnnotation:annotation];
-        
+        [self.annotationsArray addObject:annotation];
     }
     
 }
@@ -295,6 +285,7 @@
         annotation.socialNetwork = @"Instagram";
         
         [self.mapView addAnnotation:annotation];
+        [self.annotationsArray addObject:annotation];
         
     }
 }
@@ -322,6 +313,7 @@
         annotation.socialNetwork = @"Yelp";
         
         [self.mapView addAnnotation:annotation];
+        [self.annotationsArray addObject:annotation];
         
     }
 
@@ -357,6 +349,7 @@
                 annotation.socialNetwork = @"Twitter";
                 
                 [self.mapView addAnnotation:annotation];
+                [self.annotationsArray addObject:annotation];
 
             }
             
@@ -365,35 +358,7 @@
     }
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:YES];
-    
-   
-    [self refreshData];
-}
 
--(IBAction)refreshData{
-
-    if (self.mapView)
-    {
-       //Get the current user location annotation.
-        id userAnnotation=self.mapView.userLocation;
-        
-        //Remove all added annotations
-        
-        for (RMMapViewAnnotation *annotation in self.mapView.annotations)
-        {
-            [self.mapView removeAnnotation:annotation];
-        }
-      //  [self.mapView removeAnnotations:[[self mapView] annotations]];
-        
-        // Add the current user location annotation again.
-        if(userAnnotation!=nil)
-           [self.mapView addAnnotation:userAnnotation];
-
-        [self loadAnnotations];
-    }
-}
 -(void)loadNearbyFacebookPlacesWithData:(NSDictionary *)data {
     
     for (int i = 0; i < [[data objectForKey:@"data"] count]; i++){
@@ -413,8 +378,55 @@
         annotation.socialNetwork = @"Facebook";
         
         [self.mapView addAnnotation:annotation];
+        [self.annotationsArray addObject:annotation];
         
     }
-
+    
 }
+
+
+-(IBAction)createAndShowSocialNetworksView{
+    
+    RMSettingsViewController *settingsVC = [[RMSettingsViewController alloc] initWithNibName:@"RMSettingsViewController" bundle:nil];
+    
+    [self presentViewController:settingsVC animated:YES completion:nil];
+    
+}
+
+-(IBAction)refreshData{
+
+    if (self.mapView)
+    {
+        if (canRefreshData) {
+            
+            canRefreshData = NO;
+            
+            //Remove all added annotations
+            for (RMMapViewAnnotation *annotation in self.mapView.annotations)
+            {
+                [self.mapView removeAnnotation:annotation];
+            }
+            [self loadAnnotations];
+            //The user will be able to refresh the data in 15 min.
+            [self performSelector:@selector(scheduledTask) withObject:nil afterDelay:900.0];
+        }
+        else {
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:@"Can't update data."
+                                  message:@"Wait for timer to expire."
+                                  delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil, nil];
+            [alert show];
+        
+        }
+        
+    
+    }
+}
+
+-(void)scheduledTask {
+    canRefreshData = YES;
+}
+
 @end
