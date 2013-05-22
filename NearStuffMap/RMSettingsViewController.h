@@ -25,6 +25,7 @@
 
 
 -(IBAction)dismissSettingsView;
+
 -(IBAction)toggleSwitchFoursquare;
 
 -(IBAction)toggleSwitchYelp;

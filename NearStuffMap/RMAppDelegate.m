@@ -9,12 +9,18 @@
 #import "RMAppDelegate.h"
 
 #import "RMViewController.h"
+#import "AFNetworkActivityIndicatorManager.h"
 
 @implementation RMAppDelegate
 @synthesize foursquareSwitch, twitterSwitch,instagramSwitch,yelpSwitch, facebookSwitch;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:8 * 1024 * 1024 diskCapacity:20 * 1024 * 1024 diskPath:nil];
+    [NSURLCache setSharedURLCache:URLCache];
+    
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.viewController = [[RMViewController alloc] initWithNibName:@"RMViewController" bundle:nil];
