@@ -24,11 +24,11 @@
     
     MKUserLocation *lastUserLocation;
     
-    NSMutableArray *annotationsArrayBackup;
 }
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 @property (nonatomic, retain) NSMutableArray *annotationsArray;
+@property (nonatomic, retain) NSMutableArray *arrayBackup;
 
 - (void)zoomToUserLocation:(MKUserLocation *)userLocation;
 
