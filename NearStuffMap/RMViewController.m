@@ -62,20 +62,19 @@
 @implementation RMViewController
 @synthesize mapView = _mapView;
 @synthesize annotationsArray = _annotationsArray;
-@synthesize annotationsArrayBackup = _annotationsArrayBackup;
+@synthesize arrayBackup;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-
+    
     [self.mapView setShowsUserLocation:YES];
     self.mapView.delegate = self;
     canRefreshData = YES;
     self.annotationsArray = [[NSMutableArray alloc] init];
-    self.annotationsArrayBackup = [[NSMutableArray alloc] init];
+    arrayBackup = [[NSMutableArray alloc] init];
     
-
     lastUserLocation = [[MKUserLocation alloc] init];
     [lastUserLocation setCoordinate:CLLocationCoordinate2DMake(0.0000, 0.0000)];
     
@@ -84,50 +83,42 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     
-
-    if (self.mapView && self.annotationsArray.count > 0)
+    
+    if (self.mapView)
     {
-        
-        [self.annotationsArray removeAllObjects];
-        [self.annotationsArray addObjectsFromArray:self.annotationsArrayBackup];
-        
-        NSMutableArray *locs = [[NSMutableArray alloc] init];
-        for (id <MKAnnotation> annot in [self.mapView annotations])
-        {
-            if ( [annot isKindOfClass:[ MKUserLocation class]] ) {
-            }
-            else {
-                [locs addObject:annot];
-            }
-        }
-        [self.mapView removeAnnotations:locs];
-
-
-        [self.mapView addAnnotations:self.annotationsArrayBackup];
-        
         RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
         
         
-        for (int k = 0; k < app.socialArray.count ; k++)
+        [self.mapView removeAnnotations:self.mapView.annotations];
+        
+        
+        self.annotationsArray = [[NSMutableArray alloc] initWithArray:arrayBackup];
+        
+        
+        for (int loop = 0; loop < 10; loop++)
         {
-            for (int i = 0; i < self.annotationsArray.count; i++)
+            for (int k = 0; k < app.socialArrays.count ; k++)
             {
-                RMMapViewAnnotation *annotation = (RMMapViewAnnotation *)[self.annotationsArray objectAtIndex:i];
-
-            
-                if ([annotation.socialNetwork isEqualToString:[app.socialArray objectAtIndex:k]])
+                
+                for ( int i = 0; i < self.annotationsArray.count; i++)
                 {
-                    [self.annotationsArray removeObject:annotation];
-                    [self.mapView removeAnnotation:annotation];
+                    //   RMMapViewAnnotation *annotation = (RMMapViewAnnotation *)[self.annotationsArray objectAtIndex:i];
+                    
+                    NSLog(@"%i", i);
+                    NSLog(@"Social: %@", [[self.annotationsArray objectAtIndex:i] socialNetwork]);
+                    NSLog(@"SocialDelete: %@", [app.socialArrays objectAtIndex:k]);
+                    
+                    if ([[[self.annotationsArray objectAtIndex:i] socialNetwork] isEqualToString:[app.socialArrays objectAtIndex:k]])
+                    {
+                        NSLog(@"DELETED!");
+                        [self.annotationsArray removeObjectAtIndex:i];
+                    }
+                    
                 }
-            
             }
         }
-        NSLog(@"Annotation count: %i", self.annotationsArrayBackup.count);
-        NSLog(@"Annotation2 count: %i", self.annotationsArray.count);
-
         
-        //[self refreshData];
+        [self refreshData];
     }
 }
 
@@ -139,8 +130,6 @@
 
 - (void)viewDidUnload {
     [self setMapView:nil];
-    self.annotationsArray = nil;
-    self.annotationsArrayBackup = nil;
     [super viewDidUnload];
 }
 
@@ -155,18 +144,18 @@
     
     if (fabsf(userLocation.coordinate.latitude - lastUserLocation.coordinate.latitude) > 0.0010 || fabsf(userLocation.coordinate.longitude - lastUserLocation.coordinate.longitude) > 0.0010)
     {
-                
+        
         [lastUserLocation setCoordinate:userLocation.coordinate];
         
         [self loadAnnotations];
-    
+        
     }
     [self zoomToUserLocation:self.mapView.userLocation];
 }
 
 - (void)zoomToUserLocation:(MKUserLocation *)userLocation
 {
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance (userLocation.location.coordinate, 400, 400);
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance (userLocation.location.coordinate, 50, 50);
     [self.mapView setRegion:region animated:NO];
 }
 
@@ -174,15 +163,13 @@
     
     RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    
-    
     if([annotation isKindOfClass:[RMMapViewAnnotation class]]) {
         MKAnnotationView *view = [self.mapView dequeueReusableAnnotationViewWithIdentifier:@"CustomId"];
         if(nil == view) {
             
             
             if ( app.foursquareSwitch && [annotation.socialNetwork isEqualToString:@"Foursquare"])
-            {                
+            {
                 view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"fourPin"]];
             }
             else if (app.instagramSwitch && [annotation.socialNetwork isEqualToString:@"Instagram"])
@@ -201,8 +188,8 @@
             {
                 view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"facePin"]];
             }
-
-           
+            
+            
             
         }
         else {
@@ -231,7 +218,8 @@
         }
         
         [view setCanShowCallout:YES];
-
+        
+        
         return view;
     }
     
@@ -241,21 +229,21 @@
 -(void)loadAnnotations{
     
     RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
-
+    
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%f", latitude],@"latitude", [NSString stringWithFormat:@"%f", longitude], @"longitude", nil];
-
-
+    
+    
     if (app.foursquareSwitch)
     {
         NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"700", @"radius", @"15", @"limit", nil];
         [[RMMasterSDK FoursquareSDK] getUserlessExploreVenuesWithLatitudeLongitude:dict OrNear:nil AndParameters:params AndWithDelegate:self];
-    
+        
     }
     
     if (app.instagramSwitch){
         
         NSDictionary *dict2 = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%f", latitude],@"lat", [NSString stringWithFormat:@"%f", longitude], @"lng", @"1000", @"distance", nil];
-
+        
         [[RMMasterSDK InstagramSDK] getWAMediaSearchWithParams:dict2 AndWithDelegate:self];
         
     }
@@ -281,19 +269,20 @@
 
 -(void)loadNearbyExploreWithData:(NSDictionary *)array{
     
+    
     for (int i = 0; i < [[[[[array  objectForKey:@"response"] objectForKey:@"groups"] objectAtIndex:0] objectForKey:@"items"] count] ; i++)
     {
         RMMapViewAnnotation *annotation = [[RMMapViewAnnotation alloc] init];
         
         CLLocationCoordinate2D location;
-       
+        
         location.latitude = [[[[[[[[[array  objectForKey:@"response"] objectForKey:@"groups"] objectAtIndex:0] objectForKey:@"items"] objectAtIndex:i] objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"lat"] floatValue];
-       location.longitude = [[[[[[[[[array  objectForKey:@"response"] objectForKey:@"groups"] objectAtIndex:0] objectForKey:@"items"] objectAtIndex:i] objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"lng"] floatValue];
+        location.longitude = [[[[[[[[[array  objectForKey:@"response"] objectForKey:@"groups"] objectAtIndex:0] objectForKey:@"items"] objectAtIndex:i] objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"lng"] floatValue];
         
         
         
         NSLog(@"LAT : %f LON: %f", location.latitude, location.longitude);
-            
+        
         annotation.coordinate = location;
         annotation.title = [[[[[[[array  objectForKey:@"response"] objectForKey:@"groups"] objectAtIndex:0] objectForKey:@"items"] objectAtIndex:i] objectForKey:@"venue"] objectForKey:@"name"];
         annotation.subtitle = @"Foursquare";
@@ -301,12 +290,13 @@
         
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];
-        [self.annotationsArrayBackup addObject:annotation];
+        [arrayBackup addObject:annotation];
     }
     
 }
 
 -(void)loadNerbyImagesWithData:(NSDictionary *)data{
+    
     
     
     for (int i = 0; i < [[data objectForKey:@"data"] count]; i++){
@@ -324,38 +314,38 @@
         
         annotation.coordinate = location;
         
-       // UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"images"] objectForKey:@"thumbnail"] objectForKey:@"url"]]]];
+        // UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"images"] objectForKey:@"thumbnail"] objectForKey:@"url"]]]];
         
-          NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[[[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"images"] objectForKey:@"thumbnail"] objectForKey:@"url"]]];
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[[[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"images"] objectForKey:@"thumbnail"] objectForKey:@"url"]]];
         
         AFImageRequestOperation *operation;
         operation = [AFImageRequestOperation imageRequestOperationWithRequest:request
                                                          imageProcessingBlock:nil
                                                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
                                                                           
-                                                                        annotation.photo = image;
-
+                                                                          annotation.photo = image;
+                                                                          
                                                                       }
                                                                       failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                                                                           NSLog(@"%@", [error localizedDescription]);
                                                                       }];
         [operation start];
-
-       
+        
+        
         
         annotation.socialNetwork = @"Instagram";
         
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];
-        [self.annotationsArrayBackup addObject:annotation];
-
+        [arrayBackup addObject:annotation];
+        
     }
 }
 
 
 -(void)loadNearbyPlacesYelpWithData:(NSDictionary *)data{
     
-
+    
     for (int i = 0; i < [[data objectForKey:@"businesses"] count] ; i++)
     {
         RMMapViewAnnotation *annotation = [[RMMapViewAnnotation alloc] init];
@@ -376,22 +366,23 @@
         
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];
-        [self.annotationsArrayBackup addObject:annotation];
-
+        [arrayBackup addObject:annotation];
+        
     }
-
-
+    
+    
 }
 
 -(void)loadNearbyTwitterPlacesWithData:(NSDictionary *)data{
     
+    
     for (int i = 0 ; i < [[[data objectForKey:@"result"] objectForKey:@"places"] count]; i++)
     {
- 
+        
         for (int k = 0; k < [[[[[[data objectForKey:@"result"] objectForKey:@"places"] objectAtIndex:i] objectForKey:@"bounding_box"] objectForKey:@"coordinates"] count] ; k++)
         {
             
-           
+            
             
             for (int q = 0; q < [[[[[[[data objectForKey:@"result"] objectForKey:@"places"] objectAtIndex:i] objectForKey:@"bounding_box"] objectForKey:@"coordinates"] objectAtIndex:k] count]; q++)
             {
@@ -413,8 +404,8 @@
                 
                 [self.mapView addAnnotation:annotation];
                 [self.annotationsArray addObject:annotation];
-                [self.annotationsArrayBackup addObject:annotation];
-
+                [arrayBackup addObject:annotation];
+                
             }
             
         }
@@ -424,6 +415,7 @@
 
 
 -(void)loadNearbyFacebookPlacesWithData:(NSDictionary *)data {
+    
     
     for (int i = 0; i < [[data objectForKey:@"data"] count]; i++){
         
@@ -443,8 +435,8 @@
         
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];
-        [self.annotationsArrayBackup addObject:annotation];
-
+        [arrayBackup addObject:annotation];
+        
     }
     
 }
@@ -459,53 +451,42 @@
 }
 
 -(IBAction)refreshData{
-
-    if (self.mapView && self.annotationsArray.count > 0)
+    
+    if (self.mapView)
     {
         
-        //NSLog(@"Annotation count: %i", self.annotationsArrayBackup.count);
-        //NSLog(@"Annotation2 count: %i", self.annotationsArray.count);
-
-       // if (canRefreshData) {
-            
-      //      canRefreshData = NO;
-            
-            //Remove all added annotations 
-//            id userAnnotation = self.mapView.userLocation;
-//        
-//            NSMutableArray *annotations = [NSMutableArray arrayWithArray:self.mapView.annotations];
-//            [annotations removeObject:userAnnotation];
-//        
-//            [self.mapView removeAnnotations:annotations];
-//        
-            NSMutableArray *locs = [[NSMutableArray alloc] init];
-            for (id <MKAnnotation> annot in [self.mapView annotations])
-            {
-                if ( [annot isKindOfClass:[ MKUserLocation class]] ) {
-                }
-                else {
-                    [locs addObject:annot];
-                }
-            }
-            [self.mapView removeAnnotations:locs];
-            [self.mapView addAnnotations:self.annotationsArray];
         
-           // [self loadAnnotations];
-            //The user will be able to refresh the data in 15 min.
-            //[self performSelector:@selector(scheduledTask) withObject:nil afterDelay:900.0];
-       // }
-      //  else {
-      /*      UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:@"Can't update data."
-                                  message:@"Wait for timer to expire."
-                                  delegate:nil
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil, nil];
-            [alert show];
+        NSLog(@"Annotation count: %i", arrayBackup.count);
+        NSLog(@"Annotation2 count: %i", self.annotationsArray.count);
         
-        }*/
+        // if (canRefreshData) {
         
-    
+        //      canRefreshData = NO;
+        
+        //Remove all added annotations
+        for (RMMapViewAnnotation *annotation in self.mapView.annotations)
+        {
+            [self.mapView removeAnnotation:annotation];
+        }
+        
+        [self.mapView addAnnotations:self.annotationsArray];
+        
+        // [self loadAnnotations];
+        //The user will be able to refresh the data in 15 min.
+        //[self performSelector:@selector(scheduledTask) withObject:nil afterDelay:900.0];
+        // }
+        //  else {
+        /*      UIAlertView *alert = [[UIAlertView alloc]
+         initWithTitle:@"Can't update data."
+         message:@"Wait for timer to expire."
+         delegate:nil
+         cancelButtonTitle:@"OK"
+         otherButtonTitles:nil, nil];
+         [alert show];
+         
+         }*/
+        
+        
     }
 }
 
