@@ -17,11 +17,11 @@
 
 }
 
-@property (nonatomic, retain) UISwitch *instagramSwitch;
-@property (nonatomic, retain) UISwitch *twitterSwitch;
-@property (nonatomic, retain) UISwitch *yelpSwitch;
-@property (nonatomic, retain) UISwitch *foursquareSwitch;
-@property (nonatomic, retain) UISwitch *facebookSwitch;
+@property (nonatomic, strong) UISwitch *instagramSwitch;
+@property (nonatomic, strong) UISwitch *twitterSwitch;
+@property (nonatomic, strong) UISwitch *yelpSwitch;
+@property (nonatomic, strong) UISwitch *foursquareSwitch;
+@property (nonatomic, strong) UISwitch *facebookSwitch;
 
 
 -(IBAction)dismissSettingsView;

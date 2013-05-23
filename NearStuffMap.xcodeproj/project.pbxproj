@@ -90,7 +90,6 @@
 		280E87BF1725D38900A152DD = {
 			isa = PBXGroup;
 			children = (
-				AAFE6923174D8890009FE228 /* CoreLocation.framework */,
 				280E87D41725D38900A152DD /* NearStuffMap */,
 				280E87CD1725D38900A152DD /* Frameworks */,
 				280E87CB1725D38900A152DD /* Products */,
@@ -109,6 +108,7 @@
 		280E87CD1725D38900A152DD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AAFE6923174D8890009FE228 /* CoreLocation.framework */,
 				280E87F81725DBF600A152DD /* MapKit.framework */,
 				280E87CE1725D38900A152DD /* UIKit.framework */,
 				280E87D01725D38900A152DD /* Foundation.framework */,

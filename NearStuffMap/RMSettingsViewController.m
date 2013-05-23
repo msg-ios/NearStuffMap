@@ -35,13 +35,12 @@
     instagramSwitch.on = app.instagramSwitch;
     yelpSwitch.on = app.yelpSwitch;
     facebookSwitch.on = app.facebookSwitch;
-    // Do any additional setup after loading the view from its nib.
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
 
-    NSLog(@"ARRAY: %@", app.socialArrays);
+    NSLog(@"ARRAY: %@", app.socialArray);
 }
 - (void)didReceiveMemoryWarning
 {
@@ -58,22 +57,25 @@
     RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
     app.foursquareSwitch = foursquareSwitch.isOn;
     if (![foursquareSwitch isOn])
-        [app.socialArrays addObject:@"Foursquare"];
+        [app.socialArray addObject:@"Foursquare"];
     else{
-        if ([app.socialArrays containsObject:@"Foursquare"])
-            [app.socialArrays removeObject:@"Foursquare"];
-    }}
+        if ([app.socialArray containsObject:@"Foursquare"])
+            [app.socialArray removeObject:@"Foursquare"];
+    }
+    NSLog(@"SOCIAL ARRAY: %@", app.socialArray);
+}
 
 -(IBAction)toggleSwitchYelp{
     
     RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
     app.yelpSwitch = yelpSwitch.isOn;
     if (![yelpSwitch isOn])
-        [app.socialArrays addObject:@"Yelp"];
+        [app.socialArray addObject:@"Yelp"];
     else{
-        if ([app.socialArrays containsObject:@"Yelp"])
-            [app.socialArrays removeObject:@"Yelp"];
+        if ([app.socialArray containsObject:@"Yelp"])
+            [app.socialArray removeObject:@"Yelp"];
     }
+    NSLog(@"SOCIAL ARRAY: %@", app.socialArray);
 
 }
 
@@ -82,11 +84,12 @@
     RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
     app.instagramSwitch = instagramSwitch.isOn;
     if (![instagramSwitch isOn])
-        [app.socialArrays addObject:@"Instagram"];
+        [app.socialArray addObject:@"Instagram"];
     else{
-        if ([app.socialArrays containsObject:@"Instagram"])
-            [app.socialArrays removeObject:@"Instagram"];
+        if ([app.socialArray containsObject:@"Instagram"])
+            [app.socialArray removeObject:@"Instagram"];
     }
+    NSLog(@"SOCIAL ARRAY: %@", app.socialArray);
 }
 
 -(IBAction)toggleSwitchTwitter{
@@ -94,11 +97,12 @@
     RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
     app.twitterSwitch = twitterSwitch.isOn;
     if (![twitterSwitch isOn])
-        [app.socialArrays addObject:@"Twitter"];
+        [app.socialArray addObject:@"Twitter"];
     else{
-        if ([app.socialArrays containsObject:@"Twitter"])
-            [app.socialArrays removeObject:@"Twitter"];
+        if ([app.socialArray containsObject:@"Twitter"])
+            [app.socialArray removeObject:@"Twitter"];
     }
+    NSLog(@"SOCIAL ARRAY: %@", app.socialArray);
 }
 
 -(IBAction)toggleSwitchFacebook{
@@ -106,11 +110,12 @@
     RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
     app.facebookSwitch = facebookSwitch.isOn;
     if (![facebookSwitch isOn])
-        [app.socialArrays addObject:@"Facebook"];
+        [app.socialArray addObject:@"Facebook"];
     else{
-        if ([app.socialArrays containsObject:@"Facebook"])
-            [app.socialArrays removeObject:@"Facebook"];
+        if ([app.socialArray containsObject:@"Facebook"])
+            [app.socialArray removeObject:@"Facebook"];
     }
+    NSLog(@"SOCIAL ARRAY: %@", app.socialArray);
 }
 
 @end

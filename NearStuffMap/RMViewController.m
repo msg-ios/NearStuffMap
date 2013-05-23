@@ -62,6 +62,7 @@
 @implementation RMViewController
 @synthesize mapView = _mapView;
 @synthesize annotationsArray = _annotationsArray;
+@synthesize annotationsArrayBackup = _annotationsArrayBackup;
 
 - (void)viewDidLoad
 {
@@ -72,7 +73,7 @@
     self.mapView.delegate = self;
     canRefreshData = YES;
     self.annotationsArray = [[NSMutableArray alloc] init];
-    annotationsArrayBackup = [[NSMutableArray alloc] init];
+    self.annotationsArrayBackup = [[NSMutableArray alloc] init];
     
 
     lastUserLocation = [[MKUserLocation alloc] init];
@@ -84,28 +85,49 @@
     [super viewWillAppear:YES];
     
 
-    if (self.mapView)
+    if (self.mapView && self.annotationsArray.count > 0)
     {
-        self.annotationsArray = annotationsArrayBackup;
+        
+        [self.annotationsArray removeAllObjects];
+        [self.annotationsArray addObjectsFromArray:self.annotationsArrayBackup];
+        
+        NSMutableArray *locs = [[NSMutableArray alloc] init];
+        for (id <MKAnnotation> annot in [self.mapView annotations])
+        {
+            if ( [annot isKindOfClass:[ MKUserLocation class]] ) {
+            }
+            else {
+                [locs addObject:annot];
+            }
+        }
+        [self.mapView removeAnnotations:locs];
+
+
+        [self.mapView addAnnotations:self.annotationsArrayBackup];
         
         RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
-
-        for (int k = 0; k < app.socialArrays.count ; k++)
-        {
-        for (int i = 0; i < self.annotationsArray.count; i++)
-        {
-            RMMapViewAnnotation *annotation = (RMMapViewAnnotation *)[self.annotationsArray objectAtIndex:i];
-
-            
-            if ([annotation.socialNetwork isEqualToString:[app.socialArrays objectAtIndex:k]])
-            {
-                [self.annotationsArray removeObject:annotation];
-            }
-            
-        }
-        }
         
-        [self refreshData];
+        
+        for (int k = 0; k < app.socialArray.count ; k++)
+        {
+            for (int i = 0; i < self.annotationsArray.count; i++)
+            {
+                RMMapViewAnnotation *annotation = (RMMapViewAnnotation *)[self.annotationsArray objectAtIndex:i];
+
+            
+                if ([annotation.socialNetwork isEqualToString:[app.socialArray objectAtIndex:k]])
+                {
+                    [self.annotationsArray removeObject:annotation];
+                    [self.mapView removeAnnotation:annotation];
+                }
+            
+            }
+        }
+        NSLog(@"Annotation count: %i", self.annotationsArrayBackup.count);
+        NSLog(@"Annotation2 count: %i", self.annotationsArray.count);
+
+        
+        //[self refreshData];
     }
 }
 
@@ -117,6 +139,8 @@
 
 - (void)viewDidUnload {
     [self setMapView:nil];
+    self.annotationsArray = nil;
+    self.annotationsArrayBackup = nil;
     [super viewDidUnload];
 }
 
@@ -142,14 +166,16 @@
 
 - (void)zoomToUserLocation:(MKUserLocation *)userLocation
 {
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance (userLocation.location.coordinate, 50, 50);
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance (userLocation.location.coordinate, 400, 400);
     [self.mapView setRegion:region animated:NO];
 }
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(RMMapViewAnnotation *)annotation{
     
     RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
-
+    
+    
+    
     if([annotation isKindOfClass:[RMMapViewAnnotation class]]) {
         MKAnnotationView *view = [self.mapView dequeueReusableAnnotationViewWithIdentifier:@"CustomId"];
         if(nil == view) {
@@ -206,7 +232,6 @@
         
         [view setCanShowCallout:YES];
 
-        
         return view;
     }
     
@@ -276,7 +301,7 @@
         
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];
-        [annotationsArrayBackup addObject:annotation];
+        [self.annotationsArrayBackup addObject:annotation];
     }
     
 }
@@ -322,7 +347,7 @@
         
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];
-        [annotationsArrayBackup addObject:annotation];
+        [self.annotationsArrayBackup addObject:annotation];
 
     }
 }
@@ -351,7 +376,7 @@
         
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];
-        [annotationsArrayBackup addObject:annotation];
+        [self.annotationsArrayBackup addObject:annotation];
 
     }
 
@@ -388,7 +413,7 @@
                 
                 [self.mapView addAnnotation:annotation];
                 [self.annotationsArray addObject:annotation];
-                [annotationsArrayBackup addObject:annotation];
+                [self.annotationsArrayBackup addObject:annotation];
 
             }
             
@@ -418,7 +443,7 @@
         
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];
-        [annotationsArrayBackup addObject:annotation];
+        [self.annotationsArrayBackup addObject:annotation];
 
     }
     
@@ -435,22 +460,34 @@
 
 -(IBAction)refreshData{
 
-    if (self.mapView)
+    if (self.mapView && self.annotationsArray.count > 0)
     {
         
-        NSLog(@"Annotation count: %i", annotationsArrayBackup.count);
-        NSLog(@"Annotation2 count: %i", self.annotationsArray.count);
+        //NSLog(@"Annotation count: %i", self.annotationsArrayBackup.count);
+        //NSLog(@"Annotation2 count: %i", self.annotationsArray.count);
 
        // if (canRefreshData) {
             
       //      canRefreshData = NO;
             
-            //Remove all added annotations
-            for (RMMapViewAnnotation *annotation in self.mapView.annotations)
+            //Remove all added annotations 
+//            id userAnnotation = self.mapView.userLocation;
+//        
+//            NSMutableArray *annotations = [NSMutableArray arrayWithArray:self.mapView.annotations];
+//            [annotations removeObject:userAnnotation];
+//        
+//            [self.mapView removeAnnotations:annotations];
+//        
+            NSMutableArray *locs = [[NSMutableArray alloc] init];
+            for (id <MKAnnotation> annot in [self.mapView annotations])
             {
-                [self.mapView removeAnnotation:annotation];
+                if ( [annot isKindOfClass:[ MKUserLocation class]] ) {
+                }
+                else {
+                    [locs addObject:annot];
+                }
             }
-        
+            [self.mapView removeAnnotations:locs];
             [self.mapView addAnnotations:self.annotationsArray];
         
            // [self loadAnnotations];
