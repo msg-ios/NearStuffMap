@@ -23,6 +23,8 @@
     IBOutlet UIBarButtonItem *socialNetworks;
     
     MKUserLocation *lastUserLocation;
+    
+    NSMutableArray *annotationsArrayBackup;
 }
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
