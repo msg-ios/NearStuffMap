@@ -33,6 +33,7 @@
 - (void)zoomToUserLocation:(MKUserLocation *)userLocation;
 
 -(void)scheduledTask;
+-(void)refreshDataUsingArray;
 
 -(IBAction)createAndShowSocialNetworksView;
 -(IBAction)refreshData;

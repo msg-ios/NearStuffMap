@@ -27,15 +27,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_pttrn1"]]];
     
     RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
-
+    
     foursquareSwitch.on = app.foursquareSwitch;
     twitterSwitch.on = app.twitterSwitch;
     instagramSwitch.on = app.instagramSwitch;
     yelpSwitch.on = app.yelpSwitch;
     facebookSwitch.on = app.facebookSwitch;
-    // Do any additional setup after loading the view from its nib.
+    self.searchTermTextField.delegate = self;
+    self.currentSearchTermLabel.text = app.fbSearchTerm;
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -49,8 +51,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(IBAction)backgroundTouched:(id)sender {
+    [self.searchTermTextField resignFirstResponder];
+}
+
 -(IBAction)dismissSettingsView{
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
+    app.fbSearchTerm = self.searchTermTextField.text;
+    self.currentSearchTermLabel.text = app.fbSearchTerm;
+    [textField resignFirstResponder];
+    return YES;
 }
 
 -(IBAction)toggleSwitchFoursquare{
@@ -62,7 +76,9 @@
     else{
         if ([app.socialArrays containsObject:@"Foursquare"])
             [app.socialArrays removeObject:@"Foursquare"];
-    }}
+    }
+    NSLog(@"SOCIAL ARRAY: %@", app.socialArrays);
+}
 
 -(IBAction)toggleSwitchYelp{
     
@@ -74,6 +90,7 @@
         if ([app.socialArrays containsObject:@"Yelp"])
             [app.socialArrays removeObject:@"Yelp"];
     }
+    NSLog(@"SOCIAL ARRAY: %@", app.socialArrays);
 
 }
 
@@ -87,6 +104,7 @@
         if ([app.socialArrays containsObject:@"Instagram"])
             [app.socialArrays removeObject:@"Instagram"];
     }
+    NSLog(@"SOCIAL ARRAY: %@", app.socialArrays);
 }
 
 -(IBAction)toggleSwitchTwitter{
@@ -99,6 +117,7 @@
         if ([app.socialArrays containsObject:@"Twitter"])
             [app.socialArrays removeObject:@"Twitter"];
     }
+    NSLog(@"SOCIAL ARRAY: %@", app.socialArrays);
 }
 
 -(IBAction)toggleSwitchFacebook{
@@ -111,6 +130,7 @@
         if ([app.socialArrays containsObject:@"Facebook"])
             [app.socialArrays removeObject:@"Facebook"];
     }
+    NSLog(@"SOCIAL ARRAY: %@", app.socialArrays);
 }
 
 @end

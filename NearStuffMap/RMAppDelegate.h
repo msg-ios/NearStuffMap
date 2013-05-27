@@ -10,13 +10,15 @@
 
 @class RMViewController;
 
-@interface RMAppDelegate : UIResponder <UIApplicationDelegate>
+@interface RMAppDelegate : UIResponder <UIApplicationDelegate, UIAppearanceContainer>
 
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong, nonatomic) RMViewController *viewController;
 
 @property (strong, nonatomic) NSMutableArray *socialArrays;
+
+@property (strong, nonatomic) NSString *fbSearchTerm;
 
 @property BOOL foursquareSwitch;
 @property BOOL twitterSwitch;
