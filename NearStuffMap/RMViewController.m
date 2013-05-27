@@ -124,6 +124,7 @@
         [self refreshDataUsingArray];
     }
 }
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -177,7 +178,7 @@
             }
             else if (app.instagramSwitch && [annotation.socialNetwork isEqualToString:@"Instagram"])
             {
-                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:annotation.photo];
+                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"instaPin"]];
             }
             else if (app.yelpSwitch && [annotation.socialNetwork isEqualToString:@"Yelp"])
             {
@@ -189,7 +190,7 @@
             }
             else if (app.facebookSwitch && [annotation.socialNetwork isEqualToString:@"Facebook"])
             {
-                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"facePin"]];
+                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"facePinWhite"]];
             }
             
             
@@ -204,7 +205,7 @@
             }
             else if (app.instagramSwitch && [annotation.socialNetwork isEqualToString:@"Instagram"])
             {
-                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:annotation.photo];
+                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"instaPin"]];
             }
             else if (app.yelpSwitch && [annotation.socialNetwork isEqualToString:@"Yelp"])
             {
@@ -216,7 +217,7 @@
             }
             else if (app.facebookSwitch && [annotation.socialNetwork isEqualToString:@"Facebook"])
             {
-                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"facePin"]];
+                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"facePinWhite"]];
             }
         }
         
