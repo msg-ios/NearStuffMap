@@ -27,20 +27,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_pttrn1"]]];
     
     RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
-
+    
     foursquareSwitch.on = app.foursquareSwitch;
     twitterSwitch.on = app.twitterSwitch;
     instagramSwitch.on = app.instagramSwitch;
     yelpSwitch.on = app.yelpSwitch;
     facebookSwitch.on = app.facebookSwitch;
+    self.searchTermTextField.delegate = self;
+    self.currentSearchTermLabel.text = app.fbSearchTerm;
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
 
-    NSLog(@"ARRAY: %@", app.socialArray);
+    NSLog(@"ARRAY: %@", app.socialArrays);
 }
 - (void)didReceiveMemoryWarning
 {
@@ -48,8 +51,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(IBAction)backgroundTouched:(id)sender {
+    [self.searchTermTextField resignFirstResponder];
+}
+
 -(IBAction)dismissSettingsView{
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
+    app.fbSearchTerm = self.searchTermTextField.text;
+    self.currentSearchTermLabel.text = app.fbSearchTerm;
+    [textField resignFirstResponder];
+    return YES;
 }
 
 -(IBAction)toggleSwitchFoursquare{
@@ -57,12 +72,12 @@
     RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
     app.foursquareSwitch = foursquareSwitch.isOn;
     if (![foursquareSwitch isOn])
-        [app.socialArray addObject:@"Foursquare"];
+        [app.socialArrays addObject:@"Foursquare"];
     else{
-        if ([app.socialArray containsObject:@"Foursquare"])
-            [app.socialArray removeObject:@"Foursquare"];
+        if ([app.socialArrays containsObject:@"Foursquare"])
+            [app.socialArrays removeObject:@"Foursquare"];
     }
-    NSLog(@"SOCIAL ARRAY: %@", app.socialArray);
+    NSLog(@"SOCIAL ARRAY: %@", app.socialArrays);
 }
 
 -(IBAction)toggleSwitchYelp{
@@ -70,12 +85,12 @@
     RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
     app.yelpSwitch = yelpSwitch.isOn;
     if (![yelpSwitch isOn])
-        [app.socialArray addObject:@"Yelp"];
+        [app.socialArrays addObject:@"Yelp"];
     else{
-        if ([app.socialArray containsObject:@"Yelp"])
-            [app.socialArray removeObject:@"Yelp"];
+        if ([app.socialArrays containsObject:@"Yelp"])
+            [app.socialArrays removeObject:@"Yelp"];
     }
-    NSLog(@"SOCIAL ARRAY: %@", app.socialArray);
+    NSLog(@"SOCIAL ARRAY: %@", app.socialArrays);
 
 }
 
@@ -84,12 +99,12 @@
     RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
     app.instagramSwitch = instagramSwitch.isOn;
     if (![instagramSwitch isOn])
-        [app.socialArray addObject:@"Instagram"];
+        [app.socialArrays addObject:@"Instagram"];
     else{
-        if ([app.socialArray containsObject:@"Instagram"])
-            [app.socialArray removeObject:@"Instagram"];
+        if ([app.socialArrays containsObject:@"Instagram"])
+            [app.socialArrays removeObject:@"Instagram"];
     }
-    NSLog(@"SOCIAL ARRAY: %@", app.socialArray);
+    NSLog(@"SOCIAL ARRAY: %@", app.socialArrays);
 }
 
 -(IBAction)toggleSwitchTwitter{
@@ -97,12 +112,12 @@
     RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
     app.twitterSwitch = twitterSwitch.isOn;
     if (![twitterSwitch isOn])
-        [app.socialArray addObject:@"Twitter"];
+        [app.socialArrays addObject:@"Twitter"];
     else{
-        if ([app.socialArray containsObject:@"Twitter"])
-            [app.socialArray removeObject:@"Twitter"];
+        if ([app.socialArrays containsObject:@"Twitter"])
+            [app.socialArrays removeObject:@"Twitter"];
     }
-    NSLog(@"SOCIAL ARRAY: %@", app.socialArray);
+    NSLog(@"SOCIAL ARRAY: %@", app.socialArrays);
 }
 
 -(IBAction)toggleSwitchFacebook{
@@ -110,12 +125,12 @@
     RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
     app.facebookSwitch = facebookSwitch.isOn;
     if (![facebookSwitch isOn])
-        [app.socialArray addObject:@"Facebook"];
+        [app.socialArrays addObject:@"Facebook"];
     else{
-        if ([app.socialArray containsObject:@"Facebook"])
-            [app.socialArray removeObject:@"Facebook"];
+        if ([app.socialArrays containsObject:@"Facebook"])
+            [app.socialArrays removeObject:@"Facebook"];
     }
-    NSLog(@"SOCIAL ARRAY: %@", app.socialArray);
+    NSLog(@"SOCIAL ARRAY: %@", app.socialArrays);
 }
 
 @end

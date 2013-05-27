@@ -62,7 +62,7 @@
 @implementation RMViewController
 @synthesize mapView = _mapView;
 @synthesize annotationsArray = _annotationsArray;
-@synthesize arrayBackup;
+@synthesize arrayBackup = _arrayBackup;
 
 - (void)viewDidLoad
 {
@@ -73,16 +73,20 @@
     self.mapView.delegate = self;
     canRefreshData = YES;
     self.annotationsArray = [[NSMutableArray alloc] init];
-    arrayBackup = [[NSMutableArray alloc] init];
+    self.arrayBackup = [[NSMutableArray alloc] init];
     
     lastUserLocation = [[MKUserLocation alloc] init];
     [lastUserLocation setCoordinate:CLLocationCoordinate2DMake(0.0000, 0.0000)];
     
+    RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
+    //set default fb search term
+    app.fbSearchTerm = @"coffee";
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     
+    canRefreshData = YES;
     
     if (self.mapView)
     {
@@ -92,7 +96,7 @@
         [self.mapView removeAnnotations:self.mapView.annotations];
         
         
-        self.annotationsArray = [[NSMutableArray alloc] initWithArray:arrayBackup];
+        self.annotationsArray = [[NSMutableArray alloc] initWithArray:self.arrayBackup];
         
         
         for (int loop = 0; loop < 10; loop++)
@@ -118,7 +122,7 @@
             }
         }
         
-        [self refreshData];
+        [self refreshDataUsingArray];
     }
 }
 
@@ -155,7 +159,7 @@
 
 - (void)zoomToUserLocation:(MKUserLocation *)userLocation
 {
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance (userLocation.location.coordinate, 50, 50);
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance (userLocation.location.coordinate, 400, 400);
     [self.mapView setRegion:region animated:NO];
 }
 
@@ -235,7 +239,7 @@
     
     if (app.foursquareSwitch)
     {
-        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"700", @"radius", @"15", @"limit", nil];
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"1000", @"radius", @"15", @"limit", nil];
         [[RMMasterSDK FoursquareSDK] getUserlessExploreVenuesWithLatitudeLongitude:dict OrNear:nil AndParameters:params AndWithDelegate:self];
         
     }
@@ -263,7 +267,7 @@
         NSString *lat = [NSString stringWithFormat:@"%f", latitude];
         NSString *lon = [NSString stringWithFormat:@"%f", longitude];
         NSDictionary *dict3 = [NSDictionary dictionaryWithObjectsAndKeys:@"1000", @"distance", nil];
-        [[RMFacebookSDK sharedClient] getPublicPlaceWithQuery:@"coffee" WithLatitude:lat WithLongitude:lon WithParams:dict3 AndWithDelegate:self];
+        [[RMFacebookSDK sharedClient] getPublicPlaceWithQuery:app.fbSearchTerm WithLatitude:lat WithLongitude:lon WithParams:dict3 AndWithDelegate:self];
     }
 }
 
@@ -290,7 +294,7 @@
         
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];
-        [arrayBackup addObject:annotation];
+        [self.arrayBackup addObject:annotation];
     }
     
 }
@@ -337,7 +341,7 @@
         
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];
-        [arrayBackup addObject:annotation];
+        [self.arrayBackup addObject:annotation];
         
     }
 }
@@ -366,7 +370,7 @@
         
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];
-        [arrayBackup addObject:annotation];
+        [self.arrayBackup addObject:annotation];
         
     }
     
@@ -404,7 +408,7 @@
                 
                 [self.mapView addAnnotation:annotation];
                 [self.annotationsArray addObject:annotation];
-                [arrayBackup addObject:annotation];
+                [self.arrayBackup addObject:annotation];
                 
             }
             
@@ -435,7 +439,7 @@
         
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];
-        [arrayBackup addObject:annotation];
+        [self.arrayBackup addObject:annotation];
         
     }
     
@@ -454,14 +458,44 @@
     
     if (self.mapView)
     {
-        
-        
-        NSLog(@"Annotation count: %i", arrayBackup.count);
+        NSLog(@"Annotation count: %i", self.arrayBackup.count);
         NSLog(@"Annotation2 count: %i", self.annotationsArray.count);
         
-        // if (canRefreshData) {
+        if (canRefreshData) {
         
-        //      canRefreshData = NO;
+            canRefreshData = NO;
+        
+            //Remove all added annotations
+            for (RMMapViewAnnotation *annotation in self.mapView.annotations)
+            {
+                [self.mapView removeAnnotation:annotation];
+            }
+            
+            [self.annotationsArray removeAllObjects];
+            [self.arrayBackup removeAllObjects];
+            [self loadAnnotations];
+            //The user will be able to refresh the data in 15 min.
+            [self performSelector:@selector(scheduledTask) withObject:nil afterDelay:900.0];
+        }
+        else {
+            UIAlertView *alert = [[UIAlertView alloc]
+             initWithTitle:@"Can't update data."
+             message:@"Wait for timer to expire."
+             delegate:nil
+             cancelButtonTitle:@"OK"
+             otherButtonTitles:nil, nil];
+             [alert show];
+         }
+    }
+}
+
+-(void)refreshDataUsingArray {
+    if (self.mapView)
+    {
+        
+        
+        NSLog(@"Annotation count: %i", self.arrayBackup.count);
+        NSLog(@"Annotation2 count: %i", self.annotationsArray.count);
         
         //Remove all added annotations
         for (RMMapViewAnnotation *annotation in self.mapView.annotations)
@@ -470,22 +504,6 @@
         }
         
         [self.mapView addAnnotations:self.annotationsArray];
-        
-        // [self loadAnnotations];
-        //The user will be able to refresh the data in 15 min.
-        //[self performSelector:@selector(scheduledTask) withObject:nil afterDelay:900.0];
-        // }
-        //  else {
-        /*      UIAlertView *alert = [[UIAlertView alloc]
-         initWithTitle:@"Can't update data."
-         message:@"Wait for timer to expire."
-         delegate:nil
-         cancelButtonTitle:@"OK"
-         otherButtonTitles:nil, nil];
-         [alert show];
-         
-         }*/
-        
         
     }
 }

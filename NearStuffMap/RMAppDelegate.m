@@ -12,7 +12,7 @@
 #import "AFNetworkActivityIndicatorManager.h"
 
 @implementation RMAppDelegate
-@synthesize foursquareSwitch, twitterSwitch,instagramSwitch,yelpSwitch, facebookSwitch, socialArrays;
+@synthesize foursquareSwitch, twitterSwitch,instagramSwitch,yelpSwitch, facebookSwitch, socialArrays, fbSearchTerm;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -31,13 +31,31 @@
     yelpSwitch = YES;
     facebookSwitch = YES;
     
-    socialArrays = [[NSMutableArray alloc ] init];
+    socialArrays = [[NSMutableArray alloc] init];
+    fbSearchTerm = [[NSString alloc] init];
+    [self customizeAppearance];
     
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
+
+-(void)customizeAppearance {
+    UIImage *toolbarBackground = [UIImage imageNamed:@"bar_grey"];
+    [[UIToolbar appearance] setBackgroundImage:toolbarBackground forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
+    
+    UIImage *buttonBackground = [UIImage imageNamed:@"general_button"];
+    UIEdgeInsets insets = UIEdgeInsetsMake(buttonBackground.size.height/2, buttonBackground.size.width/2, buttonBackground.size.height/2, buttonBackground.size.width/2);
+    buttonBackground = [buttonBackground resizableImageWithCapInsets:insets];
+    [[UIBarButtonItem appearance] setBackgroundImage:buttonBackground forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    
+    [[UISwitch appearance] setOnImage:[UIImage imageNamed:@"switch_on"]];
+    [[UISwitch appearance] setOffImage:[UIImage imageNamed:@"switch_off"]];
+    [[UISwitch appearance] setThumbTintColor:[UIColor darkGrayColor]];
+
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

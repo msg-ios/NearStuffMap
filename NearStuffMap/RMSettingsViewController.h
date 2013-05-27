@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RMSettingsViewController : UIViewController {
+@interface RMSettingsViewController : UIViewController <UITextFieldDelegate> {
     IBOutlet UISwitch *instagramSwitch;
     IBOutlet UISwitch *twitterSwitch;
     IBOutlet UISwitch *yelpSwitch;
@@ -22,7 +22,10 @@
 @property (nonatomic, strong) UISwitch *yelpSwitch;
 @property (nonatomic, strong) UISwitch *foursquareSwitch;
 @property (nonatomic, strong) UISwitch *facebookSwitch;
+@property (strong, nonatomic) IBOutlet UITextField *searchTermTextField;
+@property (strong, nonatomic) IBOutlet UILabel *currentSearchTermLabel;
 
+-(IBAction)backgroundTouched:(id)sender;
 
 -(IBAction)dismissSettingsView;
 
