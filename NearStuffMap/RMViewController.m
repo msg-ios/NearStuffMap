@@ -62,7 +62,8 @@
 @implementation RMViewController
 @synthesize mapView = _mapView;
 @synthesize annotationsArray = _annotationsArray;
-@synthesize arrayBackup = _arrayBackup;
+@synthesize arrayBackup;
+
 
 - (void)viewDidLoad
 {
@@ -73,8 +74,8 @@
     self.mapView.delegate = self;
     canRefreshData = YES;
     self.annotationsArray = [[NSMutableArray alloc] init];
-    self.arrayBackup = [[NSMutableArray alloc] init];
-    
+    arrayBackup = [[NSMutableArray alloc] init];
+
     lastUserLocation = [[MKUserLocation alloc] init];
     [lastUserLocation setCoordinate:CLLocationCoordinate2DMake(0.0000, 0.0000)];
     
@@ -92,38 +93,37 @@
     {
         RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
         
-        
+       
         [self.mapView removeAnnotations:self.mapView.annotations];
         
-        
-        self.annotationsArray = [[NSMutableArray alloc] initWithArray:self.arrayBackup];
+
+        self.annotationsArray = [[NSMutableArray alloc] initWithArray:arrayBackup];
         
         
         for (int loop = 0; loop < 10; loop++)
         {
-            for (int k = 0; k < app.socialArrays.count ; k++)
+        for (int k = 0; k < app.socialArrays.count ; k++)
+        {
+            
+            for ( int i = 0; i < self.annotationsArray.count; i++)
+        {
+         //   RMMapViewAnnotation *annotation = (RMMapViewAnnotation *)[self.annotationsArray objectAtIndex:i];
+
+            NSLog(@"%i", i);
+            NSLog(@"Social: %@", [[self.annotationsArray objectAtIndex:i] socialNetwork]);
+            NSLog(@"SocialDelete: %@", [app.socialArrays objectAtIndex:k]);
+
+            if ([[[self.annotationsArray objectAtIndex:i] socialNetwork] isEqualToString:[app.socialArrays objectAtIndex:k]])
             {
-                
-                for ( int i = 0; i < self.annotationsArray.count; i++)
-                {
-                    //   RMMapViewAnnotation *annotation = (RMMapViewAnnotation *)[self.annotationsArray objectAtIndex:i];
-                    
-                    NSLog(@"%i", i);
-                    NSLog(@"Social: %@", [[self.annotationsArray objectAtIndex:i] socialNetwork]);
-                    NSLog(@"SocialDelete: %@", [app.socialArrays objectAtIndex:k]);
-                    
-                    if ([[[self.annotationsArray objectAtIndex:i] socialNetwork] isEqualToString:[app.socialArrays objectAtIndex:k]])
-                    {
-                        NSLog(@"DELETED!");
-                        [self.annotationsArray removeObjectAtIndex:i];
-                    }
-                    
-                }
+                NSLog(@"DELETED!");
+                [self.annotationsArray removeObjectAtIndex:i];
+
             }
         }
-        
+        }
         [self refreshDataUsingArray];
     }
+}
 }
 
 - (void)didReceiveMemoryWarning
@@ -178,7 +178,7 @@
             }
             else if (app.instagramSwitch && [annotation.socialNetwork isEqualToString:@"Instagram"])
             {
-                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:annotation.photo];
+                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"instaPin"]];
             }
             else if (app.yelpSwitch && [annotation.socialNetwork isEqualToString:@"Yelp"])
             {
@@ -190,7 +190,7 @@
             }
             else if (app.facebookSwitch && [annotation.socialNetwork isEqualToString:@"Facebook"])
             {
-                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"facePin"]];
+                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"facePinWhite"]];
             }
             
             
@@ -205,7 +205,7 @@
             }
             else if (app.instagramSwitch && [annotation.socialNetwork isEqualToString:@"Instagram"])
             {
-                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:annotation.photo];
+                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"instaPin"]];
             }
             else if (app.yelpSwitch && [annotation.socialNetwork isEqualToString:@"Yelp"])
             {
@@ -217,7 +217,7 @@
             }
             else if (app.facebookSwitch && [annotation.socialNetwork isEqualToString:@"Facebook"])
             {
-                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"facePin"]];
+                view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"facePinWhite"]];
             }
         }
         
@@ -273,7 +273,7 @@
 
 -(void)loadNearbyExploreWithData:(NSDictionary *)array{
     
-    
+
     for (int i = 0; i < [[[[[array  objectForKey:@"response"] objectForKey:@"groups"] objectAtIndex:0] objectForKey:@"items"] count] ; i++)
     {
         RMMapViewAnnotation *annotation = [[RMMapViewAnnotation alloc] init];
@@ -294,13 +294,15 @@
         
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];
-        [self.arrayBackup addObject:annotation];
+        [arrayBackup addObject:annotation];
+        
     }
     
 }
 
 -(void)loadNerbyImagesWithData:(NSDictionary *)data{
     
+
     
     
     for (int i = 0; i < [[data objectForKey:@"data"] count]; i++){
@@ -341,8 +343,8 @@
         
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];
-        [self.arrayBackup addObject:annotation];
-        
+        [arrayBackup addObject:annotation];
+
     }
 }
 
@@ -370,15 +372,13 @@
         
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];
-        [self.arrayBackup addObject:annotation];
-        
+        [arrayBackup addObject:annotation];
     }
     
     
 }
 
 -(void)loadNearbyTwitterPlacesWithData:(NSDictionary *)data{
-    
     
     for (int i = 0 ; i < [[[data objectForKey:@"result"] objectForKey:@"places"] count]; i++)
     {
@@ -408,8 +408,8 @@
                 
                 [self.mapView addAnnotation:annotation];
                 [self.annotationsArray addObject:annotation];
-                [self.arrayBackup addObject:annotation];
-                
+                [arrayBackup addObject:annotation];
+
             }
             
         }
@@ -420,7 +420,7 @@
 
 -(void)loadNearbyFacebookPlacesWithData:(NSDictionary *)data {
     
-    
+
     for (int i = 0; i < [[data objectForKey:@"data"] count]; i++){
         
         RMMapViewAnnotation *annotation = [[RMMapViewAnnotation alloc] init];
@@ -439,8 +439,9 @@
         
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];
-        [self.arrayBackup addObject:annotation];
-        
+        [arrayBackup addObject:annotation];
+
+
     }
     
 }
@@ -458,7 +459,10 @@
     
     if (self.mapView)
     {
-        NSLog(@"Annotation count: %i", self.arrayBackup.count);
+
+        
+        NSLog(@"Annotation count: %i", arrayBackup.count);
+
         NSLog(@"Annotation2 count: %i", self.annotationsArray.count);
         
         if (canRefreshData) {
