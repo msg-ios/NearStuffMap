@@ -20,5 +20,8 @@
 @property (nonatomic, copy) NSString *socialNetwork;
 @property (nonatomic, retain) MKPinAnnotationView *pin;
 @property (nonatomic, retain) UIImage *photo;
+@property (nonatomic, retain) UIImage *leftCalloutImage;
+@property (nonatomic, copy) NSString *instaID;
+@property (nonatomic, copy) NSString *instaFilter;
 
 @end

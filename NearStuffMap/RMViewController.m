@@ -11,6 +11,7 @@
 #import "RMMasterSDK.h"
 #import "RMSettingsViewController.h"
 #import "RMAppDelegate.h"
+#import "RMInstaDetailViewController.h"
 
 @interface CustomPin : MKPinAnnotationView
 {
@@ -68,8 +69,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    
+    self.title = @"Near Stuff Map";
     [self.mapView setShowsUserLocation:YES];
     self.mapView.delegate = self;
     canRefreshData = YES;
@@ -175,14 +175,19 @@
             if ( app.foursquareSwitch && [annotation.socialNetwork isEqualToString:@"Foursquare"])
             {
                 view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"fourPin"]];
+                view.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
             }
             else if (app.instagramSwitch && [annotation.socialNetwork isEqualToString:@"Instagram"])
             {
                 view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"instaPin"]];
+                view.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+                view.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+                [(UIImageView *)view.leftCalloutAccessoryView setImage:annotation.leftCalloutImage];
             }
             else if (app.yelpSwitch && [annotation.socialNetwork isEqualToString:@"Yelp"])
             {
                 view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"yelpPin"]];
+                view.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
             }
             else if (app.twitterSwitch && [annotation.socialNetwork isEqualToString:@"Twitter"])
             {
@@ -202,14 +207,19 @@
             if ( app.foursquareSwitch && [annotation.socialNetwork isEqualToString:@"Foursquare"])
             {
                 view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"fourPin"]];
+                view.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
             }
             else if (app.instagramSwitch && [annotation.socialNetwork isEqualToString:@"Instagram"])
             {
                 view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"instaPin"]];
+                view.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+                view.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+                [(UIImageView *)view.leftCalloutAccessoryView setImage:annotation.leftCalloutImage];
             }
             else if (app.yelpSwitch && [annotation.socialNetwork isEqualToString:@"Yelp"])
             {
                 view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"yelpPin"]];
+                view.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
             }
             else if (app.twitterSwitch && [annotation.socialNetwork isEqualToString:@"Twitter"])
             {
@@ -230,19 +240,37 @@
     return nil;
 }
 
+
+-(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    if (view.rightCalloutAccessoryView == control) {
+        RMMapViewAnnotation *annotation = view.annotation;
+        if ([annotation.socialNetwork isEqualToString:@"Instagram"]) {
+            RMInstaDetailViewController *instaDetailVC = [[RMInstaDetailViewController alloc] initWithNibName:@"RMInstaDetailViewController" bundle:nil];
+            instaDetailVC.instaPhotoImageView.image = annotation.photo;
+            instaDetailVC.filterLabel.text = annotation.instaFilter;
+            NSLog(@"filter: %@", annotation.instaFilter);
+            NSLog(@"id: %@", annotation.instaID);
+            instaDetailVC.title = annotation.title;
+            [self.navigationController pushViewController:instaDetailVC animated:YES];
+
+        }
+        
+    }
+}
+
 -(void)loadAnnotations{
     
     RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%f", latitude],@"latitude", [NSString stringWithFormat:@"%f", longitude], @"longitude", nil];
-    
-    
-    if (app.foursquareSwitch)
-    {
-        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"1000", @"radius", @"15", @"limit", nil];
-        [[RMMasterSDK FoursquareSDK] getUserlessExploreVenuesWithLatitudeLongitude:dict OrNear:nil AndParameters:params AndWithDelegate:self];
-        
-    }
+//    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%f", latitude],@"latitude", [NSString stringWithFormat:@"%f", longitude], @"longitude", nil];
+//    
+//    
+//    if (app.foursquareSwitch)
+//    {
+//        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"1000", @"radius", @"15", @"limit", nil];
+//        [[RMMasterSDK FoursquareSDK] getUserlessExploreVenuesWithLatitudeLongitude:dict OrNear:nil AndParameters:params AndWithDelegate:self];
+//        
+//    }
     
     if (app.instagramSwitch){
         
@@ -252,23 +280,23 @@
         
     }
     
-    if (app.yelpSwitch){
-        [[RMMasterSDK YelpSDK] getSearchWithTerm:nil AndCoordinates:dict AndParams:[NSDictionary dictionaryWithObjectsAndKeys:@"1000",@"radius_filter", nil] AndWithDelegate:self];
-        
-    }
-    
-    if (app.twitterSwitch){
-        [[RMTwitterSDK sharedClient] getPlacesOnTwitterWithLatitude:[NSString stringWithFormat:@"%f", latitude] AndLongitude:[NSString stringWithFormat:@"%f", longitude] AndWithDelegate:self];
-        
-    }
-    
-    if (app.facebookSwitch)
-    {
-        NSString *lat = [NSString stringWithFormat:@"%f", latitude];
-        NSString *lon = [NSString stringWithFormat:@"%f", longitude];
-        NSDictionary *dict3 = [NSDictionary dictionaryWithObjectsAndKeys:@"1000", @"distance", nil];
-        [[RMFacebookSDK sharedClient] getPublicPlaceWithQuery:app.fbSearchTerm WithLatitude:lat WithLongitude:lon WithParams:dict3 AndWithDelegate:self];
-    }
+//    if (app.yelpSwitch){
+//        [[RMMasterSDK YelpSDK] getSearchWithTerm:nil AndCoordinates:dict AndParams:[NSDictionary dictionaryWithObjectsAndKeys:@"1000",@"radius_filter", nil] AndWithDelegate:self];
+//        
+//    }
+//    
+//    if (app.twitterSwitch){
+//        [[RMTwitterSDK sharedClient] getPlacesOnTwitterWithLatitude:[NSString stringWithFormat:@"%f", latitude] AndLongitude:[NSString stringWithFormat:@"%f", longitude] AndWithDelegate:self];
+//        
+//    }
+//    
+//    if (app.facebookSwitch)
+//    {
+//        NSString *lat = [NSString stringWithFormat:@"%f", latitude];
+//        NSString *lon = [NSString stringWithFormat:@"%f", longitude];
+//        NSDictionary *dict3 = [NSDictionary dictionaryWithObjectsAndKeys:@"1000", @"distance", nil];
+//        [[RMFacebookSDK sharedClient] getPublicPlaceWithQuery:app.fbSearchTerm WithLatitude:lat WithLongitude:lon WithParams:dict3 AndWithDelegate:self];
+//    }
 }
 
 -(void)loadNearbyExploreWithData:(NSDictionary *)array{
@@ -302,9 +330,6 @@
 
 -(void)loadNerbyImagesWithData:(NSDictionary *)data{
     
-
-    
-    
     for (int i = 0; i < [[data objectForKey:@"data"] count]; i++){
         
         RMMapViewAnnotation *annotation = [[RMMapViewAnnotation alloc] init];
@@ -322,7 +347,7 @@
         
         // UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"images"] objectForKey:@"thumbnail"] objectForKey:@"url"]]]];
         
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[[[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"images"] objectForKey:@"thumbnail"] objectForKey:@"url"]]];
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[[[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"images"] objectForKey:@"standard_resolution"] objectForKey:@"url"]]];
         
         AFImageRequestOperation *operation;
         operation = [AFImageRequestOperation imageRequestOperationWithRequest:request
@@ -337,9 +362,27 @@
                                                                       }];
         [operation start];
         
+        NSURLRequest *request2 = [NSURLRequest requestWithURL:[NSURL URLWithString:[[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"user"] objectForKey:@"profile_picture"]]];
         
+        AFImageRequestOperation *operation2;
+        operation2 = [AFImageRequestOperation imageRequestOperationWithRequest:request2
+                                                         imageProcessingBlock:nil
+                                                                      success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                                                          
+                                                                          annotation.leftCalloutImage = image;
+                                                                          
+                                                                      }
+                                                                      failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                                                          NSLog(@"%@", [error localizedDescription]);
+                                                                      }];
+        [operation2 start];
+
         
+        annotation.title = [[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"user"] objectForKey:@"username"];
+        annotation.subtitle = @"Instagram";
         annotation.socialNetwork = @"Instagram";
+        annotation.instaID = [[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"id"];
+        annotation.instaFilter = [[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"filter"];
         
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];

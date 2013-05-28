@@ -10,6 +10,6 @@
 
 @implementation RMMapViewAnnotation
 
-@synthesize title, subtitle, coordinate, socialNetwork, pin, photo;
+@synthesize title, subtitle, coordinate, socialNetwork, pin, photo, leftCalloutImage, instaID, instaFilter;
 
 @end

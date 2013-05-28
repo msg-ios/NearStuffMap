@@ -22,8 +22,9 @@
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
     self.viewController = [[RMViewController alloc] initWithNibName:@"RMViewController" bundle:nil];
+    self.navController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
+    
     
     foursquareSwitch = YES;
     twitterSwitch = YES;
@@ -35,7 +36,7 @@
     fbSearchTerm = [[NSString alloc] init];
     [self customizeAppearance];
     
-    self.window.rootViewController = self.viewController;
+    self.window.rootViewController = self.navController;
     [self.window makeKeyAndVisible];
     
     return YES;
