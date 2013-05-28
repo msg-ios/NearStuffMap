@@ -25,7 +25,6 @@
     self.viewController = [[RMViewController alloc] initWithNibName:@"RMViewController" bundle:nil];
     self.navController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
     
-    
     foursquareSwitch = YES;
     twitterSwitch = YES;
     instagramSwitch = YES;

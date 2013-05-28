@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface RMInstaDetailViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UIImageView *instaPhotoImageView;
+@property (strong, nonatomic) UIImage *photo;
 @property (strong, nonatomic) IBOutlet UILabel *filterLabel;
 
 @end

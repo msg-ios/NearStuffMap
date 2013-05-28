@@ -87,6 +87,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+
     canRefreshData = YES;
     
     if (self.mapView)
@@ -182,7 +184,9 @@
                 view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"instaPin"]];
                 view.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
                 view.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-                [(UIImageView *)view.leftCalloutAccessoryView setImage:annotation.leftCalloutImage];
+                [(UIImageView *)view.leftCalloutAccessoryView setImage:annotation.leftCalloutImage];                
+                view.leftCalloutAccessoryView.layer.cornerRadius = 15.0;
+                view.leftCalloutAccessoryView.layer.masksToBounds = YES;
             }
             else if (app.yelpSwitch && [annotation.socialNetwork isEqualToString:@"Yelp"])
             {
@@ -215,6 +219,8 @@
                 view.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
                 view.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
                 [(UIImageView *)view.leftCalloutAccessoryView setImage:annotation.leftCalloutImage];
+                view.leftCalloutAccessoryView.layer.cornerRadius = 15.0;
+                view.leftCalloutAccessoryView.layer.masksToBounds = YES;
             }
             else if (app.yelpSwitch && [annotation.socialNetwork isEqualToString:@"Yelp"])
             {
@@ -246,7 +252,7 @@
         RMMapViewAnnotation *annotation = view.annotation;
         if ([annotation.socialNetwork isEqualToString:@"Instagram"]) {
             RMInstaDetailViewController *instaDetailVC = [[RMInstaDetailViewController alloc] initWithNibName:@"RMInstaDetailViewController" bundle:nil];
-            instaDetailVC.instaPhotoImageView.image = annotation.photo;
+            instaDetailVC.photo = annotation.photo;
             instaDetailVC.filterLabel.text = annotation.instaFilter;
             NSLog(@"filter: %@", annotation.instaFilter);
             NSLog(@"id: %@", annotation.instaID);
@@ -347,6 +353,12 @@
         
         // UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"images"] objectForKey:@"thumbnail"] objectForKey:@"url"]]]];
         
+        annotation.title = [[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"user"] objectForKey:@"username"];
+        annotation.subtitle = @"Instagram";
+        annotation.socialNetwork = @"Instagram";
+        annotation.instaID = [[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"id"];
+        annotation.instaFilter = [[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"filter"];
+        
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[[[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"images"] objectForKey:@"standard_resolution"] objectForKey:@"url"]]];
         
         AFImageRequestOperation *operation;
@@ -370,6 +382,9 @@
                                                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
                                                                           
                                                                           annotation.leftCalloutImage = image;
+                                                                          [self.mapView addAnnotation:annotation];
+                                                                          [self.annotationsArray addObject:annotation];
+                                                                          [arrayBackup addObject:annotation];
                                                                           
                                                                       }
                                                                       failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
@@ -378,15 +393,9 @@
         [operation2 start];
 
         
-        annotation.title = [[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"user"] objectForKey:@"username"];
-        annotation.subtitle = @"Instagram";
-        annotation.socialNetwork = @"Instagram";
-        annotation.instaID = [[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"id"];
-        annotation.instaFilter = [[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"filter"];
+       
         
-        [self.mapView addAnnotation:annotation];
-        [self.annotationsArray addObject:annotation];
-        [arrayBackup addObject:annotation];
+      
 
     }
 }
