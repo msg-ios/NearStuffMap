@@ -27,6 +27,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+
     UIImageView *instaPhotoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 20, 300, 300)];
     instaPhotoImageView.image = photo;
    /*

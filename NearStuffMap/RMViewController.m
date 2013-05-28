@@ -87,6 +87,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+
     canRefreshData = YES;
     
     if (self.mapView)
