@@ -13,6 +13,7 @@
 @end
 
 @implementation RMInstaDetailViewController
+@synthesize photo;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -23,19 +24,22 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"purty_wood"]];
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
     
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+
+    UIImageView *instaPhotoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 20, 300, 300)];
+    instaPhotoImageView.image = photo;
+   /*
     //Adds shadow to image view:
-    CALayer *layer = self.instaPhotoImageView.layer;
+    CALayer *layer = instaPhotoImageView.layer;
     layer.shadowOffset = CGSizeZero;
     layer.shadowColor = [[UIColor blackColor] CGColor];
     layer.shadowRadius = 4.0f;
     layer.shadowOpacity = 0.80f;
     
-    CGSize size = self.instaPhotoImageView.bounds.size;
+    CGSize size = instaPhotoImageView.bounds.size;
     CGFloat curlFactor = 15.0f;
     CGFloat shadowDepth = 5.0f;
     
@@ -47,7 +51,26 @@
             controlPoint1:CGPointMake(size.width - curlFactor, size.height + shadowDepth - curlFactor)
             controlPoint2:CGPointMake(curlFactor, size.height + shadowDepth - curlFactor)];
     [path closePath];
-    layer.shadowPath = path.CGPath;
+    layer.shadowPath = path.CGPath;*/
+    
+    instaPhotoImageView.layer.shadowColor = [UIColor blackColor].CGColor;
+    instaPhotoImageView.layer.shadowOpacity = 0.7f;
+    instaPhotoImageView.layer.shadowOffset = CGSizeMake(6.0f, 6.0f);
+    instaPhotoImageView.layer.shadowRadius = 5.0f;
+    instaPhotoImageView.layer.masksToBounds = NO;
+    
+    UIBezierPath *path = [UIBezierPath bezierPathWithRect:instaPhotoImageView.bounds];
+    instaPhotoImageView.layer.shadowPath = path.CGPath;
+    
+    [self.view addSubview:instaPhotoImageView];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"purty_wood"]];
+    
+   
 }
 
 - (void)didReceiveMemoryWarning
