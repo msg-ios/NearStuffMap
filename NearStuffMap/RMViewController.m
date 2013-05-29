@@ -253,9 +253,9 @@
         if ([annotation.socialNetwork isEqualToString:@"Instagram"]) {
             RMInstaDetailViewController *instaDetailVC = [[RMInstaDetailViewController alloc] initWithNibName:@"RMInstaDetailViewController" bundle:nil];
             instaDetailVC.photo = annotation.photo;
-            instaDetailVC.filterLabel.text = annotation.instaFilter;
-            NSLog(@"filter: %@", annotation.instaFilter);
-            NSLog(@"id: %@", annotation.instaID);
+            instaDetailVC.filterString = annotation.instaFilter;
+            instaDetailVC.mediaIdString = annotation.mediaID;
+            instaDetailVC.fullNameString = annotation.instaFullUsername;
             instaDetailVC.title = annotation.title;
             [self.navigationController pushViewController:instaDetailVC animated:YES];
 
@@ -356,8 +356,9 @@
         annotation.title = [[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"user"] objectForKey:@"username"];
         annotation.subtitle = @"Instagram";
         annotation.socialNetwork = @"Instagram";
-        annotation.instaID = [[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"id"];
+        annotation.mediaID = [[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"id"];
         annotation.instaFilter = [[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"filter"];
+        annotation.instaFullUsername = [[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"user"] objectForKey:@"full_name"];
         
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[[[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"images"] objectForKey:@"standard_resolution"] objectForKey:@"url"]]];
         

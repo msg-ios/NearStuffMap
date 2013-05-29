@@ -21,7 +21,8 @@
 @property (nonatomic, retain) MKPinAnnotationView *pin;
 @property (nonatomic, retain) UIImage *photo;
 @property (nonatomic, retain) UIImage *leftCalloutImage;
-@property (nonatomic, copy) NSString *instaID;
+@property (nonatomic, copy) NSString *mediaID;
 @property (nonatomic, copy) NSString *instaFilter;
+@property (nonatomic, copy) NSString *instaFullUsername;
 
 @end

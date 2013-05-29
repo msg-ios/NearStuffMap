@@ -11,6 +11,10 @@
 
 @interface RMInstaDetailViewController : UIViewController
 @property (strong, nonatomic) UIImage *photo;
-@property (strong, nonatomic) IBOutlet UILabel *filterLabel;
+@property (nonatomic, copy) NSString *filterString;
+@property (nonatomic, copy) NSString *mediaIdString;
+@property (nonatomic, copy) NSString *fullNameString;
+
+-(void)openInInstaAppAction;
 
 @end

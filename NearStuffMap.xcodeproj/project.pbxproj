@@ -18,9 +18,6 @@
 		280E87D91725D38900A152DD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 280E87D71725D38900A152DD /* InfoPlist.strings */; };
 		280E87DB1725D38900A152DD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E87DA1725D38900A152DD /* main.m */; };
 		280E87DF1725D38900A152DD /* RMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E87DE1725D38900A152DD /* RMAppDelegate.m */; };
-		280E87E11725D38900A152DD /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 280E87E01725D38900A152DD /* Default.png */; };
-		280E87E31725D38900A152DD /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 280E87E21725D38900A152DD /* Default@2x.png */; };
-		280E87E51725D38900A152DD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 280E87E41725D38900A152DD /* Default-568h@2x.png */; };
 		280E87E81725D38900A152DD /* RMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E87E71725D38900A152DD /* RMViewController.m */; };
 		280E87EB1725D38900A152DD /* RMViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E87E91725D38900A152DD /* RMViewController.xib */; };
 		280E87F91725DBF600A152DD /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280E87F81725DBF600A152DD /* MapKit.framework */; };
@@ -28,6 +25,8 @@
 		282F774117554120001EEEDA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282F774017554120001EEEDA /* QuartzCore.framework */; };
 		282F77451755457B001EEEDA /* vichy.png in Resources */ = {isa = PBXBuildFile; fileRef = 282F77441755457B001EEEDA /* vichy.png */; };
 		282F77471755459B001EEEDA /* purty_wood.png in Resources */ = {isa = PBXBuildFile; fileRef = 282F77461755459B001EEEDA /* purty_wood.png */; };
+		282F77491755A394001EEEDA /* dark_wood.png in Resources */ = {isa = PBXBuildFile; fileRef = 282F77481755A394001EEEDA /* dark_wood.png */; };
+		282F774B1755A47F001EEEDA /* tileable_wood_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 282F774A1755A47E001EEEDA /* tileable_wood_texture.png */; };
 		28513F1F1754534A00157438 /* RMInstaDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28513F1D1754534800157438 /* RMInstaDetailViewController.m */; };
 		28513F201754534A00157438 /* RMInstaDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28513F1E1754534900157438 /* RMInstaDetailViewController.xib */; };
 		AA2DA26E174AC4CD00B9438B /* RMSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2DA26C174AC4CD00B9438B /* RMSettingsViewController.m */; };
@@ -64,9 +63,6 @@
 		280E87DC1725D38900A152DD /* NearStuffMap-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NearStuffMap-Prefix.pch"; sourceTree = "<group>"; };
 		280E87DD1725D38900A152DD /* RMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMAppDelegate.h; sourceTree = "<group>"; };
 		280E87DE1725D38900A152DD /* RMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMAppDelegate.m; sourceTree = "<group>"; };
-		280E87E01725D38900A152DD /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		280E87E21725D38900A152DD /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		280E87E41725D38900A152DD /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		280E87E61725D38900A152DD /* RMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMViewController.h; sourceTree = "<group>"; };
 		280E87E71725D38900A152DD /* RMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMViewController.m; sourceTree = "<group>"; };
 		280E87EA1725D38900A152DD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RMViewController.xib; sourceTree = "<group>"; };
@@ -76,6 +72,8 @@
 		282F774017554120001EEEDA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		282F77441755457B001EEEDA /* vichy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vichy.png; sourceTree = "<group>"; };
 		282F77461755459B001EEEDA /* purty_wood.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purty_wood.png; sourceTree = "<group>"; };
+		282F77481755A394001EEEDA /* dark_wood.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dark_wood.png; sourceTree = "<group>"; };
+		282F774A1755A47E001EEEDA /* tileable_wood_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tileable_wood_texture.png; sourceTree = "<group>"; };
 		28513F1C1754534600157438 /* RMInstaDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMInstaDetailViewController.h; sourceTree = "<group>"; };
 		28513F1D1754534800157438 /* RMInstaDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMInstaDetailViewController.m; sourceTree = "<group>"; };
 		28513F1E1754534900157438 /* RMInstaDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMInstaDetailViewController.xib; sourceTree = "<group>"; };
@@ -171,6 +169,8 @@
 				2807F1BD17503E2A00D0B532 /* switch_on.png */,
 				282F77441755457B001EEEDA /* vichy.png */,
 				282F77461755459B001EEEDA /* purty_wood.png */,
+				282F77481755A394001EEEDA /* dark_wood.png */,
+				282F774A1755A47E001EEEDA /* tileable_wood_texture.png */,
 				2815CD541730486200AC25C1 /* RMFacebookSDK.h */,
 				2815CD551730486200AC25C1 /* RMFacebookSDK.m */,
 				280E87DD1725D38900A152DD /* RMAppDelegate.h */,
@@ -200,9 +200,6 @@
 				280E87D71725D38900A152DD /* InfoPlist.strings */,
 				280E87DA1725D38900A152DD /* main.m */,
 				280E87DC1725D38900A152DD /* NearStuffMap-Prefix.pch */,
-				280E87E01725D38900A152DD /* Default.png */,
-				280E87E21725D38900A152DD /* Default@2x.png */,
-				280E87E41725D38900A152DD /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -261,9 +258,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				280E87D91725D38900A152DD /* InfoPlist.strings in Resources */,
-				280E87E11725D38900A152DD /* Default.png in Resources */,
-				280E87E31725D38900A152DD /* Default@2x.png in Resources */,
-				280E87E51725D38900A152DD /* Default-568h@2x.png in Resources */,
 				280E87EB1725D38900A152DD /* RMViewController.xib in Resources */,
 				AA2DA26F174AC4CD00B9438B /* RMSettingsViewController.xib in Resources */,
 				2807F1AB1750076B00D0B532 /* bar_grey.png in Resources */,
@@ -284,6 +278,8 @@
 				AA7392CB175563800075FA56 /* Default-568h@2x.png in Resources */,
 				AA7392CD175566990075FA56 /* Icono.png in Resources */,
 				AA7392CF1755669D0075FA56 /* Icono@2x.png in Resources */,
+				282F77491755A394001EEEDA /* dark_wood.png in Resources */,
+				282F774B1755A47F001EEEDA /* tileable_wood_texture.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
