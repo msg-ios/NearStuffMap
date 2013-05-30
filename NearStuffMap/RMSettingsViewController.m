@@ -8,6 +8,7 @@
 
 #import "RMSettingsViewController.h"
 #import "RMAppDelegate.h"
+#import "RMAboutVC.h"
 @interface RMSettingsViewController ()
 
 @end
@@ -131,6 +132,12 @@
             [app.socialArrays removeObject:@"Facebook"];
     }
     NSLog(@"SOCIAL ARRAY: %@", app.socialArrays);
+}
+
+-(IBAction)createAndLoadAboutVC{
+    RMAboutVC *aboutVC = [[RMAboutVC alloc ] init];
+    
+    [self presentViewController:aboutVC animated:YES completion:nil];
 }
 
 @end
