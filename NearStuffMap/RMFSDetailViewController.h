@@ -10,7 +10,7 @@
 #import "MBProgressHUD.h"
 
 @interface RMFSDetailViewController : UIViewController <UIWebViewDelegate, MBProgressHUDDelegate> {
-    MBProgressHUD *HUD;
+    UIWebView *customWebView;
 }
 
 @property (nonatomic, copy) NSString *fsVenueCanonicalURLString;
