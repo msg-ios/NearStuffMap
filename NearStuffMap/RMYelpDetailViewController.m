@@ -1,19 +1,19 @@
 //
-//  RMFSDetailViewController.m
+//  RMYelpDetailViewController.m
 //  NearStuffMap
 //
 //  Created by Marco Graciano on 5/29/13.
 //  Copyright (c) 2013 Marco Graciano. All rights reserved.
 //
 
-#import "RMFSDetailViewController.h"
+#import "RMYelpDetailViewController.h"
 
-@interface RMFSDetailViewController ()
+@interface RMYelpDetailViewController ()
 
 @end
 
-@implementation RMFSDetailViewController
-@synthesize fsVenueCanonicalURLString;
+@implementation RMYelpDetailViewController
+@synthesize yelpMobileURLString;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,7 +37,7 @@
     
     //UIWebView setup
     customWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height-44)];
-    NSString *urlString = self.fsVenueCanonicalURLString;
+    NSString *urlString = self.yelpMobileURLString;
     customWebView.delegate = self;
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -56,11 +56,12 @@
     [MBProgressHUD hideAllHUDsForView:customWebView animated:YES];
 }
 
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 @end

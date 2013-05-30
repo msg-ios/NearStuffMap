@@ -1,5 +1,5 @@
 //
-//  RMFSDetailViewController.h
+//  RMYelpDetailViewController.h
 //  NearStuffMap
 //
 //  Created by Marco Graciano on 5/29/13.
@@ -9,12 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
 
-@interface RMFSDetailViewController : UIViewController <UIWebViewDelegate> {
+@interface RMYelpDetailViewController : UIViewController <UIWebViewDelegate> {
     UIWebView *customWebView;
 }
 
-@property (nonatomic, copy) NSString *fsVenueCanonicalURLString;
-
+@property (nonatomic, copy) NSString *yelpMobileURLString;
 
 
 @end
