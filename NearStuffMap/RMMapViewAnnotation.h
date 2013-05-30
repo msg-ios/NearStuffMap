@@ -24,5 +24,7 @@
 @property (nonatomic, copy) NSString *mediaID;
 @property (nonatomic, copy) NSString *instaFilter;
 @property (nonatomic, copy) NSString *instaFullUsername;
+@property (nonatomic, copy) NSString *fsVenueCanonicalURL;
+@property (nonatomic, copy) NSString *fsVenueID;
 
 @end

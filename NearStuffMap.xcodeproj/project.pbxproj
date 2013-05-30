@@ -29,6 +29,11 @@
 		282F774B1755A47F001EEEDA /* tileable_wood_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 282F774A1755A47E001EEEDA /* tileable_wood_texture.png */; };
 		28513F1F1754534A00157438 /* RMInstaDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28513F1D1754534800157438 /* RMInstaDetailViewController.m */; };
 		28513F201754534A00157438 /* RMInstaDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28513F1E1754534900157438 /* RMInstaDetailViewController.xib */; };
+		2890AA661756C42E00B9E182 /* RMFSDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2890AA641756C42E00B9E182 /* RMFSDetailViewController.m */; };
+		2890AA671756C42E00B9E182 /* RMFSDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2890AA651756C42E00B9E182 /* RMFSDetailViewController.xib */; };
+		2890AA6A1756D01000B9E182 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 2890AA691756D00F00B9E182 /* MBProgressHUD.m */; };
+		2890AA6D1756D32900B9E182 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 2890AA6B1756D32800B9E182 /* 37x-Checkmark.png */; };
+		2890AA6E1756D32900B9E182 /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2890AA6C1756D32900B9E182 /* 37x-Checkmark@2x.png */; };
 		AA2DA26E174AC4CD00B9438B /* RMSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2DA26C174AC4CD00B9438B /* RMSettingsViewController.m */; };
 		AA2DA26F174AC4CD00B9438B /* RMSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA2DA26D174AC4CD00B9438B /* RMSettingsViewController.xib */; };
 		AA5064EA175409410035A224 /* facePinWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = AA5064E9175409410035A224 /* facePinWhite.png */; };
@@ -77,6 +82,13 @@
 		28513F1C1754534600157438 /* RMInstaDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMInstaDetailViewController.h; sourceTree = "<group>"; };
 		28513F1D1754534800157438 /* RMInstaDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMInstaDetailViewController.m; sourceTree = "<group>"; };
 		28513F1E1754534900157438 /* RMInstaDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMInstaDetailViewController.xib; sourceTree = "<group>"; };
+		2890AA631756C42D00B9E182 /* RMFSDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMFSDetailViewController.h; sourceTree = "<group>"; };
+		2890AA641756C42E00B9E182 /* RMFSDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMFSDetailViewController.m; sourceTree = "<group>"; };
+		2890AA651756C42E00B9E182 /* RMFSDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMFSDetailViewController.xib; sourceTree = "<group>"; };
+		2890AA681756D00F00B9E182 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		2890AA691756D00F00B9E182 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		2890AA6B1756D32800B9E182 /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
+		2890AA6C1756D32900B9E182 /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark@2x.png"; sourceTree = "<group>"; };
 		7BE394D772714CD69142F29A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A649A159EDC24B0BA1886337 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		AA2DA26B174AC4CD00B9438B /* RMSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSettingsViewController.h; sourceTree = "<group>"; };
@@ -157,6 +169,8 @@
 		280E87D41725D38900A152DD /* NearStuffMap */ = {
 			isa = PBXGroup;
 			children = (
+				2890AA6B1756D32800B9E182 /* 37x-Checkmark.png */,
+				2890AA6C1756D32900B9E182 /* 37x-Checkmark@2x.png */,
 				AA5064E9175409410035A224 /* facePinWhite.png */,
 				AA5064EB1754095F0035A224 /* fourPin.png */,
 				AA5064EC1754095F0035A224 /* instaPin.png */,
@@ -171,6 +185,8 @@
 				282F77461755459B001EEEDA /* purty_wood.png */,
 				282F77481755A394001EEEDA /* dark_wood.png */,
 				282F774A1755A47E001EEEDA /* tileable_wood_texture.png */,
+				2890AA681756D00F00B9E182 /* MBProgressHUD.h */,
+				2890AA691756D00F00B9E182 /* MBProgressHUD.m */,
 				2815CD541730486200AC25C1 /* RMFacebookSDK.h */,
 				2815CD551730486200AC25C1 /* RMFacebookSDK.m */,
 				280E87DD1725D38900A152DD /* RMAppDelegate.h */,
@@ -185,9 +201,12 @@
 				AAF2A9AF1725F85B00B48D7F /* RMMapViewAnnotation.m */,
 				28513F1C1754534600157438 /* RMInstaDetailViewController.h */,
 				28513F1D1754534800157438 /* RMInstaDetailViewController.m */,
+				2890AA631756C42D00B9E182 /* RMFSDetailViewController.h */,
+				2890AA641756C42E00B9E182 /* RMFSDetailViewController.m */,
 				280E87E91725D38900A152DD /* RMViewController.xib */,
 				AA2DA26D174AC4CD00B9438B /* RMSettingsViewController.xib */,
 				28513F1E1754534900157438 /* RMInstaDetailViewController.xib */,
+				2890AA651756C42E00B9E182 /* RMFSDetailViewController.xib */,
 				280E87D51725D38900A152DD /* Supporting Files */,
 			);
 			path = NearStuffMap;
@@ -280,6 +299,9 @@
 				AA7392CF1755669D0075FA56 /* Icono@2x.png in Resources */,
 				282F77491755A394001EEEDA /* dark_wood.png in Resources */,
 				282F774B1755A47F001EEEDA /* tileable_wood_texture.png in Resources */,
+				2890AA671756C42E00B9E182 /* RMFSDetailViewController.xib in Resources */,
+				2890AA6D1756D32900B9E182 /* 37x-Checkmark.png in Resources */,
+				2890AA6E1756D32900B9E182 /* 37x-Checkmark@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,6 +337,8 @@
 				AA2DA26E174AC4CD00B9438B /* RMSettingsViewController.m in Sources */,
 				2815CD561730486200AC25C1 /* RMFacebookSDK.m in Sources */,
 				28513F1F1754534A00157438 /* RMInstaDetailViewController.m in Sources */,
+				2890AA661756C42E00B9E182 /* RMFSDetailViewController.m in Sources */,
+				2890AA6A1756D01000B9E182 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,7 @@
 #import "RMSettingsViewController.h"
 #import "RMAppDelegate.h"
 #import "RMInstaDetailViewController.h"
+#import "RMFSDetailViewController.h"
 
 @interface CustomPin : MKPinAnnotationView
 {
@@ -260,6 +261,12 @@
             [self.navigationController pushViewController:instaDetailVC animated:YES];
 
         }
+        else if ([annotation.socialNetwork isEqualToString:@"Foursquare"]) {
+            RMFSDetailViewController *fsDetailVC = [[RMFSDetailViewController alloc] initWithNibName:@"RMFSDetailViewController" bundle:nil];
+            fsDetailVC.title = annotation.title;
+            fsDetailVC.fsVenueCanonicalURLString = annotation.fsVenueCanonicalURL;
+            [self.navigationController pushViewController:fsDetailVC animated:YES];
+        }
         
     }
 }
@@ -268,23 +275,23 @@
     
     RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-//    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%f", latitude],@"latitude", [NSString stringWithFormat:@"%f", longitude], @"longitude", nil];
-//    
-//    
-//    if (app.foursquareSwitch)
-//    {
-//        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"1000", @"radius", @"15", @"limit", nil];
-//        [[RMMasterSDK FoursquareSDK] getUserlessExploreVenuesWithLatitudeLongitude:dict OrNear:nil AndParameters:params AndWithDelegate:self];
-//        
-//    }
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%f", latitude],@"latitude", [NSString stringWithFormat:@"%f", longitude], @"longitude", nil];
     
-    if (app.instagramSwitch){
-        
-        NSDictionary *dict2 = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%f", latitude],@"lat", [NSString stringWithFormat:@"%f", longitude], @"lng", @"1000", @"distance", nil];
-        
-        [[RMMasterSDK InstagramSDK] getWAMediaSearchWithParams:dict2 AndWithDelegate:self];
+    
+    if (app.foursquareSwitch)
+    {
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"1000", @"radius", @"15", @"limit", nil];
+        [[RMMasterSDK FoursquareSDK] getUserlessExploreVenuesWithLatitudeLongitude:dict OrNear:nil AndParameters:params AndWithDelegate:self];
         
     }
+    
+//    if (app.instagramSwitch){
+//        
+//        NSDictionary *dict2 = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%f", latitude],@"lat", [NSString stringWithFormat:@"%f", longitude], @"lng", @"1000", @"distance", nil];
+//        
+//        [[RMMasterSDK InstagramSDK] getWAMediaSearchWithParams:dict2 AndWithDelegate:self];
+//        
+//    }
     
 //    if (app.yelpSwitch){
 //        [[RMMasterSDK YelpSDK] getSearchWithTerm:nil AndCoordinates:dict AndParams:[NSDictionary dictionaryWithObjectsAndKeys:@"1000",@"radius_filter", nil] AndWithDelegate:self];
@@ -317,14 +324,16 @@
         location.latitude = [[[[[[[[[array  objectForKey:@"response"] objectForKey:@"groups"] objectAtIndex:0] objectForKey:@"items"] objectAtIndex:i] objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"lat"] floatValue];
         location.longitude = [[[[[[[[[array  objectForKey:@"response"] objectForKey:@"groups"] objectAtIndex:0] objectForKey:@"items"] objectAtIndex:i] objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"lng"] floatValue];
         
-        
-        
+
         NSLog(@"LAT : %f LON: %f", location.latitude, location.longitude);
         
         annotation.coordinate = location;
         annotation.title = [[[[[[[array  objectForKey:@"response"] objectForKey:@"groups"] objectAtIndex:0] objectForKey:@"items"] objectAtIndex:i] objectForKey:@"venue"] objectForKey:@"name"];
         annotation.subtitle = @"Foursquare";
         annotation.socialNetwork = @"Foursquare";
+        
+        annotation.fsVenueCanonicalURL = [[[[[[[array  objectForKey:@"response"] objectForKey:@"groups"] objectAtIndex:0] objectForKey:@"items"] objectAtIndex:i] objectForKey:@"venue"] objectForKey:@"canonicalUrl"];
+        annotation.fsVenueID = [[[[[[[array  objectForKey:@"response"] objectForKey:@"groups"] objectAtIndex:0] objectForKey:@"items"] objectAtIndex:i] objectForKey:@"venue"] objectForKey:@"id"];
         
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];
