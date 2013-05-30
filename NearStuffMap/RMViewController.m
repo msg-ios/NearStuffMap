@@ -13,6 +13,7 @@
 #import "RMAppDelegate.h"
 #import "RMInstaDetailViewController.h"
 #import "RMFSDetailViewController.h"
+#import "RMYelpDetailViewController.h"
 
 @interface CustomPin : MKPinAnnotationView
 {
@@ -267,6 +268,12 @@
             fsDetailVC.fsVenueCanonicalURLString = annotation.fsVenueCanonicalURL;
             [self.navigationController pushViewController:fsDetailVC animated:YES];
         }
+        else if ([annotation.socialNetwork isEqualToString:@"Yelp"]) {
+            RMYelpDetailViewController *yelpDetailVC = [[RMYelpDetailViewController alloc] initWithNibName:@"RMYelpDetailViewController" bundle:nil];
+            yelpDetailVC.title = annotation.title;
+            yelpDetailVC.yelpMobileURLString = annotation.yelpMobileURL;
+            [self.navigationController pushViewController:yelpDetailVC animated:YES];
+        }
         
     }
 }
@@ -285,19 +292,19 @@
         
     }
     
-//    if (app.instagramSwitch){
-//        
-//        NSDictionary *dict2 = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%f", latitude],@"lat", [NSString stringWithFormat:@"%f", longitude], @"lng", @"1000", @"distance", nil];
-//        
-//        [[RMMasterSDK InstagramSDK] getWAMediaSearchWithParams:dict2 AndWithDelegate:self];
-//        
-//    }
+    if (app.instagramSwitch){
+        
+        NSDictionary *dict2 = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%f", latitude],@"lat", [NSString stringWithFormat:@"%f", longitude], @"lng", @"1000", @"distance", nil];
+        
+        [[RMMasterSDK InstagramSDK] getWAMediaSearchWithParams:dict2 AndWithDelegate:self];
+        
+    }
     
-//    if (app.yelpSwitch){
-//        [[RMMasterSDK YelpSDK] getSearchWithTerm:nil AndCoordinates:dict AndParams:[NSDictionary dictionaryWithObjectsAndKeys:@"1000",@"radius_filter", nil] AndWithDelegate:self];
-//        
-//    }
-//    
+    if (app.yelpSwitch){
+        [[RMMasterSDK YelpSDK] getSearchWithTerm:nil AndCoordinates:dict AndParams:[NSDictionary dictionaryWithObjectsAndKeys:@"1000",@"radius_filter", nil] AndWithDelegate:self];
+        
+    }
+//
 //    if (app.twitterSwitch){
 //        [[RMTwitterSDK sharedClient] getPlacesOnTwitterWithLatitude:[NSString stringWithFormat:@"%f", latitude] AndLongitude:[NSString stringWithFormat:@"%f", longitude] AndWithDelegate:self];
 //        
@@ -333,7 +340,6 @@
         annotation.socialNetwork = @"Foursquare";
         
         annotation.fsVenueCanonicalURL = [[[[[[[array  objectForKey:@"response"] objectForKey:@"groups"] objectAtIndex:0] objectForKey:@"items"] objectAtIndex:i] objectForKey:@"venue"] objectForKey:@"canonicalUrl"];
-        annotation.fsVenueID = [[[[[[[array  objectForKey:@"response"] objectForKey:@"groups"] objectAtIndex:0] objectForKey:@"items"] objectAtIndex:i] objectForKey:@"venue"] objectForKey:@"id"];
         
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];
@@ -431,6 +437,8 @@
         annotation.title = [[[data objectForKey:@"businesses"] objectAtIndex:i] objectForKey:@"name"];
         annotation.subtitle = @"Yelp";
         annotation.socialNetwork = @"Yelp";
+        
+        annotation.yelpMobileURL = [[[data objectForKey:@"businesses"] objectAtIndex:i] objectForKey:@"mobile_url"];
         
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];

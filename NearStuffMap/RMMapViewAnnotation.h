@@ -25,6 +25,6 @@
 @property (nonatomic, copy) NSString *instaFilter;
 @property (nonatomic, copy) NSString *instaFullUsername;
 @property (nonatomic, copy) NSString *fsVenueCanonicalURL;
-@property (nonatomic, copy) NSString *fsVenueID;
+@property (nonatomic, copy) NSString *yelpMobileURL;
 
 @end
