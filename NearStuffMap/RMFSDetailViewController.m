@@ -41,12 +41,16 @@
 //    HUD.mode = MBProgressHUDModeDeterminate;
     
     //UIWebView setup
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height-44)];
+    customWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height-44)];
     NSString *urlString = self.fsVenueCanonicalURLString;
+    customWebView.delegate = self;
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [webView loadRequest:request];
-    [self.view addSubview:webView];
+    [customWebView loadRequest:request];
+    [self.view addSubview:customWebView];
+    
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:customWebView animated:YES];
+    HUD.dimBackground = YES;
 }
 
 -(void)webViewDidStartLoad:(UIWebView *)webView {
@@ -55,13 +59,15 @@
 }
 
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    
+    [MBProgressHUD hideAllHUDsForView:customWebView animated:YES];
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
 //    HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
 //	HUD.mode = MBProgressHUDModeCustomView;
 //	[HUD hide:YES afterDelay:2];
+    
+    [MBProgressHUD hideAllHUDsForView:customWebView animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
