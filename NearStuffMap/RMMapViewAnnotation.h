@@ -26,5 +26,6 @@
 @property (nonatomic, copy) NSString *instaFullUsername;
 @property (nonatomic, copy) NSString *fsVenueCanonicalURL;
 @property (nonatomic, copy) NSString *yelpMobileURL;
+@property (nonatomic, copy) NSString *facebookMobileURL;
 
 @end

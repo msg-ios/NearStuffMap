@@ -14,6 +14,7 @@
 #import "RMInstaDetailViewController.h"
 #import "RMFSDetailViewController.h"
 #import "RMYelpDetailViewController.h"
+#import "RMFacebookDetailViewController.h"
 
 @interface CustomPin : MKPinAnnotationView
 {
@@ -202,6 +203,8 @@
             else if (app.facebookSwitch && [annotation.socialNetwork isEqualToString:@"Facebook"])
             {
                 view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"facePinWhite"]];
+                view.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+
             }
             
             
@@ -236,6 +239,8 @@
             else if (app.facebookSwitch && [annotation.socialNetwork isEqualToString:@"Facebook"])
             {
                 view = [[CustomPin alloc] initWithAnnotation:annotation andImage:[UIImage imageNamed:@"facePinWhite"]];
+                view.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+
             }
         }
         
@@ -273,6 +278,11 @@
             yelpDetailVC.title = annotation.title;
             yelpDetailVC.yelpMobileURLString = annotation.yelpMobileURL;
             [self.navigationController pushViewController:yelpDetailVC animated:YES];
+        }else if ([annotation.socialNetwork isEqualToString:@"Facebook"]) {
+            RMFacebookDetailViewController *faceDetailVC = [[RMFacebookDetailViewController alloc] initWithNibName:@"RMFacebookDetailViewController" bundle:nil];
+            faceDetailVC.title = annotation.title;
+            faceDetailVC.facebookMobileURLString = annotation.facebookMobileURL;
+            [self.navigationController pushViewController:faceDetailVC animated:YES];
         }
         
     }
@@ -284,7 +294,7 @@
     
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%f", latitude],@"latitude", [NSString stringWithFormat:@"%f", longitude], @"longitude", nil];
     
-    
+   
     if (app.foursquareSwitch)
     {
         NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:@"1000", @"radius", @"15", @"limit", nil];
@@ -304,19 +314,19 @@
         [[RMMasterSDK YelpSDK] getSearchWithTerm:nil AndCoordinates:dict AndParams:[NSDictionary dictionaryWithObjectsAndKeys:@"1000",@"radius_filter", nil] AndWithDelegate:self];
         
     }
-//
-//    if (app.twitterSwitch){
-//        [[RMTwitterSDK sharedClient] getPlacesOnTwitterWithLatitude:[NSString stringWithFormat:@"%f", latitude] AndLongitude:[NSString stringWithFormat:@"%f", longitude] AndWithDelegate:self];
-//        
-//    }
-//    
-//    if (app.facebookSwitch)
-//    {
-//        NSString *lat = [NSString stringWithFormat:@"%f", latitude];
-//        NSString *lon = [NSString stringWithFormat:@"%f", longitude];
-//        NSDictionary *dict3 = [NSDictionary dictionaryWithObjectsAndKeys:@"1000", @"distance", nil];
-//        [[RMFacebookSDK sharedClient] getPublicPlaceWithQuery:app.fbSearchTerm WithLatitude:lat WithLongitude:lon WithParams:dict3 AndWithDelegate:self];
-//    }
+
+    if (app.twitterSwitch){
+        [[RMTwitterSDK sharedClient] getPlacesOnTwitterWithLatitude:[NSString stringWithFormat:@"%f", latitude] AndLongitude:[NSString stringWithFormat:@"%f", longitude] AndWithDelegate:self];
+        
+    }
+    
+    if (app.facebookSwitch)
+    {
+        NSString *lat = [NSString stringWithFormat:@"%f", latitude];
+        NSString *lon = [NSString stringWithFormat:@"%f", longitude];
+        NSDictionary *dict3 = [NSDictionary dictionaryWithObjectsAndKeys:@"1000", @"distance", nil];
+        [[RMFacebookSDK sharedClient] getPublicPlaceWithQuery:app.fbSearchTerm WithLatitude:lat WithLongitude:lon WithParams:dict3 AndWithDelegate:self];
+   }
 }
 
 -(void)loadNearbyExploreWithData:(NSDictionary *)array{
@@ -439,7 +449,6 @@
         annotation.socialNetwork = @"Yelp";
         
         annotation.yelpMobileURL = [[[data objectForKey:@"businesses"] objectAtIndex:i] objectForKey:@"mobile_url"];
-        
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];
         [arrayBackup addObject:annotation];
@@ -504,9 +513,9 @@
         
         annotation.coordinate = location;
         annotation.title = [[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"name"];
+        annotation.facebookMobileURL = [NSString stringWithFormat:@"http://www.facebook.com/%@", [[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"id"]];
         annotation.subtitle = @"Facebook";
         annotation.socialNetwork = @"Facebook";
-        
         [self.mapView addAnnotation:annotation];
         [self.annotationsArray addObject:annotation];
         [arrayBackup addObject:annotation];
