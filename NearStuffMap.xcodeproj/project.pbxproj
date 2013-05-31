@@ -34,6 +34,8 @@
 		2890AA6A1756D01000B9E182 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 2890AA691756D00F00B9E182 /* MBProgressHUD.m */; };
 		2890AA721756E68900B9E182 /* RMYelpDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2890AA701756E68700B9E182 /* RMYelpDetailViewController.m */; };
 		2890AA731756E68900B9E182 /* RMYelpDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2890AA711756E68900B9E182 /* RMYelpDetailViewController.xib */; };
+		AA262F4417593CA500598A82 /* RMFacebookDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA262F4217593CA500598A82 /* RMFacebookDetailViewController.m */; };
+		AA262F4517593CA500598A82 /* RMFacebookDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA262F4317593CA500598A82 /* RMFacebookDetailViewController.xib */; };
 		AA2DA26E174AC4CD00B9438B /* RMSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2DA26C174AC4CD00B9438B /* RMSettingsViewController.m */; };
 		AA2DA26F174AC4CD00B9438B /* RMSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA2DA26D174AC4CD00B9438B /* RMSettingsViewController.xib */; };
 		AA5064EA175409410035A224 /* facePinWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = AA5064E9175409410035A224 /* facePinWhite.png */; };
@@ -96,6 +98,9 @@
 		2890AA711756E68900B9E182 /* RMYelpDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMYelpDetailViewController.xib; sourceTree = "<group>"; };
 		7BE394D772714CD69142F29A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A649A159EDC24B0BA1886337 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		AA262F4117593CA500598A82 /* RMFacebookDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMFacebookDetailViewController.h; sourceTree = "<group>"; };
+		AA262F4217593CA500598A82 /* RMFacebookDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMFacebookDetailViewController.m; sourceTree = "<group>"; };
+		AA262F4317593CA500598A82 /* RMFacebookDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMFacebookDetailViewController.xib; sourceTree = "<group>"; };
 		AA2DA26B174AC4CD00B9438B /* RMSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSettingsViewController.h; sourceTree = "<group>"; };
 		AA2DA26C174AC4CD00B9438B /* RMSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSettingsViewController.m; sourceTree = "<group>"; };
 		AA2DA26D174AC4CD00B9438B /* RMSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSettingsViewController.xib; sourceTree = "<group>"; };
@@ -215,9 +220,12 @@
 				2890AA641756C42E00B9E182 /* RMFSDetailViewController.m */,
 				2890AA6F1756E68600B9E182 /* RMYelpDetailViewController.h */,
 				2890AA701756E68700B9E182 /* RMYelpDetailViewController.m */,
+				AA262F4117593CA500598A82 /* RMFacebookDetailViewController.h */,
+				AA262F4217593CA500598A82 /* RMFacebookDetailViewController.m */,
 				AA7D5A071757FAD80031374B /* RMAboutVC.h */,
 				AA7D5A081757FAD80031374B /* RMAboutVC.m */,
 				AA7D5A091757FAD80031374B /* RMAboutVC.xib */,
+				AA262F4317593CA500598A82 /* RMFacebookDetailViewController.xib */,
 				280E87E91725D38900A152DD /* RMViewController.xib */,
 				AA2DA26D174AC4CD00B9438B /* RMSettingsViewController.xib */,
 				28513F1E1754534900157438 /* RMInstaDetailViewController.xib */,
@@ -320,6 +328,7 @@
 				AAD5D3B01756E1CF002C4B40 /* poweredByFoursquare_white.png in Resources */,
 				2890AA731756E68900B9E182 /* RMYelpDetailViewController.xib in Resources */,
 				AA7D5A0B1757FAD80031374B /* RMAboutVC.xib in Resources */,
+				AA262F4517593CA500598A82 /* RMFacebookDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,6 +368,7 @@
 				2890AA6A1756D01000B9E182 /* MBProgressHUD.m in Sources */,
 				2890AA721756E68900B9E182 /* RMYelpDetailViewController.m in Sources */,
 				AA7D5A0A1757FAD80031374B /* RMAboutVC.m in Sources */,
+				AA262F4417593CA500598A82 /* RMFacebookDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
