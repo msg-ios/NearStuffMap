@@ -151,7 +151,7 @@
     latitude = userLocation.coordinate.latitude;
     longitude = userLocation.coordinate.longitude;
     
-    if (fabsf(userLocation.coordinate.latitude - lastUserLocation.coordinate.latitude) > 0.0010 || fabsf(userLocation.coordinate.longitude - lastUserLocation.coordinate.longitude) > 0.0010)
+    if (fabsf(userLocation.coordinate.latitude - lastUserLocation.coordinate.latitude) > 0.0050 || fabsf(userLocation.coordinate.longitude - lastUserLocation.coordinate.longitude) > 0.0050)
     {
         
         [lastUserLocation setCoordinate:userLocation.coordinate];
@@ -278,7 +278,8 @@
             yelpDetailVC.title = annotation.title;
             yelpDetailVC.yelpMobileURLString = annotation.yelpMobileURL;
             [self.navigationController pushViewController:yelpDetailVC animated:YES];
-        }else if ([annotation.socialNetwork isEqualToString:@"Facebook"]) {
+        }
+        else if ([annotation.socialNetwork isEqualToString:@"Facebook"]) {
             RMFacebookDetailViewController *faceDetailVC = [[RMFacebookDetailViewController alloc] initWithNibName:@"RMFacebookDetailViewController" bundle:nil];
             faceDetailVC.title = annotation.title;
             faceDetailVC.facebookMobileURLString = annotation.facebookMobileURL;
