@@ -14,6 +14,8 @@
     IBOutlet UISwitch *yelpSwitch;
     IBOutlet UISwitch *foursquareSwitch;
     IBOutlet UISwitch *facebookSwitch;
+    
+    IBOutlet UIButton *aboutButton;
 
 }
 
@@ -38,5 +40,8 @@
 -(IBAction)toggleSwitchTwitter;
 
 -(IBAction)toggleSwitchFacebook;
+
+-(IBAction)createAndLoadAboutVC;
+
 
 @end
