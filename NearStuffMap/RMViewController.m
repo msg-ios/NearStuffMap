@@ -66,18 +66,22 @@
 @implementation RMViewController
 @synthesize mapView = _mapView;
 @synthesize annotationsArray = _annotationsArray;
-@synthesize arrayBackup;
+@synthesize instagramArray, facebookArray, foursquareArray, twitterArray, yelpArray;
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"Near Stuff Map";
+    self.title = @"NearStuff Map";
     [self.mapView setShowsUserLocation:YES];
     self.mapView.delegate = self;
     canRefreshData = YES;
     self.annotationsArray = [[NSMutableArray alloc] init];
-    arrayBackup = [[NSMutableArray alloc] init];
+    instagramArray = [[NSMutableArray alloc] init];
+    facebookArray = [[NSMutableArray alloc] init];
+    foursquareArray = [[NSMutableArray alloc] init];
+    twitterArray = [[NSMutableArray alloc] init];
+    yelpArray = [[NSMutableArray alloc] init];
 
     lastUserLocation = [[MKUserLocation alloc] init];
     [lastUserLocation setCoordinate:CLLocationCoordinate2DMake(0.0000, 0.0000)];
@@ -91,44 +95,33 @@
     [super viewWillAppear:YES];
     
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
-
+    
     canRefreshData = YES;
     
     if (self.mapView)
     {
         RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
+        [self.annotationsArray removeAllObjects];
         
-       
-        [self.mapView removeAnnotations:self.mapView.annotations];
-        
-
-        self.annotationsArray = [[NSMutableArray alloc] initWithArray:arrayBackup];
-        
-        
-        for (int loop = 0; loop < 10; loop++)
-        {
-        for (int k = 0; k < app.socialArrays.count ; k++)
-        {
-            
-            for ( int i = 0; i < self.annotationsArray.count; i++)
-        {
-         //   RMMapViewAnnotation *annotation = (RMMapViewAnnotation *)[self.annotationsArray objectAtIndex:i];
-
-            NSLog(@"%i", i);
-            NSLog(@"Social: %@", [[self.annotationsArray objectAtIndex:i] socialNetwork]);
-            NSLog(@"SocialDelete: %@", [app.socialArrays objectAtIndex:k]);
-
-            if ([[[self.annotationsArray objectAtIndex:i] socialNetwork] isEqualToString:[app.socialArrays objectAtIndex:k]])
-            {
-                NSLog(@"DELETED!");
-                [self.annotationsArray removeObjectAtIndex:i];
-
-            }
+        if (![app.socialArrays containsObject:@"Instagram"]) {
+            [self.annotationsArray addObjectsFromArray:instagramArray];
         }
+        if (![app.socialArrays containsObject:@"Foursquare"]) {
+            [self.annotationsArray addObjectsFromArray:foursquareArray];
         }
+        if (![app.socialArrays containsObject:@"Yelp"]) {
+            [self.annotationsArray addObjectsFromArray:yelpArray];
+        }
+        if (![app.socialArrays containsObject:@"Facebook"]) {
+            [self.annotationsArray addObjectsFromArray:facebookArray];
+        }
+        if (![app.socialArrays containsObject:@"Twitter"]) {
+            [self.annotationsArray addObjectsFromArray:twitterArray];
+        }
+        
         [self refreshDataUsingArray];
+        
     }
-}
 }
 
 - (void)didReceiveMemoryWarning
@@ -353,8 +346,7 @@
         annotation.fsVenueCanonicalURL = [[[[[[[array  objectForKey:@"response"] objectForKey:@"groups"] objectAtIndex:0] objectForKey:@"items"] objectAtIndex:i] objectForKey:@"venue"] objectForKey:@"canonicalUrl"];
         
         [self.mapView addAnnotation:annotation];
-        [self.annotationsArray addObject:annotation];
-        [arrayBackup addObject:annotation];
+        [foursquareArray addObject:annotation];
         
     }
     
@@ -410,9 +402,7 @@
                                                                           
                                                                           annotation.leftCalloutImage = image;
                                                                           [self.mapView addAnnotation:annotation];
-                                                                          [self.annotationsArray addObject:annotation];
-                                                                          [arrayBackup addObject:annotation];
-                                                                          
+                                                                          [instagramArray addObject:annotation];                                                                          
                                                                       }
                                                                       failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                                                                           NSLog(@"%@", [error localizedDescription]);
@@ -451,8 +441,7 @@
         
         annotation.yelpMobileURL = [[[data objectForKey:@"businesses"] objectAtIndex:i] objectForKey:@"mobile_url"];
         [self.mapView addAnnotation:annotation];
-        [self.annotationsArray addObject:annotation];
-        [arrayBackup addObject:annotation];
+        [yelpArray addObject:annotation];
     }
     
     
@@ -487,8 +476,8 @@
                 annotation.socialNetwork = @"Twitter";
                 
                 [self.mapView addAnnotation:annotation];
-                [self.annotationsArray addObject:annotation];
-                [arrayBackup addObject:annotation];
+                [twitterArray addObject:annotation];
+
 
             }
             
@@ -518,9 +507,7 @@
         annotation.subtitle = @"Facebook";
         annotation.socialNetwork = @"Facebook";
         [self.mapView addAnnotation:annotation];
-        [self.annotationsArray addObject:annotation];
-        [arrayBackup addObject:annotation];
-
+        [facebookArray addObject:annotation];
 
     }
     
@@ -540,10 +527,8 @@
     if (self.mapView)
     {
 
-        
-        NSLog(@"Annotation count: %i", arrayBackup.count);
 
-        NSLog(@"Annotation2 count: %i", self.annotationsArray.count);
+        NSLog(@"Annotations count: %i", self.annotationsArray.count);
         
         if (canRefreshData) {
         
@@ -556,7 +541,6 @@
             }
             
             [self.annotationsArray removeAllObjects];
-            [self.arrayBackup removeAllObjects];
             [self loadAnnotations];
             //The user will be able to refresh the data in 15 min.
             [self performSelector:@selector(scheduledTask) withObject:nil afterDelay:900.0];
@@ -576,10 +560,8 @@
 -(void)refreshDataUsingArray {
     if (self.mapView)
     {
-        
-        
-        NSLog(@"Annotation count: %i", self.arrayBackup.count);
-        NSLog(@"Annotation2 count: %i", self.annotationsArray.count);
+
+        NSLog(@"Annotations count: %i", self.annotationsArray.count);
         
         //Remove all added annotations
         for (RMMapViewAnnotation *annotation in self.mapView.annotations)
@@ -588,6 +570,7 @@
         }
         
         [self.mapView addAnnotations:self.annotationsArray];
+        [self.annotationsArray removeAllObjects];
         
     }
 }

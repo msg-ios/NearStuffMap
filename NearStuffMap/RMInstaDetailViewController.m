@@ -37,7 +37,7 @@
     fullNameLabel.backgroundColor = [UIColor clearColor];
     fullNameLabel.textAlignment = NSTextAlignmentCenter;
     fullNameLabel.font = [UIFont fontWithName:@"Helvetica" size:20];
-    fullNameLabel.text = [NSString stringWithFormat:@"User: %@", fullNameString];
+    fullNameLabel.text = [NSString stringWithFormat:@"Photo by user: %@", fullNameString];
     
     [self.view addSubview:fullNameLabel];
     

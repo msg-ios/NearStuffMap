@@ -28,7 +28,11 @@
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 @property (nonatomic, retain) NSMutableArray *annotationsArray;
-@property (nonatomic, retain) NSMutableArray *arrayBackup;
+@property (nonatomic, retain) NSMutableArray *instagramArray;
+@property (nonatomic, retain) NSMutableArray *yelpArray;
+@property (nonatomic, retain) NSMutableArray *foursquareArray;
+@property (nonatomic, retain) NSMutableArray *facebookArray;
+@property (nonatomic, retain) NSMutableArray *twitterArray;
 
 - (void)zoomToUserLocation:(MKUserLocation *)userLocation;
 

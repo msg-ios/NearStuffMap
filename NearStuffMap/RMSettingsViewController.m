@@ -61,9 +61,17 @@
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
-    RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
-    app.fbSearchTerm = self.searchTermTextField.text;
-    self.currentSearchTermLabel.text = app.fbSearchTerm;
+    
+    if ([self.searchTermTextField.text isEqualToString:@""] || [self.searchTermTextField.text isEqualToString:@" "]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You must enter a search term to change it." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    else {
+        RMAppDelegate *app = (RMAppDelegate *)[[UIApplication sharedApplication] delegate];
+        app.fbSearchTerm = self.searchTermTextField.text;
+        self.currentSearchTermLabel.text = app.fbSearchTerm;
+    }
+
     [textField resignFirstResponder];
     return YES;
 }
