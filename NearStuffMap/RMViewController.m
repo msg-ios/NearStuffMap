@@ -16,7 +16,7 @@
 #import "RMYelpDetailViewController.h"
 #import "RMFacebookDetailViewController.h"
 
-@interface CustomPin : MKPinAnnotationView
+@interface CustomPin : MKAnnotationView
 {
 }
 - (id)initWithAnnotation:(id <MKAnnotation>) annotation andPinColor:(MKPinAnnotationColor *)pinColor;
@@ -41,7 +41,7 @@
     return self;
     
 }
-
+/*
 - (id)initWithAnnotation:(id <MKAnnotation>)annotation andPinColor:(MKPinAnnotationColor *)pinColor
 {
     
@@ -55,7 +55,7 @@
     }
     return self;
     
-}
+}*/
 
 @end
 
