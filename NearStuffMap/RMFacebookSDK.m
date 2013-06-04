@@ -31,8 +31,8 @@
 #import "RMFacebookSDK.h"
 
 static NSString * const kClientBaseURL = @"https://graph.facebook.com/";
-static NSString * const kClientIDString = @"544372532268478";//FILL IN WITH YOUR OWN CLIENT ID
-static NSString * const kClientSecretString = @"80561a517716a9210be6d6f7d88c12d0";//FILL IN WITH YOUR OWN CLIENT SECRET
+static NSString * const kClientIDString = @"466504436765975";//FILL IN WITH YOUR OWN CLIENT ID
+static NSString * const kClientSecretString = @"39ea5fd3c5bcdf0be365b4dfb6d0c65f";//FILL IN WITH YOUR OWN CLIENT SECRET
 
 @implementation RMFacebookSDK
 

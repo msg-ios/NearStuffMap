@@ -33,8 +33,8 @@
 
 static NSString * const kOAuth2BaseURLString = @"https://instagram.com/";
 static NSString * const kServerAPIURL = @"https://api.instagram.com/v1/";
-static NSString * const kClientIDString = @"b5be30367f2445f5b1824e914d1cb3f5";//COMPLETE WITH YOUR OWN CLIENT ID
-static NSString * const kClientSecretString = @"c0fbb6630bbe4c078c77e987c39bed39";//COMPLETE WITH YOUR OWN CLIENT SECRET
+static NSString * const kClientIDString = @"d4d5e861b34d45a7ade778177f7facfb";//COMPLETE WITH YOUR OWN CLIENT ID
+static NSString * const kClientSecretString = @"7176f1a3acea4f5084f41bafa5368646";//COMPLETE WITH YOUR OWN CLIENT SECRET
 
 
 @implementation RMInstagramSDK

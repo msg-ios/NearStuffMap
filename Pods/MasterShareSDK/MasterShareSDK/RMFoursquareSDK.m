@@ -35,8 +35,8 @@
 
 static NSString * const kOAuth2BaseURLString = @"https://foursquare.com/";
 static NSString * const kServerAPIURL = @"https://api.foursquare.com/v2/";
-static NSString * const kClientIDString = @"AD1QBEWHCZWATQNPFJOET2RD3LOZOXVHAX534NX30UOBNX12";//COMPLETE WITH YOUR OWN CLIENT_ID
-static NSString * const kClientSecretString = @"IRH3TEV00N1ID1ZHWH0EWNRVVGNOZF2M5V55MYYNW1ZGAS44";//COMPLETE WITH YOUR OWN CLIENT_SECRET
+static NSString * const kClientIDString = @"IXDJ5DIW2CNXWXGHPTVYXIMUN5YD2OS5O3ANWDQABPFTXF1B";//COMPLETE WITH YOUR OWN CLIENT_ID
+static NSString * const kClientSecretString = @"4XU5CXL0K4HNE0LP242GUC15B5ECRSRGG40QYK3GNZX2TVLB";//COMPLETE WITH YOUR OWN CLIENT_SECRET
 
 @implementation RMFoursquareSDK
 

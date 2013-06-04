@@ -31,10 +31,10 @@
 #import "RMYelpSDK.h"
 
 static NSString * const kOAuth1BaseURLString = @"http://api.yelp.com/v2/";
-static NSString * const kConsumerKeyString = @"CCWA9Km2t8lC7BFRVi2IkA";//COMPLETE WITH YOUR OWN CONSUMER KEY
-static NSString * const kConsumerSecretString = @"IRdQKHOEvJJGcuHz_j0zYsZaLg8";//COMPLETE WITH YOUR OWN CONSUMER SECRET
-static NSString * const kTokenString = @"e7nKgPCRAIAAEts_q0YcbK_gKYDnJF5C";//COMPLETE WITH YOUR OWN TOKEN
-static NSString * const kTokenSecretString = @"CN8R7f1YA3l30GdQl1cQB7a-mvw";//COMPLETE WITH YOUR OWN TOKEN SECRET
+static NSString * const kConsumerKeyString = @"VNe9qsnapf3Fji-g0hDycA";//COMPLETE WITH YOUR OWN CONSUMER KEY
+static NSString * const kConsumerSecretString = @"xSkz0FZ6ujL257pB8Kttc4WHfYs";//COMPLETE WITH YOUR OWN CONSUMER SECRET
+static NSString * const kTokenString = @"jI_vqXQMHxVjIU_ajzFeheADuk-UvzDa";//COMPLETE WITH YOUR OWN TOKEN
+static NSString * const kTokenSecretString = @"cqDiQlDss49jj9DwZmGFtVrPv0s";//COMPLETE WITH YOUR OWN TOKEN SECRET
 
 //IMPORTANT NOTE: IT MIGHT BE NECESSARY TO COMMENT THE LINES 418 & 419 IN THE FILE AFOAuth1Client.m
 

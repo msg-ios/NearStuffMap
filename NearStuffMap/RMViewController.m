@@ -3,7 +3,7 @@
 //  NearStuffMap
 //
 //  Created by Marco S. Graciano on 4/22/13.
-//  Copyright (c) 2013 Marco Graciano. All rights reserved.
+//  Copyright (c) 2013 Marco Graciano & Ramiro Guerrero. All rights reserved.
 //
 
 #import "RMViewController.h"
@@ -19,7 +19,7 @@
 @interface CustomPin : MKAnnotationView
 {
 }
-- (id)initWithAnnotation:(id <MKAnnotation>) annotation andPinColor:(MKPinAnnotationColor *)pinColor;
+//- (id)initWithAnnotation:(id <MKAnnotation>) annotation andPinColor:(MKPinAnnotationColor *)pinColor;
 - (id)initWithAnnotation:(id <MKAnnotation>) annotation andImage:(UIImage *)photo;
 
 @end
@@ -238,7 +238,6 @@
         }
         
         [view setCanShowCallout:YES];
-        
         
         return view;
     }
@@ -548,7 +547,7 @@
         else {
             UIAlertView *alert = [[UIAlertView alloc]
              initWithTitle:@"Can't update data."
-             message:@"Wait for timer to expire."
+             message:@"Wait for request timer to expire."
              delegate:nil
              cancelButtonTitle:@"OK"
              otherButtonTitles:nil, nil];
