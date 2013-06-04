@@ -19,7 +19,7 @@
 @interface CustomPin : MKAnnotationView
 {
 }
-//- (id)initWithAnnotation:(id <MKAnnotation>) annotation andPinColor:(MKPinAnnotationColor *)pinColor;
+
 - (id)initWithAnnotation:(id <MKAnnotation>) annotation andImage:(UIImage *)photo;
 
 @end
@@ -41,21 +41,7 @@
     return self;
     
 }
-/*
-- (id)initWithAnnotation:(id <MKAnnotation>)annotation andPinColor:(MKPinAnnotationColor *)pinColor
-{
-    
-    self = [super initWithAnnotation:annotation reuseIdentifier:@"CustomId"];
-    
-    if (self)
-    {
-        
-        [self setPinColor:pinColor];
-        
-    }
-    return self;
-    
-}*/
+
 
 @end
 
@@ -148,6 +134,14 @@
     {
         
         [lastUserLocation setCoordinate:userLocation.coordinate];
+        
+        //Remove all added annotations
+        for (RMMapViewAnnotation *annotation in self.mapView.annotations)
+        {
+            [self.mapView removeAnnotation:annotation];
+        }
+        
+        [self.annotationsArray removeAllObjects];
         
         [self loadAnnotations];
         
@@ -368,8 +362,6 @@
         
         annotation.coordinate = location;
         
-        // UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"images"] objectForKey:@"thumbnail"] objectForKey:@"url"]]]];
-        
         annotation.title = [[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"user"] objectForKey:@"username"];
         annotation.subtitle = @"Instagram";
         annotation.socialNetwork = @"Instagram";
@@ -540,7 +532,10 @@
             }
             
             [self.annotationsArray removeAllObjects];
+            [self.facebookArray removeAllObjects];
+            
             [self loadAnnotations];
+            
             //The user will be able to refresh the data in 15 min.
             [self performSelector:@selector(scheduledTask) withObject:nil afterDelay:900.0];
         }
