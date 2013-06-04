@@ -542,7 +542,7 @@
         else {
             UIAlertView *alert = [[UIAlertView alloc]
              initWithTitle:@"Can't update data."
-             message:@"Wait for request timer to expire."
+             message:@"Please wait for timer to expire."
              delegate:nil
              cancelButtonTitle:@"OK"
              otherButtonTitles:nil, nil];
