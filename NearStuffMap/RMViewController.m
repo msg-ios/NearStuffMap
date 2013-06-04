@@ -3,7 +3,7 @@
 //  NearStuffMap
 //
 //  Created by Marco S. Graciano on 4/22/13.
-//  Copyright (c) 2013 Marco Graciano. All rights reserved.
+//  Copyright (c) 2013 Marco Graciano & Ramiro Guerrero. All rights reserved.
 //
 
 #import "RMViewController.h"
@@ -19,7 +19,7 @@
 @interface CustomPin : MKAnnotationView
 {
 }
-- (id)initWithAnnotation:(id <MKAnnotation>) annotation andPinColor:(MKPinAnnotationColor *)pinColor;
+
 - (id)initWithAnnotation:(id <MKAnnotation>) annotation andImage:(UIImage *)photo;
 
 @end
@@ -41,21 +41,7 @@
     return self;
     
 }
-/*
-- (id)initWithAnnotation:(id <MKAnnotation>)annotation andPinColor:(MKPinAnnotationColor *)pinColor
-{
-    
-    self = [super initWithAnnotation:annotation reuseIdentifier:@"CustomId"];
-    
-    if (self)
-    {
-        
-        [self setPinColor:pinColor];
-        
-    }
-    return self;
-    
-}*/
+
 
 @end
 
@@ -149,6 +135,14 @@
         
         [lastUserLocation setCoordinate:userLocation.coordinate];
         
+        //Remove all added annotations
+        for (RMMapViewAnnotation *annotation in self.mapView.annotations)
+        {
+            [self.mapView removeAnnotation:annotation];
+        }
+        
+        [self.annotationsArray removeAllObjects];
+        
         [self loadAnnotations];
         
     }
@@ -238,7 +232,6 @@
         }
         
         [view setCanShowCallout:YES];
-        
         
         return view;
     }
@@ -368,8 +361,6 @@
         NSLog(@"LAT : %f LON: %f", location.latitude, location.longitude);
         
         annotation.coordinate = location;
-        
-        // UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"images"] objectForKey:@"thumbnail"] objectForKey:@"url"]]]];
         
         annotation.title = [[[[data objectForKey:@"data"] objectAtIndex:i] objectForKey:@"user"] objectForKey:@"username"];
         annotation.subtitle = @"Instagram";
@@ -541,14 +532,21 @@
             }
             
             [self.annotationsArray removeAllObjects];
+            [self.facebookArray removeAllObjects];
+            
             [self loadAnnotations];
+            
             //The user will be able to refresh the data in 15 min.
             [self performSelector:@selector(scheduledTask) withObject:nil afterDelay:900.0];
         }
         else {
             UIAlertView *alert = [[UIAlertView alloc]
              initWithTitle:@"Can't update data."
+<<<<<<< HEAD
              message:@"Please wait for timer to expire."
+=======
+             message:@"Wait for request timer to expire."
+>>>>>>> upstream/master
              delegate:nil
              cancelButtonTitle:@"OK"
              otherButtonTitles:nil, nil];

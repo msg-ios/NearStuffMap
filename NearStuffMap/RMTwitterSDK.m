@@ -3,7 +3,7 @@
 //  NearStuffMap
 //
 //  Created by Ramiro Guerrero on 24/04/13.
-//  Copyright (c) 2013 Marco Graciano. All rights reserved.
+//  Copyright (c) 2013 Marco Graciano & Ramiro Guerrero. All rights reserved.
 //
 
 #import "RMTwitterSDK.h"

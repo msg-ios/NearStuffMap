@@ -3,7 +3,7 @@
 //  NearStuffMap
 //
 //  Created by Ramiro Guerrero on 22/04/13.
-//  Copyright (c) 2013 Marco Graciano. All rights reserved.
+//  Copyright (c) 2013 Marco Graciano & Ramiro Guerrero. All rights reserved.
 //
 
 #import "RMMapViewAnnotation.h"

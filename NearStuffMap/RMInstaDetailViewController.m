@@ -3,7 +3,7 @@
 //  NearStuffMap
 //
 //  Created by Marco Graciano on 5/27/13.
-//  Copyright (c) 2013 Marco Graciano. All rights reserved.
+//  Copyright (c) 2013 Marco Graciano & Ramiro Guerrero. All rights reserved.
 //
 
 #import "RMInstaDetailViewController.h"
