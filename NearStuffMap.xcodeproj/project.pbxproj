@@ -29,11 +29,6 @@
 		282F774B1755A47F001EEEDA /* tileable_wood_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 282F774A1755A47E001EEEDA /* tileable_wood_texture.png */; };
 		28513F1F1754534A00157438 /* RMInstaDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28513F1D1754534800157438 /* RMInstaDetailViewController.m */; };
 		28513F201754534A00157438 /* RMInstaDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28513F1E1754534900157438 /* RMInstaDetailViewController.xib */; };
-		2866FDC417597AC40041B134 /* facePinWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 2866FDBF17597AC40041B134 /* facePinWhite.png */; };
-		2866FDC517597AC40041B134 /* fourPin.png in Resources */ = {isa = PBXBuildFile; fileRef = 2866FDC017597AC40041B134 /* fourPin.png */; };
-		2866FDC617597AC40041B134 /* instaPin.png in Resources */ = {isa = PBXBuildFile; fileRef = 2866FDC117597AC40041B134 /* instaPin.png */; };
-		2866FDC717597AC40041B134 /* twitterPin.png in Resources */ = {isa = PBXBuildFile; fileRef = 2866FDC217597AC40041B134 /* twitterPin.png */; };
-		2866FDC817597AC40041B134 /* yelpPin.png in Resources */ = {isa = PBXBuildFile; fileRef = 2866FDC317597AC40041B134 /* yelpPin.png */; };
 		2890AA661756C42E00B9E182 /* RMFSDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2890AA641756C42E00B9E182 /* RMFSDetailViewController.m */; };
 		2890AA671756C42E00B9E182 /* RMFSDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2890AA651756C42E00B9E182 /* RMFSDetailViewController.xib */; };
 		2890AA6A1756D01000B9E182 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 2890AA691756D00F00B9E182 /* MBProgressHUD.m */; };
@@ -43,11 +38,16 @@
 		AA262F4517593CA500598A82 /* RMFacebookDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA262F4317593CA500598A82 /* RMFacebookDetailViewController.xib */; };
 		AA2DA26E174AC4CD00B9438B /* RMSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2DA26C174AC4CD00B9438B /* RMSettingsViewController.m */; };
 		AA2DA26F174AC4CD00B9438B /* RMSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA2DA26D174AC4CD00B9438B /* RMSettingsViewController.xib */; };
+		AA3EC8AE175D609600B71CE2 /* Logo2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA3EC8AD175D609600B71CE2 /* Logo2@2x.png */; };
+		AA3EC8B0175D609900B71CE2 /* Logo2.png in Resources */ = {isa = PBXBuildFile; fileRef = AA3EC8AF175D609900B71CE2 /* Logo2.png */; };
+		AA3EC8BA175D66B100B71CE2 /* yelpPin.png in Resources */ = {isa = PBXBuildFile; fileRef = AA3EC8B5175D66B100B71CE2 /* yelpPin.png */; };
+		AA3EC8BB175D66B100B71CE2 /* twitterPin.png in Resources */ = {isa = PBXBuildFile; fileRef = AA3EC8B6175D66B100B71CE2 /* twitterPin.png */; };
+		AA3EC8BC175D66B100B71CE2 /* instaPin.png in Resources */ = {isa = PBXBuildFile; fileRef = AA3EC8B7175D66B100B71CE2 /* instaPin.png */; };
+		AA3EC8BD175D66B100B71CE2 /* fourPin.png in Resources */ = {isa = PBXBuildFile; fileRef = AA3EC8B8175D66B100B71CE2 /* fourPin.png */; };
+		AA3EC8BE175D66B100B71CE2 /* facePinWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = AA3EC8B9175D66B100B71CE2 /* facePinWhite.png */; };
 		AA7392C7175563780075FA56 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7392C6175563780075FA56 /* Default.png */; };
 		AA7392C91755637E0075FA56 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7392C81755637E0075FA56 /* Default@2x.png */; };
 		AA7392CB175563800075FA56 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7392CA175563800075FA56 /* Default-568h@2x.png */; };
-		AA7392CD175566990075FA56 /* Icono.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7392CC175566990075FA56 /* Icono.png */; };
-		AA7392CF1755669D0075FA56 /* Icono@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7392CE1755669D0075FA56 /* Icono@2x.png */; };
 		AA7D5A0A1757FAD80031374B /* RMAboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D5A081757FAD80031374B /* RMAboutVC.m */; };
 		AA7D5A0B1757FAD80031374B /* RMAboutVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA7D5A091757FAD80031374B /* RMAboutVC.xib */; };
 		AAACB54717287DC30088B73D /* RMTwitterSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = AAACB54617287DC30088B73D /* RMTwitterSDK.m */; };
@@ -88,11 +88,6 @@
 		28513F1C1754534600157438 /* RMInstaDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMInstaDetailViewController.h; sourceTree = "<group>"; };
 		28513F1D1754534800157438 /* RMInstaDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMInstaDetailViewController.m; sourceTree = "<group>"; };
 		28513F1E1754534900157438 /* RMInstaDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMInstaDetailViewController.xib; sourceTree = "<group>"; };
-		2866FDBF17597AC40041B134 /* facePinWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facePinWhite.png; sourceTree = "<group>"; };
-		2866FDC017597AC40041B134 /* fourPin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fourPin.png; sourceTree = "<group>"; };
-		2866FDC117597AC40041B134 /* instaPin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = instaPin.png; sourceTree = "<group>"; };
-		2866FDC217597AC40041B134 /* twitterPin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitterPin.png; sourceTree = "<group>"; };
-		2866FDC317597AC40041B134 /* yelpPin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yelpPin.png; sourceTree = "<group>"; };
 		2890AA631756C42D00B9E182 /* RMFSDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMFSDetailViewController.h; sourceTree = "<group>"; };
 		2890AA641756C42E00B9E182 /* RMFSDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMFSDetailViewController.m; sourceTree = "<group>"; };
 		2890AA651756C42E00B9E182 /* RMFSDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMFSDetailViewController.xib; sourceTree = "<group>"; };
@@ -109,11 +104,16 @@
 		AA2DA26B174AC4CD00B9438B /* RMSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSettingsViewController.h; sourceTree = "<group>"; };
 		AA2DA26C174AC4CD00B9438B /* RMSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSettingsViewController.m; sourceTree = "<group>"; };
 		AA2DA26D174AC4CD00B9438B /* RMSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMSettingsViewController.xib; sourceTree = "<group>"; };
+		AA3EC8AD175D609600B71CE2 /* Logo2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo2@2x.png"; sourceTree = "<group>"; };
+		AA3EC8AF175D609900B71CE2 /* Logo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo2.png; sourceTree = "<group>"; };
+		AA3EC8B5175D66B100B71CE2 /* yelpPin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yelpPin.png; sourceTree = "<group>"; };
+		AA3EC8B6175D66B100B71CE2 /* twitterPin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitterPin.png; sourceTree = "<group>"; };
+		AA3EC8B7175D66B100B71CE2 /* instaPin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = instaPin.png; sourceTree = "<group>"; };
+		AA3EC8B8175D66B100B71CE2 /* fourPin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fourPin.png; sourceTree = "<group>"; };
+		AA3EC8B9175D66B100B71CE2 /* facePinWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facePinWhite.png; sourceTree = "<group>"; };
 		AA7392C6175563780075FA56 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		AA7392C81755637E0075FA56 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		AA7392CA175563800075FA56 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		AA7392CC175566990075FA56 /* Icono.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icono.png; sourceTree = "<group>"; };
-		AA7392CE1755669D0075FA56 /* Icono@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icono@2x.png"; sourceTree = "<group>"; };
 		AA7D5A071757FAD80031374B /* RMAboutVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAboutVC.h; sourceTree = "<group>"; };
 		AA7D5A081757FAD80031374B /* RMAboutVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAboutVC.m; sourceTree = "<group>"; };
 		AA7D5A091757FAD80031374B /* RMAboutVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMAboutVC.xib; sourceTree = "<group>"; };
@@ -147,8 +147,8 @@
 		280E87BF1725D38900A152DD = {
 			isa = PBXGroup;
 			children = (
-				AA7392CE1755669D0075FA56 /* Icono@2x.png */,
-				AA7392CC175566990075FA56 /* Icono.png */,
+				AA3EC8AF175D609900B71CE2 /* Logo2.png */,
+				AA3EC8AD175D609600B71CE2 /* Logo2@2x.png */,
 				AA7392CA175563800075FA56 /* Default-568h@2x.png */,
 				AA7392C81755637E0075FA56 /* Default@2x.png */,
 				AA7392C6175563780075FA56 /* Default.png */,
@@ -186,11 +186,11 @@
 			children = (
 				AAD5D3AB1756E18E002C4B40 /* Powered_By_Yelp_White.png */,
 				AAD5D3AF1756E1CF002C4B40 /* poweredByFoursquare_white.png */,
-				2866FDBF17597AC40041B134 /* facePinWhite.png */,
-				2866FDC017597AC40041B134 /* fourPin.png */,
-				2866FDC117597AC40041B134 /* instaPin.png */,
-				2866FDC217597AC40041B134 /* twitterPin.png */,
-				2866FDC317597AC40041B134 /* yelpPin.png */,
+				AA3EC8B5175D66B100B71CE2 /* yelpPin.png */,
+				AA3EC8B6175D66B100B71CE2 /* twitterPin.png */,
+				AA3EC8B7175D66B100B71CE2 /* instaPin.png */,
+				AA3EC8B8175D66B100B71CE2 /* fourPin.png */,
+				AA3EC8B9175D66B100B71CE2 /* facePinWhite.png */,
 				2807F1A91750076B00D0B532 /* bar_grey.png */,
 				2807F1AE17500BF000D0B532 /* general_button.png */,
 				2807F1BA1750167500D0B532 /* bg_pttrn1.png */,
@@ -314,8 +314,6 @@
 				AA7392C7175563780075FA56 /* Default.png in Resources */,
 				AA7392C91755637E0075FA56 /* Default@2x.png in Resources */,
 				AA7392CB175563800075FA56 /* Default-568h@2x.png in Resources */,
-				AA7392CD175566990075FA56 /* Icono.png in Resources */,
-				AA7392CF1755669D0075FA56 /* Icono@2x.png in Resources */,
 				282F77491755A394001EEEDA /* dark_wood.png in Resources */,
 				282F774B1755A47F001EEEDA /* tileable_wood_texture.png in Resources */,
 				2890AA671756C42E00B9E182 /* RMFSDetailViewController.xib in Resources */,
@@ -324,11 +322,13 @@
 				2890AA731756E68900B9E182 /* RMYelpDetailViewController.xib in Resources */,
 				AA7D5A0B1757FAD80031374B /* RMAboutVC.xib in Resources */,
 				AA262F4517593CA500598A82 /* RMFacebookDetailViewController.xib in Resources */,
-				2866FDC417597AC40041B134 /* facePinWhite.png in Resources */,
-				2866FDC517597AC40041B134 /* fourPin.png in Resources */,
-				2866FDC617597AC40041B134 /* instaPin.png in Resources */,
-				2866FDC717597AC40041B134 /* twitterPin.png in Resources */,
-				2866FDC817597AC40041B134 /* yelpPin.png in Resources */,
+				AA3EC8AE175D609600B71CE2 /* Logo2@2x.png in Resources */,
+				AA3EC8B0175D609900B71CE2 /* Logo2.png in Resources */,
+				AA3EC8BA175D66B100B71CE2 /* yelpPin.png in Resources */,
+				AA3EC8BB175D66B100B71CE2 /* twitterPin.png in Resources */,
+				AA3EC8BC175D66B100B71CE2 /* instaPin.png in Resources */,
+				AA3EC8BD175D66B100B71CE2 /* fourPin.png in Resources */,
+				AA3EC8BE175D66B100B71CE2 /* facePinWhite.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
